@@ -1,15 +1,18 @@
 package Water;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-//HI CASANDRA
 
 public class ChooseBottle extends JPanel {
 
@@ -17,6 +20,8 @@ public class ChooseBottle extends JPanel {
 
 	public ChooseBottle()
 	{
+		//somehting somehting something
+		//somekjbadsjkfbkjsadf
 		init();
 	}
 
@@ -53,5 +58,7 @@ public class ChooseBottle extends JPanel {
 		add(recyclableWaterBox);
 		add(waterBottle);
 		add(waterBottleBox);
+
+  
 	}
 }
