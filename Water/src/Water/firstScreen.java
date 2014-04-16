@@ -28,10 +28,8 @@ public class firstScreen
 
         WelcomeScreen win1 = new WelcomeScreen();
         contentPane.add(win1, CARD_JBUTTON);
-        UsernamePassword win2 = new UsernamePassword();
-        contentPane.add(win2, CARD_JTEXTFIELD);
-        ChooseBottle win3 = new ChooseBottle();
-        contentPane.add(win3, CARD_JRADIOBUTTON);
+        ChooseBottle win2 = new ChooseBottle();
+        contentPane.add(win2, CARD_JRADIOBUTTON);
         
         JPanel buttonPanel = new JPanel(); 
         final JButton previousButton = new JButton("PREVIOUS");
