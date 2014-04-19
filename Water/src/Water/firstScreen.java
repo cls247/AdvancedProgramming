@@ -28,8 +28,14 @@ public class firstScreen
 
         WelcomeScreen win1 = new WelcomeScreen();
         contentPane.add(win1, CARD_JBUTTON);
-        ChooseBottle win2 = new ChooseBottle();
-        contentPane.add(win2, CARD_JRADIOBUTTON);
+        ScreenWithTwoQuestions chooseWaterBottle = new ScreenWithTwoQuestions("Do you use recyclable bottles?", 
+        		"Do you use plastic water bottles?", 
+        		"How many water bottles do you use a week?");
+        contentPane.add(chooseWaterBottle, CARD_JRADIOBUTTON);
+        ScreenWithTwoQuestions waterPlants = new ScreenWithTwoQuestions("Do you use sprinkles?", 
+        		"Do you water your lawn by hand?", 
+        		"How many times a week do you water the lawn?");
+        contentPane.add(chooseWaterBottle, CARD_JRADIOBUTTON);
         
         JPanel buttonPanel = new JPanel(); 
         final JButton previousButton = new JButton("PREVIOUS");
