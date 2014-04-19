@@ -1,5 +1,14 @@
 package Water;
 
+/** 
+ * This is an example of a footprint. It has lots of private
+ * data variables that hold all the information that is entered
+ * by the user. It just have getters and setters for all of the data.
+ * In addition, it has a method that can be called that will update the 
+ * total. This method can be called every time that something is updated.
+ * @author Sand
+ *
+ */
 public class FootPrint {
 
 	//this is where a database would come in handy

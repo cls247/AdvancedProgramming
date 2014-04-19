@@ -19,15 +19,21 @@ public class firstScreen
 
     private static void createAndShowGUI()
     {
-        JFrame frame = new JFrame("Card Layout Test");
+    	//here you make the frame
+        JFrame frame = new JFrame("Water");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 
+        //this is that thing that holds all the card
         final JPanel contentPane = new JPanel();
         contentPane.setLayout(new CardLayout(200, 200));
 
+        //make all the card and add them to the contentPane above
         WelcomeScreen win1 = new WelcomeScreen();
         contentPane.add(win1, CARD_JBUTTON);
+        InteractivePage temp=new InteractivePage();
+        contentPane.add(temp, CARD_JBUTTON);
+        
         ScreenWithTwoQuestions chooseWaterBottle = new ScreenWithTwoQuestions("Do you use recyclable bottles?", 
         		"Do you use plastic water bottles?", 
         		"How many water bottles do you use a week?");
@@ -37,6 +43,7 @@ public class firstScreen
         		"How many times a week do you water the lawn?");
         contentPane.add(chooseWaterBottle, CARD_JRADIOBUTTON);
         
+        //this is the buttons to go forward and backward
         JPanel buttonPanel = new JPanel(); 
         final JButton previousButton = new JButton("PREVIOUS");
         previousButton.setBackground(Color.BLACK);
@@ -47,6 +54,7 @@ public class firstScreen
         buttonPanel.add(previousButton);
         buttonPanel.add(nextButton);
 
+        //this flips to the previous card
         previousButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent ae)
@@ -56,6 +64,7 @@ public class firstScreen
             }
         });
         
+        //this flips to the next card
         nextButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent ae)
