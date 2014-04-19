@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 
 //so this is like supposed to on a thread, but I'm not positive how to do that
 //I think that I got it pretty close
+//*************I totally forgot about the slider class so we can totally use that here
 public class InteractivePage extends JPanel implements Runnable, MouseListener{
 
 	private Rectangle bar = new Rectangle(50, 100, 200, 100);
