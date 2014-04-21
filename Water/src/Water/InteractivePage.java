@@ -29,9 +29,23 @@ public class InteractivePage extends JPanel implements Runnable, MouseListener{
 	//keep updating the footprint according to the bars that change
 	FootPrint temporaryFootPrint=new FootPrint();
 	
+	double sliderForFootPrint;
+	int sliderForWaterBottles=0;
+	int sliderForNumberOfTimesDoesDishes=0;
+	int sliderForServingOfBeef=0;
+	int sliderForServingOfChicken=0;
+	int sliderForServingOfTurkey=0;
+	int sliderForNumberOfWashes=0;
+	int sliderForNumberOfLoadsOfClothes=0;
+	
+	int amountWaterUsed = 0;
+	
+	double currentWaterLevel = temporaryFootPrint.getBottle().getWaterLevel();
+	
 	public InteractivePage()
 	{
 		init();
+		
 	}	
 	
 	public void init()
@@ -39,6 +53,39 @@ public class InteractivePage extends JPanel implements Runnable, MouseListener{
 		//add a mouse listener to the rectangle
 		addMouseListener(this);
 		setLayout(new GridLayout(2, 2));	
+	}
+	
+	public void whatIfAnalysis(){
+		
+		//new values to be used in calculation
+		sliderForFootPrint = 0; //this should somehow get the value off the slider
+		temporaryFootPrint.getBottle().setWaterBottle(sliderForFootPrint);
+		
+		sliderForWaterBottles = 0; //this should get the value off the slider
+		temporaryFootPrint.setNumberOfWaterBottles(sliderForWaterBottles);
+		
+		sliderForNumberOfTimesDoesDishes=0; //this should get the value off the slider
+		temporaryFootPrint.setNumberOfTimesDoesDishes(sliderForNumberOfTimesDoesDishes);
+		
+		sliderForServingOfBeef=0; //this should get the value off the slider
+		temporaryFootPrint.setServingOfBeef(sliderForServingOfBeef);
+		
+		sliderForServingOfChicken=0; //this should get the value off the slider
+		temporaryFootPrint.setServingOfChicken(sliderForServingOfChicken);
+		
+		sliderForServingOfTurkey=0; //this should get the value off the slider
+		temporaryFootPrint.setServingOfTurkey(sliderForServingOfTurkey);
+		
+		sliderForNumberOfWashes=0; //this should get the value off the slider
+		temporaryFootPrint.setNumberOfWashes(sliderForNumberOfWashes);
+		
+		sliderForNumberOfLoadsOfClothes=0; //this should get the value off the slider
+		temporaryFootPrint.setNumberOfLoadsOfClothes(sliderForNumberOfLoadsOfClothes);
+		
+		temporaryFootPrint.updateTotalAmountOfWater();
+		
+		amountWaterUsed = temporaryFootPrint.getTotalAmountOfWater();
+		
 	}
 
 	/**
@@ -81,6 +128,11 @@ public class InteractivePage extends JPanel implements Runnable, MouseListener{
 					x--;
 					y--;
 					//also here check to see if the bar grew enough to get to the next integer
+					
+					//run the what if analysis if anything has been changed-i'm not quite sure where
+					//this should go
+					whatIfAnalysis();
+					
 			}
 			repaint();
 

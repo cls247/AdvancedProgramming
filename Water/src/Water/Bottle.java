@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 public class Bottle {
 	
-	private int waterLevel=0;
+	private double waterLevel=0;
 	
 	//this is a private data variable
 	//that holds the index of the current
@@ -46,5 +46,19 @@ public class Bottle {
 		Image bottle = water.getImage();
 		return bottle; 
 	}
+	
+	public double getWaterLevel()
+	{
+		
+		return waterLevel;
+		
+	}
+	
+	public int getCurrentBottle(){
+		
+		return currentBottle;
+		
+	}
+	
 
 }

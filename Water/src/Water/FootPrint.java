@@ -216,4 +216,16 @@ public class FootPrint {
 		return waterBottle;
 	}
 	
+	public int getTotalAmountOfWater()
+	{
+		return totalAmountOfWater;
+	}
+	
+	public Bottle getBottle(){
+		
+		return waterBottle;
+		
+	}
+
+	
 }
