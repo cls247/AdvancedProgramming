@@ -17,25 +17,45 @@ public class FootPrint {
 	//for each of those
 	private boolean usesRecyclableWaterBottle=false;
 	private boolean usesPlasticWaterBottle=false;
+	private final double literPerWaterBottle=.6;
 	private int numberOfWaterBottles=0;
 	
 	private boolean usesDishWasher=false;
+	private final int literPerDishWater=3;
 	private boolean doesDishedByHand=false;
+	private final int literPerDishesByHand=10;
 	private int numberOfTimesDoesDishes=0;
 	
 	private int servingOfBeef=0;
+	private final int literPerServingOfBeef=2024;
 	private int servingOfChicken=0;
-	private int servingOfTurkey=0;
+	private final int literPerServingOfChicken=350;
+	private int servingOfLamb=0;
+	private final int literPerServingOfLamb=914;
+	private int servingOfVeges=0;
+	private final int literPerServingOfVeges=20;
+	private int servingOfLentils=0;
+	private final int literPerServingOfLentils=59;
+	private int servingOfPasta=0;
+	private final int literPerServingOfPasta=150;
+	private int servingOfCorn=0;
+	private final int literPerServingOfCorn=70;
+	private int servingOfEggs=0;
+	private final int literPerServingOfEggs=135;
 	
 	private boolean takesShowers=false;
+	private final double literPerShowerPerMinute=35;
 	private boolean takesBaths=false;
+	private final double litersPerBath=50;
 	private int numberOfWashes=0;
 	
 	private boolean usesWashingMachine=false;
 	private boolean handWashesClothes=false;
 	private int numberOfLoadsOfClothes=0;
+	private final int litersPerLoadsOfClothersWashingMachine=0;
+	private final int litersPerLoadsOfClothesHandWashing=0;
 	
-	private int totalAmountOfWater=0;
+	private double totalLitersAmountOfWater=0;
 	private Bottle waterBottle;
 	
 	public FootPrint()
@@ -45,65 +65,104 @@ public class FootPrint {
 	public void setUsesRecyclableWaterBottle(boolean usesRecyclableWaterBottle1)
 	{
 		usesRecyclableWaterBottle=usesRecyclableWaterBottle1;
+		updateTotalAmountOfWater();
 	}
 	public void setUsesPlasticWaterBottle(boolean usesPlasticWaterBottle1)
 	{
 		usesPlasticWaterBottle=usesPlasticWaterBottle1;
+		updateTotalAmountOfWater();
 	}
 	public void setNumberOfWaterBottles(int numberOfWaterBottles1)
 	{
 		numberOfWaterBottles=numberOfWaterBottles1;
+		updateTotalAmountOfWater();
 	}	
 	public void setUsesDishWasher(boolean usesDishWasher1)
 	{
 		usesDishWasher=usesDishWasher1;
+		updateTotalAmountOfWater();
 	}
 	public void setDoesDishedByHand(boolean doesDishedByHand1)
 	{
 		doesDishedByHand=doesDishedByHand1;
+		updateTotalAmountOfWater();
 	}
 	public void setNumberOfTimesDoesDishes(int setNumberOfTimesDoesDishes)
 	{
 		numberOfTimesDoesDishes=setNumberOfTimesDoesDishes;
+		updateTotalAmountOfWater();
 	}
 	
 	public void setServingOfBeef(int setServingOfBeef)
 	{
 		servingOfBeef=setServingOfBeef;
+		updateTotalAmountOfWater();
 	}
 	public void setServingOfChicken(int setServingOfChicken )
 	{
 		servingOfChicken=setServingOfChicken;
+		updateTotalAmountOfWater();
 	}
-	public void setServingOfTurkey(int setServingOfTurkey)
+	public void setServingOfLamb(int setServingOfLamb)
 	{
-		servingOfTurkey=setServingOfTurkey;
+		servingOfLamb=setServingOfLamb;
+		updateTotalAmountOfWater();
 	}
-	
+	public void setServingOfEggs(int setServingOfEggs)
+	{
+		servingOfEggs=setServingOfEggs;
+		updateTotalAmountOfWater();
+	}
+	public void setServingOfVeges(int setServingOfVeges)
+	{
+		servingOfVeges=setServingOfVeges;
+		updateTotalAmountOfWater();
+	}
+	public void setServingOfLentils(int setServingOfLentils)
+	{
+		servingOfLentils=setServingOfLentils;
+		updateTotalAmountOfWater();
+	}
+	public void setServingOfPasta(int setServingOfPasta)
+	{
+		servingOfPasta=setServingOfPasta;
+		updateTotalAmountOfWater();
+	}
+	public void setServingOfCorn(int setServingOfCorn)
+	{
+		servingOfCorn=setServingOfCorn;
+		updateTotalAmountOfWater();
+	}
 	public void setTakesShowers(boolean setTakesShowers)
 	{
 		takesShowers=setTakesShowers;
+		updateTotalAmountOfWater();
 	}
 	public void setTakesBaths(boolean setTakesBaths)
 	{
 		takesBaths=setTakesBaths;
+		updateTotalAmountOfWater();
 	}
 	public void setNumberOfWashes(int setNumberOfWashes)
 	{
 		numberOfWashes=setNumberOfWashes;
+		updateTotalAmountOfWater();
 	}
 	
 	public void setUsesWashingMachine(boolean setUsesWashingMachine)
 	{
 		usesWashingMachine=setUsesWashingMachine;
+		updateTotalAmountOfWater();
 	}
 	public void setHandWashesClothes(boolean setHandWashesClothes)
 	{
 		handWashesClothes=setHandWashesClothes;
+		updateTotalAmountOfWater();
 	}
 	public void setNumberOfLoadsOfClothes(int setNumberOfLoadsOfClothes)
 	{
 		numberOfLoadsOfClothes=setNumberOfLoadsOfClothes;
+		updateTotalAmountOfWater();
 	}
 	
 	public void updateTotalAmountOfWater()
@@ -115,7 +174,46 @@ public class FootPrint {
 		//so we can call this after new data
 		//is entered so it would be like we are
 		//keeping a running total
-		//total=(amount of beef)*(how much water in beef) etc etc etc
+		//total=(amount of beef)*(how much water in beef) etc etc etc	
+		
+		totalLitersAmountOfWater= (literPerWaterBottle*numberOfWaterBottles);
+		
+		if(usesDishWasher)
+		{
+			totalLitersAmountOfWater=literPerDishWater*numberOfTimesDoesDishes;
+		}
+		if(doesDishedByHand)
+		{
+			totalLitersAmountOfWater=literPerDishesByHand*numberOfTimesDoesDishes;
+		}
+		totalLitersAmountOfWater=servingOfBeef*literPerServingOfBeef;
+		totalLitersAmountOfWater= servingOfChicken*literPerServingOfChicken;
+		totalLitersAmountOfWater=servingOfLamb*literPerServingOfLamb;
+		totalLitersAmountOfWater=servingOfVeges*literPerServingOfVeges;
+		totalLitersAmountOfWater=servingOfLentils*literPerServingOfLentils;
+		totalLitersAmountOfWater=servingOfPasta*literPerServingOfPasta;
+		
+		if(takesShowers)
+		{
+			totalLitersAmountOfWater=literPerShowerPerMinute*numberOfWashes;
+		}
+		if(takesBaths)
+		{
+			totalLitersAmountOfWater=litersPerBath*numberOfWashes;
+		}
+		if(usesWashingMachine)
+		{
+			totalLitersAmountOfWater=litersPerLoadsOfClothersWashingMachine*numberOfLoadsOfClothes;
+		}
+		if(handWashesClothes)
+		{
+			totalLitersAmountOfWater=litersPerLoadsOfClothesHandWashing*numberOfLoadsOfClothes;
+		}	
+		
+	}
+	public Bottle getWaterBottle()
+	{
+		return waterBottle;
 	}
 	
 }

@@ -17,5 +17,8 @@ public class User {
 	{
 		return username;
 	}
-
+	public FootPrint getFootPrint()
+	{
+		return userFootPrint;
+	}
 }
