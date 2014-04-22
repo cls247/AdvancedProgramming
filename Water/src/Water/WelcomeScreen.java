@@ -13,6 +13,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+/**
+ * This is just the Welcome screen that is the first screen
+ * that is shown. It welcomes the user and has buttons to 
+ * manuvere throughout the program. 
+ * @author Sand
+ *
+ */
 class WelcomeScreen extends JPanel
 {
 	private String welcomeText = "Welcome to Help2Out, a water footprint calculator!";

@@ -64,6 +64,10 @@ public class FootPrint {
 	private double totalLitersAmountOfWater=0;
 	private Bottle waterBottle;
 	
+	
+	/**
+	 * This are alot of getters and setters in order to edit the FootPrint appropriately
+	 */
 	public FootPrint()
 	{
 		waterBottle=new Bottle();
@@ -186,6 +190,14 @@ public class FootPrint {
 		numberOfTimesWaterPlants=setNumberOfTimesWaterPlants;
 		updateTotalAmountOfWater();
 	}
+	/**
+	 * updateTotalAmountOfWater()
+	 * 
+	 * This method updates the total amount of water in the food print
+	 * based on the private data variables and a calculation.
+	 * This method is called everytime that anything is changed in the Foootprint
+	 * in order to ensure that the total is always up to date.
+	 */
 	public void updateTotalAmountOfWater()
 	{
 		//write an equation that takes
@@ -252,6 +264,18 @@ public class FootPrint {
 		return waterBottle;
 		
 	}
+	
+	/**
+	 * Tips()
+	 * 
+	 * This method will be called on the last screen where the user
+	 * gets their total amount of water and then prints a bunch of tips 
+	 * that are specific to their water footprint.
+	 * 
+	 * @return a string a tips that are specifically
+	 * based on the footprint and what the user has entered.
+	 * 
+	 */
 	public String Tips()
 	{
 		String tipsToReturn="";

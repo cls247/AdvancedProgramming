@@ -14,7 +14,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-//I'm assuming this is the one for the final recommendation tip screen
+/**
+ * This is the final screen that the user will
+ * see after they input all their information.
+ * It should print out the total amount of water that is input
+ * and specific tips for the user based on what they input.
+ * 
+ * @author Sand
+ *
+ */
 public class TipScreen extends JPanel implements Global{
 	
 	FootPrint aFootPrint = currentUser.getFootPrint();

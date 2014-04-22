@@ -19,10 +19,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+/**
+ * 
+ * This is the screeen that contains a description'
+ * about the program and what it should be used for and
+ * how it should be used. 
+ * 
+ * @author Sand
+ *
+ */
 public class AboutScreen extends JPanel {
 
+	/**
+	 * This is the background image of the screen.
+	 */
 	private Image bkgd;
+	
     private static final String CARD_JBUTTON =  "Card JButton";
+    
+    /**
+     * This is a string that contains the text for the about page.
+     */
     private String aboutText = "Over-consumption "
     		+ "of water is an ongoing problem and causes a \n huge strain on our environment and "
     		+ "resources.\n You can use this program to calculate your personal water footprint, \n"
@@ -48,6 +65,12 @@ public class AboutScreen extends JPanel {
 	{
 		init();
 	}
+	/**
+	 * init()
+	 * 
+	 * This method sets up the screen for the about page
+	 * and sets the background image as the background image.
+	 */
 	public void init()
 	{
 		try{
@@ -66,6 +89,16 @@ public class AboutScreen extends JPanel {
 
 		}	
 	}
+	
+	/**
+	 * paintComponent(Graphics g)
+	 * 
+	 * This method prints the background image. It also prints
+	 * out the text for the about page as a drawString() in order
+	 * to ensure that the text goes on top of the image.
+	 * 
+	 * @ param g is the Graphic Screen that the image is to be printed to
+	 */
 public void paintComponent(Graphics g){
 
 		

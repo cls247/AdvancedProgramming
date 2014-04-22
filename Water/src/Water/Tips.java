@@ -3,6 +3,8 @@ package Water;
 import java.util.ArrayList;
 
 //this class will contain a selection of tips
+//this class is not done yet
+
 public class Tips {
 
 	ArrayList <String> listOfTips;

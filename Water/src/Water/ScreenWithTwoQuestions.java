@@ -21,6 +21,17 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+
+/**
+ * This is the template for the majority of the pages.
+ * It gets questions in its constuctor to change the 
+ * each page so it is specific to the information to 
+ * be input. 
+ * 
+ * @author Sand
+ *
+ */
+
 public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Global{
 
 	

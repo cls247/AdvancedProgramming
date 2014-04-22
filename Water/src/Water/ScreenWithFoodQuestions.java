@@ -14,9 +14,18 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
+/**
+ * This is a temporary class that gets the same information as the ScreenWithDraw.
+ * This was going to be used if we did not get the drag working.
+ * 
+ * @author Sand
+ *
+ */
 public class ScreenWithFoodQuestions extends JPanel{
 
-	
+	/**
+	 * Questions that are input
+	 */
 	private String firstQuestion;
 	private String secondQuestion;
 	private Image bkgd;
@@ -30,7 +39,7 @@ public class ScreenWithFoodQuestions extends JPanel{
 	{
 		try{
 
-
+			//set the background image
 			bkgd = ImageIO.read(new File("background.jpg"));
 			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
 			setPreferredSize(size);
@@ -51,7 +60,7 @@ public class ScreenWithFoodQuestions extends JPanel{
 		JLabel firstQuestionLabel = new JLabel(firstQuestion+"?", JLabel.CENTER);
 		add(firstQuestionLabel);
 		
-		//answer the first question	
+		//answer the third question	
 		JSpinner numberSpinner;
 	    SpinnerNumberModel numberSpinnerModel;
 	    Double current = new Double(1.00);
@@ -69,7 +78,7 @@ public class ScreenWithFoodQuestions extends JPanel{
 
 		public void paintComponent(Graphics g){
 
-		
+		//draw the background image
 		g.drawImage(bkgd, 0,0, null);
 
 		}

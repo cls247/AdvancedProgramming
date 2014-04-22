@@ -1,5 +1,6 @@
 package Water;
 
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
@@ -30,9 +31,18 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-//so this is like supposed to on a thread, but I'm not positive how to do that
-//I think that I got it pretty close
-//*************I totally forgot about the slider class so we can totally use that here
+/**
+ * This class has a bunch of sliders for each or the data that should be 
+ * entered into a footprint. It ten updates a running total of the amount
+ * of water that would be used based on the input from the sliders.
+ * We will add a water bottle that will increase the water level based on 
+ * the total amount of water that the user would use if they followed the input
+ * from the sliders. 
+ * 
+ * @author Sand
+ *
+ */
+
 public class InteractivePage extends JPanel {
 	
 
@@ -49,6 +59,9 @@ public class InteractivePage extends JPanel {
 	int sliderForServingOfCorn=0;
 	int sliderForNumberOfWashes=0;
 	int sliderForNumberOfLoadsOfClothes=0;
+	
+	//add text areas for each slider to display the total
+	//for that slider
 	JTextField textTotal1=new JTextField("00");
 	JTextField textTotal2=new JTextField("00");
 	JTextField textTotal3=new JTextField("00");
@@ -60,6 +73,9 @@ public class InteractivePage extends JPanel {
 	JTextField textTotal9=new JTextField("00");
 	JTextField textWater = new JTextField("00");
 	
+	/**
+	 * This is the background image
+	 */
 	private Image bkgd;
 	//TextField totalText=new TextField("00");
 	
@@ -76,7 +92,7 @@ public class InteractivePage extends JPanel {
 	{
 		try{
 
-
+			//set the background image
 			bkgd = ImageIO.read(new File("background.jpg"));
 			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
 			setPreferredSize(size);
@@ -110,6 +126,12 @@ public class InteractivePage extends JPanel {
 			}
 			
 		});
+		
+		//******
+		//This is a bunch of sliders that the user can manipulate.
+		//When the slider is called, it update the TextAreas and it updates
+		//the footprint based on wha twas input from the user. 
+		
 		slider.setMajorTickSpacing(10); 
 		slider.setPaintLabels(true); 
 		slider.setPaintTicks(true); 

@@ -89,6 +89,7 @@ public class ScreenWithDraw extends JPanel implements Runnable, Global {
 			jp.setPreferredSize(new Dimension(350,600));
 			jp2.setPreferredSize(new Dimension(350,600));
 
+			// add images to be clicked on
 			final ImageIcon chickenIcon = new ImageIcon("smallChicken.jpg");
 			final ImageIcon lambIcon = new ImageIcon("lamb.jpeg");
 			final ImageIcon beefIcon = new ImageIcon("cow.jpg");
@@ -97,6 +98,10 @@ public class ScreenWithDraw extends JPanel implements Runnable, Global {
 			final JButton lambButton = new JButton();
 			final JButton cowButton = new JButton();
 
+			
+			//when am image is clicked, update the appropriate variables
+			//and change the icons accordingly
+			
 			cowButton.setIcon(beefIcon);
 			lambButton.setIcon(lambIcon);
 			chickenButton.setIcon(chickenIcon);

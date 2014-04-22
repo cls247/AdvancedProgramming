@@ -13,16 +13,42 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * 
+ * This is the screen where the user can read a conclomeration
+ * of a bunch of different tips for saving water.
+ * The tips are divided into categories based on their category.
+ * @author Sand
+ *
+ */
 public class AllTipScreen extends JPanel {
 
+	/**
+	 * This is the string that will be populated with all the tips to be printed
+	 */
 	private String tipsString="";
+	
+	/**
+	 * This is the image that will be the background
+	 */
 	private Image bkgd;
 	
+	/**
+	 * AllTipScreen()
+	 * 
+	 * This constructor calls init() to set up the screen
+	 */
 	public AllTipScreen()
 	{
 		init();
 	}
+	
+	/**
+	 * init()
+	 * 
+	 * This method sets the background image of the screen and 
+	 * populates the string with all the tips to be printed. 
+	 */
 	public void init()
 	{
 		try{
@@ -45,6 +71,12 @@ public class AllTipScreen extends JPanel {
 		
 		
 	}
+	/**
+	 * populateTips()
+	 * 
+	 * This method simply populates the string with all the 
+	 * different tips that are to be printed. 
+	 */
 	private void populateTips()
 	{
 		tipsString+="Water Consumption\n"
@@ -78,6 +110,14 @@ public class AllTipScreen extends JPanel {
 				
 	}
 	
+	/**
+	 * paintComponent(Graphics g)
+	 * 
+	 * This method draws an image as the background and prints the text for the 
+	 * tips with proper formatting (spacing between lines).
+	 * 
+	 * @param g this is the Graphics screen that the images will be passed to 
+	 */
 	public void paintComponent(Graphics g){
 
 		

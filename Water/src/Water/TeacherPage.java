@@ -40,7 +40,7 @@ public class TeacherPage extends JPanel{
 		
 		//Just write something and then put it here
 		try{
-
+			//set the background image
 			bkgd = ImageIO.read(new File("background.jpg"));
 			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
 			setPreferredSize(size);
@@ -50,16 +50,15 @@ public class TeacherPage extends JPanel{
 			setLayout(null);
 			
 		}catch(IOException error){
-
-
 		}
-
 
 	}
 	
 	 public void paintComponent(Graphics g){
-	    	
+	    	//draw the background image
 	    	g.drawImage(bkgd, 0,0, null);
+	    	//draw the text for the page being sure to keep the 
+	    	//text in front of the image
 			Dimension d = this.getPreferredSize(); 
 			int fontSize = 20; 
 			g.setFont(new Font("Helvetica Neue", Font.PLAIN, fontSize)); 
