@@ -19,13 +19,17 @@ public class Bottle {
 	//this is an arraylist of all the water bottle from 1-21
 	private ArrayList <String> waterBottles=new ArrayList<String>();
 	
+	public Bottle()
+	{
+		addWater();
+	}
 	
 	public void addWater()
 	{		
 		//this should fill the array with all the different images
 		for(int i=0; i<=21; i++)
 		{
-			waterBottles.add("Water/water"+i+".jpg");
+			waterBottles.add("water"+String.valueOf(i+1) +".jpg");
 		}
 	}
 	
@@ -40,12 +44,12 @@ public class Bottle {
 		currentBottle=(int) Math.floor(((double)waterLevel)/1000);
 		
 	}
-	public Image getImage()
+	public ImageIcon getImage()
 	{
 		//this method returns the image of the current water bottle
-		ImageIcon water = new ImageIcon(waterBottles.get(currentBottle));
-		Image bottle = water.getImage();
-		return bottle; 
+		System.out.println(waterBottles.get(currentBottle));
+		ImageIcon waterBottle = new ImageIcon(waterBottles.get(currentBottle));
+		return waterBottle; 
 	}
 	
 	public double getWaterLevel()

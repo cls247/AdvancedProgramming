@@ -1,9 +1,11 @@
 package Water;
 
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -11,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
-public class ScreenWithTwoQuestions extends JPanel implements ActionListener{
+public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Global{
 
 	
 	private String firstQuestion;
@@ -31,7 +33,7 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener{
 	{
 		//we need to save all this data, I didn't do that
 		//here we would add the background image
-		setLayout(new GridLayout(2, 2));
+		setLayout(new GridLayout(3, 2));
 		//ask the first question
 		JLabel firstQuestionLabel = new JLabel(firstQuestion+"?", JLabel.CENTER);
 		add(firstQuestionLabel);
@@ -113,6 +115,13 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener{
 	    m_numberSpinnerModel = new SpinnerNumberModel(current, min, max, step);
 	    m_numberSpinner = new JSpinner(m_numberSpinnerModel);
 	    add(m_numberSpinner);
+	    
+	    JLabel imageLabel=new JLabel();
+	    ImageIcon waterBottle=currentUser.getFootPrint().getWaterBottle().getImage();
+
+	    
+	    imageLabel.setIcon(waterBottle);
+	    add(imageLabel);
 
 		
 		

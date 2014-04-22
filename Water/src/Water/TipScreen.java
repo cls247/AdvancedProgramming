@@ -36,7 +36,7 @@ public class TipScreen extends JPanel implements Global{
 		//this is just a temporary tip display
 		if((waterUsed >=0) && (waterUsed <=100)){
 			
-			tip=new TextArea("You used a regular amount of water."+
+			tip=new TextArea("You used "+ String.valueOf(waterUsed) +" liters of water. You used a regular amount of water."+
 			"In addition, " );/*+ waterTip.getTip(aFootPrint.getBottle().getCurrentBottle())+
 			currentUser.getFootPrint().Tips());*/
 			

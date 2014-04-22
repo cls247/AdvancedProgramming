@@ -194,39 +194,43 @@ public class FootPrint {
 		//keeping a running total
 		//total=(amount of beef)*(how much water in beef) etc etc etc	
 		
+		System.out.println("liter er water boottle"+literPerWaterBottle);
+		System.out.println("number of water bottle"+numberOfWaterBottles);
+		System.out.println("totalLitersofWater"+totalLitersAmountOfWater);
 		totalLitersAmountOfWater= (literPerWaterBottle*numberOfWaterBottles);
-		
+		System.out.println("totalLitersofWater"+totalLitersAmountOfWater);
 		if(usesDishWasher)
 		{
-			totalLitersAmountOfWater=literPerDishWater*numberOfTimesDoesDishes;
+			totalLitersAmountOfWater+=literPerDishWater*numberOfTimesDoesDishes;
 		}
 		if(doesDishedByHand)
 		{
-			totalLitersAmountOfWater=literPerDishesByHand*numberOfTimesDoesDishes;
+			totalLitersAmountOfWater+=literPerDishesByHand*numberOfTimesDoesDishes;
 		}
-		totalLitersAmountOfWater=servingOfBeef*literPerServingOfBeef;
-		totalLitersAmountOfWater= servingOfChicken*literPerServingOfChicken;
-		totalLitersAmountOfWater=servingOfLamb*literPerServingOfLamb;
-		totalLitersAmountOfWater=servingOfVeges*literPerServingOfVeges;
-		totalLitersAmountOfWater=servingOfLentils*literPerServingOfLentils;
-		totalLitersAmountOfWater=servingOfPasta*literPerServingOfPasta;
+		totalLitersAmountOfWater+=servingOfBeef*literPerServingOfBeef;
+		totalLitersAmountOfWater+= servingOfChicken*literPerServingOfChicken;
+		totalLitersAmountOfWater+=servingOfLamb*literPerServingOfLamb;
+		totalLitersAmountOfWater+=servingOfVeges*literPerServingOfVeges;
+		totalLitersAmountOfWater+=servingOfLentils*literPerServingOfLentils;
+		totalLitersAmountOfWater+=servingOfPasta*literPerServingOfPasta;
 		
 		if(takesShowers)
 		{
-			totalLitersAmountOfWater=literPerShowerPerMinute*numberOfWashes;
+			totalLitersAmountOfWater+=literPerShowerPerMinute*numberOfWashes;
 		}
 		if(takesBaths)
 		{
-			totalLitersAmountOfWater=litersPerBath*numberOfWashes;
+			totalLitersAmountOfWater+=litersPerBath*numberOfWashes;
 		}
 		if(usesWashingMachine)
 		{
-			totalLitersAmountOfWater=litersPerLoadsOfClothersWashingMachine*numberOfLoadsOfClothes;
+			totalLitersAmountOfWater+=litersPerLoadsOfClothersWashingMachine*numberOfLoadsOfClothes;
 		}
 		if(handWashesClothes)
 		{
-			totalLitersAmountOfWater=litersPerLoadsOfClothesHandWashing*numberOfLoadsOfClothes;
+			totalLitersAmountOfWater+=litersPerLoadsOfClothesHandWashing*numberOfLoadsOfClothes;
 		}	
+		System.out.println("totalLitersofWater"+totalLitersAmountOfWater);
 		
 	}
 	public Bottle getWaterBottle()
