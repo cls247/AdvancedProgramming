@@ -66,21 +66,11 @@ class WelcomeScreen extends JPanel
 		g.drawImage(bkgd, 0,0, null);
 		Dimension d = this.getPreferredSize(); 
 		int fontSize = 20; 
-		g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize)); 
-		g.drawString(welcomeText, 10, 20); 
+		g.setFont(new Font("Helvetica Neue", Font.PLAIN, fontSize)); 
+		g.drawString(welcomeText, 10, 200); 
 		}
 
 	}
-
-
-
-
-
-
-
-
-
-
 
 
 

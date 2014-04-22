@@ -83,9 +83,23 @@ public class AllTipScreen extends JPanel {
 		
 		g.drawImage(bkgd, 0,0, null);
 		Dimension d = this.getPreferredSize(); 
-		int fontSize = 20; 
-		g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize)); 
-		g.drawString(tipsString, 10, 20); 
+		int fontSize = 12; 
+		g.setFont(new Font("Helvetica Neue", Font.PLAIN, fontSize)); 
+		
+		
+		int x = 150;
+		int y = 50;
+		
+//		for (String line: aboutText.split("\n")){
+//			
+//			g.drawString(line, x += g.getFontMetrics().getHeight(), 200);
+//			
+//		}
+//		
+		for (String line : tipsString.split("\n"))
+            g.drawString(line, x, y += g.getFontMetrics().getHeight());
+		
+//		g.drawString(tipsString, 10, 20); 
 
 		}
 }

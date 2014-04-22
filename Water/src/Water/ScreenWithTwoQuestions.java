@@ -18,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Global{
 
@@ -33,7 +35,7 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 		firstQuestion=firstQuestion1;
 		secondQuestion=secondQuestion1;
 		thirdQuestion=thirdQuestion1;
-		type=type;
+		type=type1;
 		init();
 	}
 	public void init()
@@ -115,7 +117,7 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
         //add(answerToThirdQuestion);
         //answerToThirdQuestion.setValue(new Double(10.0));
         //String answer=answerToThirdQuestion.getText();
-		JSpinner m_numberSpinner;
+		final JSpinner m_numberSpinner;
 	    SpinnerNumberModel m_numberSpinnerModel;
 	    Double current = new Double(1.00);
 	    Double min = new Double(0.00);
@@ -124,19 +126,27 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 	    m_numberSpinnerModel = new SpinnerNumberModel(current, min, max, step);
 	    m_numberSpinner = new JSpinner(m_numberSpinnerModel);
 	    add(m_numberSpinner);
-	    
-	    Double answer= (Double) (m_numberSpinner.getValue());
-	    int temp=answer.intValue();
-        if(type=="bottle")
-			Global.currentUser.getFootPrint().setNumberOfWaterBottles(temp);				
-		if(type=="plants")
-			Global.currentUser.getFootPrint().setNumberOfTimesWaterPlants(temp);
-		if(type=="bathing")
-			Global.currentUser.getFootPrint().setNumberOfWashes(temp);
-		if(type=="dishes")
-			Global.currentUser.getFootPrint().setNumberOfTimesDoesDishes(temp);
-		if(type=="clothes")
-			Global.currentUser.getFootPrint().setNumberOfLoadsOfClothes(temp);
+	    m_numberSpinner.addChangeListener(new ChangeListener()
+	    {
+
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				// TODO Auto-generated method stub
+				Double answer= (Double) (m_numberSpinner.getValue());
+			    int temp=answer.intValue();
+		        if(type=="bottle")
+					Global.currentUser.getFootPrint().setNumberOfWaterBottles(temp);				
+				if(type=="plants")
+					Global.currentUser.getFootPrint().setNumberOfTimesWaterPlants(temp);
+				if(type=="bathing")
+					Global.currentUser.getFootPrint().setNumberOfWashes(temp);
+				if(type=="dishes")
+					Global.currentUser.getFootPrint().setNumberOfTimesDoesDishes(temp);
+				if(type=="clothes")
+					Global.currentUser.getFootPrint().setNumberOfLoadsOfClothes(temp);
+			}
+	    	
+	    });
 
         //we need to save this data, and error check to make sure that the numbers are responable
 	    

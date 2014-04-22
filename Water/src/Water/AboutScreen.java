@@ -17,15 +17,16 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class AboutScreen extends JPanel {
 
 	private Image bkgd;
     private static final String CARD_JBUTTON =  "Card JButton";
-    private String aboutText = "Welcome to the Water Footprint Calculator! \n Over-consumption "
-    		+ "of water is an ongoing problem and causes a \n huge strain on our environment and</br> "
-    		+ "resources.\n You can use this program to calculate your <br> personal water footprint, "
-    		+ "learn how to decrease your impact, and \n"
+    private String aboutText = "Over-consumption "
+    		+ "of water is an ongoing problem and causes a \n huge strain on our environment and "
+    		+ "resources.\n You can use this program to calculate your personal water footprint, \n"
+    		+ "learn how to decrease your impact, and "
     		+ "track your progress over time.\n"
     		+"Over-consumption of water is a common problem among Americans, \n "
     		+ "and indeed all world citizens, that is creating a strain on the \n"
@@ -70,9 +71,26 @@ public void paintComponent(Graphics g){
 		
 		g.drawImage(bkgd, 0,0, null);
 		Dimension d = this.getPreferredSize(); 
-		int fontSize = 20; 
-		g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize)); 
-		g.drawString(aboutText, 10, 20); 
-		}
+		int fontSize = 15; 
+		g.setFont(new Font("Helvetica Neue", Font.PLAIN, fontSize)); 
+		
+		int x = 100;
+		int y = 50;
+		
+//		for (String line: aboutText.split("\n")){
+//			
+//			g.drawString(line, x += g.getFontMetrics().getHeight(), 200);
+//			
+//		}
+//		
+		for (String line : aboutText.split("\n"))
+            g.drawString(line, x, y += g.getFontMetrics().getHeight());
+
+
+		
+//		g.drawString(aboutText, 10, 200); 
+//		
+//		}
 
 	}
+}

@@ -12,13 +12,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 //I'm assuming this is the one for the final recommendation tip screen
 public class TipScreen extends JPanel implements Global{
 	
 	FootPrint aFootPrint = currentUser.getFootPrint();
 	double waterUsed;
-	TextArea tip=new TextArea();
+	JTextField tip=new JTextField();
 	Tips waterTip;
 	private Image bkgd;
 	
@@ -26,13 +27,17 @@ public class TipScreen extends JPanel implements Global{
 	{
 		init();
 	
-		waterUsed = currentUser.getFootPrint().getTotalAmountOfWater();
-		
-		calculateFootPrint();
+		updateTotal();
 		
 		add(tip);
 		
 	}
+	public void updateTotal()
+	{
+		waterUsed=aFootPrint.getTotalAmountOfWater();
+		calculateFootPrint();
+	}
+	
 	public void init()
 	{
 		try{
@@ -58,13 +63,13 @@ public class TipScreen extends JPanel implements Global{
 		//this is just a temporary tip display
 		if((waterUsed >=0) && (waterUsed <=100)){
 			
-			tip=new TextArea("You used "+ String.valueOf(waterUsed) +" liters of water. You used a regular amount of water."+
+			tip=new JTextField("You used "+ String.valueOf(waterUsed) +" liters of water. You used a regular amount of water."+
 			"In addition, " );/*+ waterTip.getTip(aFootPrint.getBottle().getCurrentBottle())+
 			currentUser.getFootPrint().Tips());*/
 			
 		}else{
 			
-			tip=new TextArea("You used an abnormal amount of water."+
+			tip=new JTextField("You used an abnormal amount of water."+
 			"In addition, ");/* + waterTip.getTip(aFootPrint.getBottle().getCurrentBottle())+
 			currentUser.getFootPrint().Tips());*/
 			
@@ -74,7 +79,12 @@ public class TipScreen extends JPanel implements Global{
 	}
 	public void paintComponent(Graphics g){
 	
-		
+		System.out.println("painting");
+		updateTotal();
+		remove(tip);
+		tip=new JTextField("You used "+ String.valueOf(waterUsed) +" liters of water. You used a regular amount of water."+
+				"In addition, " );
+		add(tip);
 		g.drawImage(bkgd, 0,0, null);
 
 		}

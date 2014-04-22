@@ -173,15 +173,18 @@ public class FootPrint {
 	public void setUsesSprinklers(boolean setUsesSprinklers)
 	{
 		usesSprinklers=setUsesSprinklers;
+		updateTotalAmountOfWater();
 	}
 	public void setHandWaters(boolean setHandWaters)
 	{
 		handWaters=setHandWaters;
+		updateTotalAmountOfWater();
 	}
 
 	public void setNumberOfTimesWaterPlants(int setNumberOfTimesWaterPlants)
 	{
 		numberOfTimesWaterPlants=setNumberOfTimesWaterPlants;
+		updateTotalAmountOfWater();
 	}
 	public void updateTotalAmountOfWater()
 	{
@@ -240,6 +243,7 @@ public class FootPrint {
 	
 	public double getTotalAmountOfWater()
 	{
+		System.out.println("*********Getting Water*********" + totalLitersAmountOfWater);
 		return totalLitersAmountOfWater;
 	}
 	

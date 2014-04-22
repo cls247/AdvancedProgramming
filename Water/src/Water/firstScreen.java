@@ -64,7 +64,7 @@ public class firstScreen
 		"Do you take baths", 
 		"How many times a week do you wash yourself?", "clothes");
 		pane.add(bathingWin);
-
+		ScreenWithDraw tempBeef=new ScreenWithDraw("meat");
 		ScreenWithFoodQuestions  chooseMeat = new ScreenWithFoodQuestions("How many servings of meat do you eat each week?");
 		pane.add(chooseMeat);
 
@@ -90,7 +90,7 @@ public class firstScreen
 		tabs.addTab("Wash clothes", washClothes);
 		
 		tabs.addTab("Bath", bathingWin);
-		
+		tabs.addTab("Temporary beef", tempBeef);
 		tabs.addTab("Meat", chooseMeat);
 		tabs.addTab("Grains", chooseGrains);
 		
@@ -99,7 +99,7 @@ public class firstScreen
 		
 		tabs.addTab("final", finalScreen);
 		
-
+		finalScreen.updateTotal();
 		pane.add(tabs, BorderLayout.CENTER);
 		
 	}

@@ -1,10 +1,13 @@
 package Water;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -12,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -27,7 +31,7 @@ import javax.swing.TransferHandler;
  *
  */
 
-public class ScreenWithDraw extends JPanel implements Runnable {
+public class ScreenWithDraw extends JPanel implements Runnable, Global {
 
 	private ImageIcon plate=new ImageIcon("Water/plate.jpg");
 	private Image platePicture=plate.getImage();
@@ -38,6 +42,9 @@ public class ScreenWithDraw extends JPanel implements Runnable {
 	//meat, grains or fruits that said which it should be ???? not sure yet
 	private String type;
 	private Image bkgd;
+	final JPanel jp = new JPanel();
+	JPanel jp2 = new JPanel();
+
 	
 	public ScreenWithDraw(String foodType){
 		type = foodType;
@@ -55,57 +62,82 @@ public class ScreenWithDraw extends JPanel implements Runnable {
 	}
 	public void init()
 	{
-		try{
+//		try{
+//
+//
+//			bkgd = ImageIO.read(new File("background.jpg"));
+//			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
+//			setPreferredSize(size);
+//			setMinimumSize(size);
+//			setMaximumSize(size);
+//			setSize(size);
+//			setLayout(null);
+//			
+//		}catch(IOException error){
+//
+//
+//		}
+		{
+			addNotify();
 
-
-			bkgd = ImageIO.read(new File("background.jpg"));
-			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
-			setPreferredSize(size);
-			setMinimumSize(size);
-			setMaximumSize(size);
-			setSize(size);
-			setLayout(null);
-			
-		}catch(IOException error){
-
-
-		}
-		addNotify();
-				
-       JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 50, 15));
-       
-       ImageIcon meatIcon = new ImageIcon("cow.png");
-       JButton meatButton = new JButton(meatIcon);
-
-		panel.add(meatButton);
+			jp.setBackground(Color.white);
 		
-		add(panel);
-       /* ImageIcon icon1 = new ImageIcon("smallplate.png");
-        ImageIcon icon2 = new ImageIcon("smallplate.png");
-        ImageIcon icon3 = new ImageIcon("water3.jpg");
+			jp2.setBackground(Color.white);
+			jp2.setLayout(new BoxLayout(jp2, BoxLayout.Y_AXIS));
+			jp.setLayout(new BoxLayout(jp, BoxLayout.Y_AXIS));
 
-        DropTarget button = new DropTarget();
-   //     button.setFocusable(false);
-        
-       // panel.setDropTarget(button);
+			jp.setPreferredSize(new Dimension(350,600));
+			jp2.setPreferredSize(new Dimension(350,600));
 
-        JLabel label1  = new JLabel(icon1, JLabel.CENTER);
-        JLabel label2  = new JLabel(icon3, JLabel.CENTER);
-        label2.setSize(100, 100);
+			final ImageIcon chickenIcon = new ImageIcon("smallChicken.jpg");
+			final ImageIcon lambIcon = new ImageIcon("lamb.jpeg");
+			final ImageIcon beefIcon = new ImageIcon("cow.jpg");
 
-        MouseListener listener = new DragMouseAdapter();
-        label1.addMouseListener(listener);
-        label2.addMouseListener(listener);
+			final JButton chickenButton = new JButton();
+			final JButton lambButton = new JButton();
+			final JButton cowButton = new JButton();
 
-        label1.setTransferHandler(new TransferHandler("icon"));
-       // button.setTransferHandler(new TransferHandler("icon"));
-        label2.setTransferHandler(new TransferHandler("icon"));
+			cowButton.setIcon(beefIcon);
+			lambButton.setIcon(lambIcon);
+			chickenButton.setIcon(chickenIcon);
+			jp2.add(chickenButton);
+			jp2.add(lambButton);
+			jp2.add(cowButton);
+			
+			cowButton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent arg0){
+					
+					
+					jp.add(cowButton);				
+					
+					currentUser.getFootPrint().setServingOfBeef(1);
+					
+					repaint();
 
-        panel.add(label1);
-        panel.add(button);
-        panel.add(label2);
-        add(panel);*/
+				}
+			});
 
+			chickenButton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent arg0){
+					
+					
+					jp.add(chickenButton);
+					currentUser.getFootPrint().setServingOfChicken(1);
+					
+					repaint();
+				}
+			});
+
+			lambButton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent arg0){
+					
+					
+					jp.add(lambButton);
+					currentUser.getFootPrint().setServingOfLamb(1);
+					
+					repaint();
+				}
+			});
     }
 	class DragMouseAdapter extends MouseAdapter {
         public void mousePressed(MouseEvent e) {
@@ -114,6 +146,10 @@ public class ScreenWithDraw extends JPanel implements Runnable {
             handler.exportAsDrag(c, e, TransferHandler.COPY);
         }
     }
+
+	add(jp2, BorderLayout.WEST);
+	add(jp, BorderLayout.EAST);
+	}
 
 	/**
 	 * addNotify()
