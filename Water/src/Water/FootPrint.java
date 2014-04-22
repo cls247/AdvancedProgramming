@@ -20,6 +20,12 @@ public class FootPrint {
 	private final double literPerWaterBottle=.6;
 	private int numberOfWaterBottles=0;
 	
+	private boolean usesSprinklers=false;
+	private final int literPerSprinklerPerTime=90;
+	private boolean handWaters=false;
+	private final int literPerHandWaterTime=50;
+	private int numberOfTimesWaterPlants;
+	
 	private boolean usesDishWasher=false;
 	private final int literPerDishWater=3;
 	private boolean doesDishedByHand=false;
@@ -52,8 +58,8 @@ public class FootPrint {
 	private boolean usesWashingMachine=false;
 	private boolean handWashesClothes=false;
 	private int numberOfLoadsOfClothes=0;
-	private final int litersPerLoadsOfClothersWashingMachine=0;
-	private final int litersPerLoadsOfClothesHandWashing=0;
+	private final int litersPerLoadsOfClothersWashingMachine=20;
+	private final int litersPerLoadsOfClothesHandWashing=37;
 	
 	private double totalLitersAmountOfWater=0;
 	private Bottle waterBottle;
@@ -164,7 +170,19 @@ public class FootPrint {
 		numberOfLoadsOfClothes=setNumberOfLoadsOfClothes;
 		updateTotalAmountOfWater();
 	}
-	
+	public void setUsesSprinklers(boolean setUsesSprinklers)
+	{
+		usesSprinklers=setUsesSprinklers;
+	}
+	public void setHandWaters(boolean setHandWaters)
+	{
+		handWaters=setHandWaters;
+	}
+
+	public void setNumberOfTimesWaterPlants(int setNumberOfTimesWaterPlants)
+	{
+		numberOfTimesWaterPlants=setNumberOfTimesWaterPlants;
+	}
 	public void updateTotalAmountOfWater()
 	{
 		//write an equation that takes
@@ -216,14 +234,37 @@ public class FootPrint {
 		return waterBottle;
 	}
 	
-	public int getTotalAmountOfWater()
+	public double getTotalAmountOfWater()
 	{
-		return totalAmountOfWater;
+		return totalLitersAmountOfWater;
 	}
 	
 	public Bottle getBottle(){
 		
 		return waterBottle;
+		
+	}
+	public String Tips()
+	{
+		String tipsToReturn="";
+		if(usesPlasticWaterBottle)
+			tipsToReturn+="You should try using Recycleable Water Bottles. \n";
+		if(doesDishedByHand)
+			tipsToReturn+="You should consider using a dishwasher to wash you dishes.\n" +
+					"It actually uses less water";
+		if(takesBaths)
+			tipsToReturn+="You shoudl take showers instead of baths. They use less water. \n";
+		if (servingOfLamb+servingOfChicken+servingOfBeef>=5)
+			return "You should try decreasing the amount of Meat you eat. \n"
+					+"Vegetables use less water to produce. They are better for the "
+					+ "environment and for you. \n";
+		if(numberOfWashes>7 && takesShowers)
+			tipsToReturn+="You should shower less times per week. It will conserver water\n";
+		else if(numberOfWashes>7)
+			tipsToReturn+="You should shower less times per week. It will conserver water\n";
+		if(usesWashingMachine || usesDishWasher)
+			tipsToReturn+="You should be sure that you are using water efficient appliances.";
+		return tipsToReturn;
 		
 	}
 

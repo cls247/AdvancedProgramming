@@ -2,9 +2,12 @@ package Water;
 
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
+import java.awt.TextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -19,33 +22,34 @@ import javax.swing.JPanel;
 //*************I totally forgot about the slider class so we can totally use that here
 public class InteractivePage extends JPanel implements Runnable, MouseListener{
 
-	private Rectangle bar = new Rectangle(50, 100, 200, 100);
 	private Thread graphs;
 	private MouseListener m;
 	private final int DELAY = 20;
 	private boolean clicked=false;
-	private int x=20, y=20, height=100, width=100;
+	private int meatX=20, meatY=60, meatHeight=100, meatWidth=100;
 	//there should be a temporary food print in order to 
 	//keep updating the footprint according to the bars that change
 	FootPrint temporaryFootPrint=new FootPrint();
-	
+	Rectangle meatBar=new Rectangle(meatX, meatY, meatWidth, meatHeight);
+	private int mouseX, mouseY;
+	private Point mousePoint;
 	double sliderForFootPrint;
 	int sliderForWaterBottles=0;
 	int sliderForNumberOfTimesDoesDishes=0;
 	int sliderForServingOfBeef=0;
 	int sliderForServingOfChicken=0;
-	int sliderForServingOfTurkey=0;
+	int sliderForServingOfCorn=0;
 	int sliderForNumberOfWashes=0;
 	int sliderForNumberOfLoadsOfClothes=0;
+	TextField total=new TextField();
 	
-	int amountWaterUsed = 0;
+	double amountWaterUsed = 0;
 	
 	double currentWaterLevel = temporaryFootPrint.getBottle().getWaterLevel();
 	
 	public InteractivePage()
 	{
-		init();
-		
+		init();		
 	}	
 	
 	public void init()
@@ -73,8 +77,8 @@ public class InteractivePage extends JPanel implements Runnable, MouseListener{
 		sliderForServingOfChicken=0; //this should get the value off the slider
 		temporaryFootPrint.setServingOfChicken(sliderForServingOfChicken);
 		
-		sliderForServingOfTurkey=0; //this should get the value off the slider
-		temporaryFootPrint.setServingOfTurkey(sliderForServingOfTurkey);
+		sliderForServingOfCorn=0; //this should get the value off the slider
+		temporaryFootPrint.setServingOfCorn(sliderForServingOfCorn);
 		
 		sliderForNumberOfWashes=0; //this should get the value off the slider
 		temporaryFootPrint.setNumberOfWashes(sliderForNumberOfWashes);
@@ -105,7 +109,8 @@ public class InteractivePage extends JPanel implements Runnable, MouseListener{
 	public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			//paint the rectangle
-			g.drawRect(x,y,height, width);
+			Graphics2D graphicsObject2d = (Graphics2D) g;
+			graphicsObject2d.draw(meatBar);
 
 	}
 	
@@ -123,16 +128,19 @@ public class InteractivePage extends JPanel implements Runnable, MouseListener{
 		while (true) {
 
 			if(clicked)
-			{
-					//here we need to make the bar rise with the mouse
-					x--;
-					y--;
-					//also here check to see if the bar grew enough to get to the next integer
+			{			
+					if(meatBar.contains(new Point(mouseX,mouseY)));
+					{
+						System.out.println("this contains");
+						total.setText(String.valueOf(amountWaterUsed));
+						//here we need to make the bar rise with the mouse
+						meatBar=new Rectangle(meatX, --meatY, meatWidth, ++meatHeight);
+						//also here check to see if the bar grew enough to get to the next integer
 					
-					//run the what if analysis if anything has been changed-i'm not quite sure where
-					//this should go
-					whatIfAnalysis();
-					
+						//run the what if analysis if anything has been changed-i'm not quite sure where
+						//this should go
+						whatIfAnalysis();
+					}
 			}
 			repaint();
 
@@ -158,8 +166,6 @@ public class InteractivePage extends JPanel implements Runnable, MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("Mouse was clicked");
-		clicked=true;
 	}
 
 	@Override
@@ -177,14 +183,17 @@ public class InteractivePage extends JPanel implements Runnable, MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("Mouse pressed");
 		clicked=true;
+		mouseX=e.getX();
+		System.out.println(mouseX);
+		System.out.println(mouseY);
+		mouseY=e.getY();
+		mousePoint=new Point(mouseX, mouseY);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("Mouse released");
 		clicked=false;
 	}
 }

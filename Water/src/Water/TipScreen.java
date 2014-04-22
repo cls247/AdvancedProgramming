@@ -1,28 +1,28 @@
 package Water;
 
 import java.awt.GridLayout;
+import java.awt.TextArea;
+import java.awt.TextField;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 //I'm assuming this is the one for the final recommendation tip screen
-public class TipScreen extends JPanel{
+public class TipScreen extends JPanel implements Global{
 	
-	FootPrint aFootPrint = new FootPrint();
-	int waterUsed;
-	JTextArea tip;
+	FootPrint aFootPrint = currentUser.getFootPrint();
+	double waterUsed;
+	TextArea tip=new TextArea();
 	Tips waterTip;
 	
 	public TipScreen()
 	{
 		init();
-		
-		//how are we passing the footprint?
-		waterUsed = aFootPrint.getTotalAmountOfWater();
+	
+		waterUsed = currentUser.getFootPrint().getTotalAmountOfWater();
 		
 		calculateFootPrint();
 		
-		//add the tip to the screen
 		add(tip);
 		
 	}
@@ -36,15 +36,18 @@ public class TipScreen extends JPanel{
 		//this is just a temporary tip display
 		if((waterUsed >=0) && (waterUsed <=100)){
 			
-			tip.setText("You used a regular amount of water.");
-			tip.append("In addition, " + waterTip.getTip(aFootPrint.getBottle().getCurrentBottle()));
+			tip=new TextArea("You used a regular amount of water."+
+			"In addition, " );/*+ waterTip.getTip(aFootPrint.getBottle().getCurrentBottle())+
+			currentUser.getFootPrint().Tips());*/
 			
 		}else{
 			
-			tip.setText("You used an abnormal amount of water.");
-			tip.append("In addition, " + waterTip.getTip(aFootPrint.getBottle().getCurrentBottle()));
+			tip=new TextArea("You used an abnormal amount of water."+
+			"In addition, ");/* + waterTip.getTip(aFootPrint.getBottle().getCurrentBottle())+
+			currentUser.getFootPrint().Tips());*/
 			
 		}
+		
 		
 	}
 

@@ -1,24 +1,30 @@
 package Water;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
-public class ScreenWithTwoQuestions extends JPanel{
+public class ScreenWithTwoQuestions extends JPanel implements ActionListener{
 
 	
 	private String firstQuestion;
 	private String secondQuestion;
 	private String thirdQuestion;
+	private String type;
 	
-	public ScreenWithTwoQuestions(String firstQuestion1, String secondQuestion1, String thirdQuestion1)
+	public ScreenWithTwoQuestions(String firstQuestion1, String secondQuestion1, String thirdQuestion1, String type1)
 	{
 		firstQuestion=firstQuestion1;
 		secondQuestion=secondQuestion1;
 		thirdQuestion=thirdQuestion1;
+		type=type;
 		init();
 	}
 	public void init()
@@ -32,6 +38,25 @@ public class ScreenWithTwoQuestions extends JPanel{
 		//answer the first question
 		final JCheckBox firstQuestionBox = new JCheckBox();
 		add(firstQuestionBox);
+		firstQuestionBox.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(type=="bottle")
+					Global.currentUser.getFootPrint().setUsesRecyclableWaterBottle(true);				
+				if(type=="plants")
+					Global.currentUser.getFootPrint().setUsesSprinklers(true);
+				if(type=="bathing")
+					Global.currentUser.getFootPrint().setTakesShowers(true);
+				if(type=="dishes")
+					Global.currentUser.getFootPrint().setUsesDishWasher(true);
+				if(type=="clothes")
+					Global.currentUser.getFootPrint().setUsesWashingMachine(true);
+			}
+			
+		});
 		//ask the second questions
 		JLabel secondQuestionlabel = new JLabel(secondQuestion+"?", JLabel.CENTER);
 		add(secondQuestionlabel);
@@ -39,7 +64,24 @@ public class ScreenWithTwoQuestions extends JPanel{
 		final JCheckBox secondQuestionBox = new JCheckBox();
 		add(secondQuestionBox);
 		//need error checking to make sure that these two questions are mutually exclusive
-		
+		secondQuestionBox.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(type=="bottle")
+					Global.currentUser.getFootPrint().setUsesPlasticWaterBottle(true);				
+				if(type=="plants")
+					Global.currentUser.getFootPrint().setHandWaters(true);
+				if(type=="bathing")
+					Global.currentUser.getFootPrint().setTakesBaths(true);
+				if(type=="dishes")
+					Global.currentUser.getFootPrint().setDoesDishedByHand(true);
+				if(type=="clothes")
+					Global.currentUser.getFootPrint().setHandWashesClothes(true);
+			}
+			
+		});
 		//ask the third question
 		JLabel thirdQuestionLabel = new JLabel(thirdQuestion+"?", JLabel.CENTER);
 		add(thirdQuestionLabel);
@@ -48,10 +90,36 @@ public class ScreenWithTwoQuestions extends JPanel{
 		answerToThirdQuestion.setBounds(25, 330, 56, 20);
         add(answerToThirdQuestion);
         answerToThirdQuestion.setValue(new Double(10.0));
+        String answer=answerToThirdQuestion.getText();
+        if(type=="bottle")
+			Global.currentUser.getFootPrint().setNumberOfWaterBottles(Integer.parseInt(answer));				
+		if(type=="plants")
+			Global.currentUser.getFootPrint().setNumberOfTimesWaterPlants(Integer.parseInt(answer));
+		if(type=="bathing")
+			Global.currentUser.getFootPrint().setNumberOfWashes(Integer.parseInt(answer));
+		if(type=="dishes")
+			Global.currentUser.getFootPrint().setNumberOfTimesDoesDishes(Integer.parseInt(answer));
+		if(type=="clothes")
+			Global.currentUser.getFootPrint().setNumberOfLoadsOfClothes(Integer.parseInt(answer));
+        
         //we need to save this data, and error check to make sure that the numbers are responable
 		
+		JSpinner m_numberSpinner;
+	    SpinnerNumberModel m_numberSpinnerModel;
+	    Double current = new Double(1.00);
+	    Double min = new Double(0.00);
+	    Double max = new Double(100.00);
+	    Double step = new Double(1.00);
+	    m_numberSpinnerModel = new SpinnerNumberModel(current, min, max, step);
+	    m_numberSpinner = new JSpinner(m_numberSpinnerModel);
+	    add(m_numberSpinner);
+
+		
+		
 	}
-
-
-
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -37,6 +37,7 @@ public class Bottle {
 		//this method takes in the total amount of 
 		//water and it sets the water bottle index (currentBottle)
 		//to the correct index according to the amount of water
+		currentBottle=(int) Math.floor(((double)waterLevel)/1000);
 		
 	}
 	public Image getImage()

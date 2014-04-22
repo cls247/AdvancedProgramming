@@ -1,12 +1,18 @@
 package Water;
 
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.TransferHandler;
 
 /**
  * This should be the template for the page that has 
@@ -28,6 +34,12 @@ public class ScreenWithDraw extends JPanel implements Runnable {
 	//meat, grains or fruits that said which it should be ???? not sure yet
 	private String type;
 	
+	
+	public ScreenWithDraw(String foodType){
+		type = foodType;
+		init();
+	}
+	
 	/**
 	 * This will take in an array of pictures that will be dragged
 	 * @param pics
@@ -39,8 +51,51 @@ public class ScreenWithDraw extends JPanel implements Runnable {
 	}
 	public void init()
 	{
+		addNotify();
+				
+       JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 50, 15));
+       
+       ImageIcon meatIcon = new ImageIcon("cow.png");
+       JButton meatButton = new JButton(meatIcon);
+
+		panel.add(meatButton);
 		
-	}
+		add(panel);
+       /* ImageIcon icon1 = new ImageIcon("smallplate.png");
+        ImageIcon icon2 = new ImageIcon("smallplate.png");
+        ImageIcon icon3 = new ImageIcon("water3.jpg");
+
+        DropTarget button = new DropTarget();
+   //     button.setFocusable(false);
+        
+       // panel.setDropTarget(button);
+
+        JLabel label1  = new JLabel(icon1, JLabel.CENTER);
+        JLabel label2  = new JLabel(icon3, JLabel.CENTER);
+        label2.setSize(100, 100);
+
+        MouseListener listener = new DragMouseAdapter();
+        label1.addMouseListener(listener);
+        label2.addMouseListener(listener);
+
+        label1.setTransferHandler(new TransferHandler("icon"));
+       // button.setTransferHandler(new TransferHandler("icon"));
+        label2.setTransferHandler(new TransferHandler("icon"));
+
+        panel.add(label1);
+        panel.add(button);
+        panel.add(label2);
+        add(panel);*/
+
+    }
+	class DragMouseAdapter extends MouseAdapter {
+        public void mousePressed(MouseEvent e) {
+            JComponent c = (JComponent) e.getSource();
+            TransferHandler handler = c.getTransferHandler();
+            handler.exportAsDrag(c, e, TransferHandler.COPY);
+        }
+    }
+
 	/**
 	 * addNotify()
 	 * 

@@ -3,14 +3,20 @@ package Water;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
 public class firstScreen
 {
 	private static final String CARD_JBUTTON =  "Card JButton";
@@ -23,10 +29,19 @@ public class firstScreen
 		JFrame frame = new JFrame("Water");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
+		JPanel jp = new JPanel();
+		jp.setPreferredSize(new Dimension(400,800));// changed it to preferredSize, Thanks!
+		frame.getContentPane().add( jp );// adding to content pane will work here. Please read the comment bellow.
+		frame.pack();
+		//ImageIcon background=new ImageIcon("Water/background");
+		//Image bkgrd=background.getImage();
+		
+		
 
 		//this is that thing that holds all the card
 		final JPanel contentPane = new JPanel();
-		contentPane.setLayout(new CardLayout(200, 200));
+		contentPane.setLayout(new CardLayout(100, 100));
+		contentPane.setPreferredSize(new Dimension(400,600));
 
 		//make all the card and add them to the contentPane above
 		WelcomeScreen welcomeWin = new WelcomeScreen();
@@ -41,13 +56,37 @@ public class firstScreen
 		contentPane.add(interactiveWin, CARD_JBUTTON);
 		ScreenWithTwoQuestions chooseWaterBottle = new ScreenWithTwoQuestions("Do you use recyclable bottles?", 
 				"Do you use plastic water bottles?", 
-				"How many water bottles do you use a week?");
+				"How many water bottles do you use a week?", "bottle");
 		contentPane.add(chooseWaterBottle, CARD_JRADIOBUTTON);
 		ScreenWithTwoQuestions waterPlants = new ScreenWithTwoQuestions("Do you use sprinkles?", 
 				"Do you water your lawn by hand?", 
-				"How many times a week do you water the lawn?");
+				"How many times a week do you water the lawn?", "plants");
 		contentPane.add(waterPlants, CARD_JRADIOBUTTON);
-
+		ScreenWithTwoQuestions washDishes = new ScreenWithTwoQuestions("Do you use a dishwasher?", 
+				"Do you wash dishes by hand?", 
+				"How many times a week do you wash dishes", "dishes");
+		contentPane.add(washDishes, CARD_JRADIOBUTTON);
+		ScreenWithTwoQuestions washClothes = new ScreenWithTwoQuestions("Do you use a washing machine?", 
+				"Do you wash clothes by hand", 
+				"How many loads of laundry do you do in a week?", "clothes");
+		contentPane.add(washClothes, CARD_JRADIOBUTTON);
+		ScreenWithTwoQuestions bathingWin = new ScreenWithTwoQuestions("Do you take showers?", 
+				"Do you take baths", 
+				"How many times a week do you wash yourself?", "clothes");
+		contentPane.add(bathingWin, CARD_JRADIOBUTTON);
+		TipScreen finalTipScreen=new TipScreen();
+		contentPane.add(finalTipScreen, CARD_JRADIOBUTTON);
+		
+        ScreenWithFoodQuestions  chooseMeat = new ScreenWithFoodQuestions("How many servings of meat do you eat each week?");
+        contentPane.add(chooseMeat, CARD_JRADIOBUTTON);
+        ScreenWithFoodQuestions  chooseGrains = new ScreenWithFoodQuestions("How many servings of grains do you eat each week?");
+        contentPane.add(chooseGrains, CARD_JRADIOBUTTON);
+        ScreenWithFoodQuestions  chooseFruitsAndVeggies = new ScreenWithFoodQuestions("How many servings of fruits and veggies do you eat each week?");
+        contentPane.add(chooseFruitsAndVeggies, CARD_JRADIOBUTTON);
+        ScreenWithDraw DragMeat = new ScreenWithDraw("Meat");
+        contentPane.add(DragMeat, CARD_JRADIOBUTTON);
+		
+		
 		//this is the buttons to go forward and backward
 		JPanel buttonPanel = new JPanel(); 
 		final JButton aboutButton=new JButton("ABOUT");
