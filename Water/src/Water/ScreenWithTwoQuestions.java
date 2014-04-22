@@ -1,10 +1,16 @@
 package Water;
 
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
@@ -20,6 +26,7 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 	private String secondQuestion;
 	private String thirdQuestion;
 	private String type;
+	private Image bkgd;
 	
 	public ScreenWithTwoQuestions(String firstQuestion1, String secondQuestion1, String thirdQuestion1, String type1)
 	{
@@ -31,9 +38,24 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 	}
 	public void init()
 	{
+		try{
+
+
+			bkgd = ImageIO.read(new File("background.jpg"));
+			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
+			setPreferredSize(size);
+			setMinimumSize(size);
+			setMaximumSize(size);
+			setSize(size);
+			setLayout(null);
+			
+		}catch(IOException error){
+
+
+		}
 		//we need to save all this data, I didn't do that
 		//here we would add the background image
-		setLayout(new GridLayout(3, 2));
+		setLayout(new GridLayout(4, 4));
 		//ask the first question
 		JLabel firstQuestionLabel = new JLabel(firstQuestion+"?", JLabel.CENTER);
 		add(firstQuestionLabel);
@@ -88,24 +110,11 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 		JLabel thirdQuestionLabel = new JLabel(thirdQuestion+"?", JLabel.CENTER);
 		add(thirdQuestionLabel);
 		//answer the third question
-		JFormattedTextField answerToThirdQuestion = new JFormattedTextField();
-		answerToThirdQuestion.setBounds(25, 330, 56, 20);
-        add(answerToThirdQuestion);
-        answerToThirdQuestion.setValue(new Double(10.0));
-        String answer=answerToThirdQuestion.getText();
-        if(type=="bottle")
-			Global.currentUser.getFootPrint().setNumberOfWaterBottles(Integer.parseInt(answer));				
-		if(type=="plants")
-			Global.currentUser.getFootPrint().setNumberOfTimesWaterPlants(Integer.parseInt(answer));
-		if(type=="bathing")
-			Global.currentUser.getFootPrint().setNumberOfWashes(Integer.parseInt(answer));
-		if(type=="dishes")
-			Global.currentUser.getFootPrint().setNumberOfTimesDoesDishes(Integer.parseInt(answer));
-		if(type=="clothes")
-			Global.currentUser.getFootPrint().setNumberOfLoadsOfClothes(Integer.parseInt(answer));
-        
-        //we need to save this data, and error check to make sure that the numbers are responable
-		
+		//JFormattedTextField answerToThirdQuestion = new JFormattedTextField();
+		//answerToThirdQuestion.setBounds(25, 330, 56, 20);
+        //add(answerToThirdQuestion);
+        //answerToThirdQuestion.setValue(new Double(10.0));
+        //String answer=answerToThirdQuestion.getText();
 		JSpinner m_numberSpinner;
 	    SpinnerNumberModel m_numberSpinnerModel;
 	    Double current = new Double(1.00);
@@ -115,6 +124,22 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 	    m_numberSpinnerModel = new SpinnerNumberModel(current, min, max, step);
 	    m_numberSpinner = new JSpinner(m_numberSpinnerModel);
 	    add(m_numberSpinner);
+	    
+	    Double answer= (Double) (m_numberSpinner.getValue());
+	    int temp=answer.intValue();
+        if(type=="bottle")
+			Global.currentUser.getFootPrint().setNumberOfWaterBottles(temp);				
+		if(type=="plants")
+			Global.currentUser.getFootPrint().setNumberOfTimesWaterPlants(temp);
+		if(type=="bathing")
+			Global.currentUser.getFootPrint().setNumberOfWashes(temp);
+		if(type=="dishes")
+			Global.currentUser.getFootPrint().setNumberOfTimesDoesDishes(temp);
+		if(type=="clothes")
+			Global.currentUser.getFootPrint().setNumberOfLoadsOfClothes(temp);
+
+        //we need to save this data, and error check to make sure that the numbers are responable
+	    
 	    
 	    JLabel imageLabel=new JLabel();
 	    ImageIcon waterBottle=currentUser.getFootPrint().getWaterBottle().getImage();
@@ -131,4 +156,12 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 		// TODO Auto-generated method stub
 		
 	}
-}
+	public void paintComponent(Graphics g){
+
+		
+		g.drawImage(bkgd, 0,0, null);
+
+		}
+
+	}
+

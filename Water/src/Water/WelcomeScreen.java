@@ -1,6 +1,8 @@
 package Water;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionListener;
@@ -8,8 +10,8 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 class WelcomeScreen extends JPanel
 {
@@ -17,14 +19,18 @@ class WelcomeScreen extends JPanel
 
 	private static final String CARD_JBUTTON =  "Card JButton";
 	private ActionListener action;
-
+	JTextArea aboutText=new JTextArea(welcomeText);
+	
 	Image bkgd;
 
+	public WelcomeScreen()
+	{
+		init();
+	}
 	private void init() 
-	{    
+	{   
 		try{
-			JLabel aboutText=new JLabel(welcomeText);
-			add(aboutText);
+
 
 			bkgd = ImageIO.read(new File("background.jpg"));
 			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
@@ -33,7 +39,7 @@ class WelcomeScreen extends JPanel
 			setMaximumSize(size);
 			setSize(size);
 			setLayout(null);
-
+			
 		}catch(IOException error){
 
 
@@ -56,10 +62,15 @@ class WelcomeScreen extends JPanel
 
 	public void paintComponent(Graphics g){
 
+		
 		g.drawImage(bkgd, 0,0, null);
+		Dimension d = this.getPreferredSize(); 
+		int fontSize = 20; 
+		g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize)); 
+		g.drawString(welcomeText, 10, 20); 
+		}
 
 	}
-}
 
 
 

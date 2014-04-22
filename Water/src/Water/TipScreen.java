@@ -1,9 +1,15 @@
 package Water;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.TextArea;
 import java.awt.TextField;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -14,6 +20,7 @@ public class TipScreen extends JPanel implements Global{
 	double waterUsed;
 	TextArea tip=new TextArea();
 	Tips waterTip;
+	private Image bkgd;
 	
 	public TipScreen()
 	{
@@ -28,6 +35,21 @@ public class TipScreen extends JPanel implements Global{
 	}
 	public void init()
 	{
+		try{
+
+
+			bkgd = ImageIO.read(new File("background.jpg"));
+			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
+			setPreferredSize(size);
+			setMinimumSize(size);
+			setMaximumSize(size);
+			setSize(size);
+			setLayout(null);
+			
+		}catch(IOException error){
+
+
+		}
 		setLayout(new GridLayout(2, 2));
 	}
 	
@@ -50,5 +72,11 @@ public class TipScreen extends JPanel implements Global{
 		
 		
 	}
+	public void paintComponent(Graphics g){
+	
+		
+		g.drawImage(bkgd, 0,0, null);
+
+		}
 
 }

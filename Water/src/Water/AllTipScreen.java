@@ -1,8 +1,15 @@
 package Water;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.TextField;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,6 +17,7 @@ import javax.swing.JPanel;
 public class AllTipScreen extends JPanel {
 
 	private String tipsString="";
+	private Image bkgd;
 	
 	public AllTipScreen()
 	{
@@ -17,6 +25,20 @@ public class AllTipScreen extends JPanel {
 	}
 	public void init()
 	{
+		try{
+
+			bkgd = ImageIO.read(new File("background.jpg"));
+			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
+			setPreferredSize(size);
+			setMinimumSize(size);
+			setMaximumSize(size);
+			setSize(size);
+			setLayout(null);
+			
+		}catch(IOException error){
+
+
+		}	
 		populateTips();
 		JLabel tips=new JLabel(tipsString);
 		add(tips);
@@ -55,4 +77,15 @@ public class AllTipScreen extends JPanel {
 		
 				
 	}
+	
+	public void paintComponent(Graphics g){
+
+		
+		g.drawImage(bkgd, 0,0, null);
+		Dimension d = this.getPreferredSize(); 
+		int fontSize = 20; 
+		g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize)); 
+		g.drawString(tipsString, 10, 20); 
+
+		}
 }

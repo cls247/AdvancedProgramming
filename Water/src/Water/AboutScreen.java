@@ -2,20 +2,28 @@ package Water;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class AboutScreen extends JPanel {
 
+	private Image bkgd;
     private static final String CARD_JBUTTON =  "Card JButton";
     private String aboutText = "Welcome to the Water Footprint Calculator! \n Over-consumption "
-    		+ "of water is an ongoing problem and causes a \n huge strain on our environment and "
+    		+ "of water is an ongoing problem and causes a \n huge strain on our environment and</br> "
     		+ "resources.\n You can use this program to calculate your <br> personal water footprint, "
     		+ "learn how to decrease your impact, and \n"
     		+ "track your progress over time.\n"
@@ -41,10 +49,30 @@ public class AboutScreen extends JPanel {
 	}
 	public void init()
 	{
-		
-		//Just write something and then put it here
-		JLabel about=new JLabel(aboutText);
-		add(about);
-		setLayout(new GridLayout(2, 2));		
+		try{
+
+
+			bkgd = ImageIO.read(new File("background.jpg"));
+			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
+			setPreferredSize(size);
+			setMinimumSize(size);
+			setMaximumSize(size);
+			setSize(size);
+			setLayout(null);
+			
+		}catch(IOException error){
+
+
+		}	
 	}
-}
+public void paintComponent(Graphics g){
+
+		
+		g.drawImage(bkgd, 0,0, null);
+		Dimension d = this.getPreferredSize(); 
+		int fontSize = 20; 
+		g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize)); 
+		g.drawString(aboutText, 10, 20); 
+		}
+
+	}

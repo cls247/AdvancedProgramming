@@ -34,9 +34,15 @@ public class firstScreen
 		
 		WelcomeScreen welcomeScreen = new WelcomeScreen();
 		TeacherPage teacherScreen = new TeacherPage();
+		AboutScreen aboutScreen=new AboutScreen();
+		InteractivePage interact=new InteractivePage();
+		AllTipScreen tips=new AllTipScreen();
 		
 		pane.add(welcomeScreen);
 		pane.add(teacherScreen);
+		pane.add(aboutScreen);
+		pane.add(interact);
+		pane.add(tips);
 		
 		ScreenWithTwoQuestions chooseWaterBottle = new ScreenWithTwoQuestions("Do you use recyclable bottles?", 
 		"Do you use plastic water bottles?", 
@@ -71,6 +77,12 @@ public class firstScreen
 		TipScreen finalScreen = new TipScreen();
 		pane.add(finalScreen);
 
+		tabs.addTab("Home", welcomeScreen);
+		tabs.addTab("Teacher", teacherScreen);
+		tabs.addTab("About", aboutScreen);
+		tabs.addTab("Interactive", interact);
+		tabs.addTab("Tips", tips);
+		
 		tabs.addTab("Water bottles", chooseWaterBottle);
 		tabs.addTab("Water plants", waterPlants);
 		
@@ -87,8 +99,6 @@ public class firstScreen
 		
 		tabs.addTab("final", finalScreen);
 		
-		tabs.addTab("Home", welcomeScreen);
-		tabs.addTab("Teacher", teacherScreen);
 
 		pane.add(tabs, BorderLayout.CENTER);
 		

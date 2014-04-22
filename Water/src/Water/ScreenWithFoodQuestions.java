@@ -1,8 +1,14 @@
 package Water;
 
 
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -13,6 +19,7 @@ public class ScreenWithFoodQuestions extends JPanel{
 	
 	private String firstQuestion;
 	private String secondQuestion;
+	private Image bkgd;
 	
 	public ScreenWithFoodQuestions(String firstQuestion1)
 	{
@@ -21,6 +28,21 @@ public class ScreenWithFoodQuestions extends JPanel{
 	}
 	public void init()
 	{
+		try{
+
+
+			bkgd = ImageIO.read(new File("background.jpg"));
+			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
+			setPreferredSize(size);
+			setMinimumSize(size);
+			setMaximumSize(size);
+			setSize(size);
+			setLayout(null);
+			
+		}catch(IOException error){
+
+
+		}
 		//we need to save all this data, I didn't do that
 		//here we would add the background image
 		setLayout(new GridLayout(2, 2));
@@ -45,5 +67,11 @@ public class ScreenWithFoodQuestions extends JPanel{
         add(numberSpinner);
 	}
 
+		public void paintComponent(Graphics g){
+
+		
+		g.drawImage(bkgd, 0,0, null);
+
+		}
 
 }

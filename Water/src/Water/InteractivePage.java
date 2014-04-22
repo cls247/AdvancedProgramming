@@ -3,10 +3,12 @@ package Water;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -16,8 +18,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Handler;
 
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -54,7 +59,8 @@ public class InteractivePage extends JPanel {
 	JTextField textTotal8=new JTextField("00");
 	JTextField textTotal9=new JTextField("00");
 	JTextField textWater = new JTextField("00");
-
+	
+	private Image bkgd;
 	//TextField totalText=new TextField("00");
 	
 	double amountWaterUsed = 0;
@@ -68,6 +74,21 @@ public class InteractivePage extends JPanel {
 	
 	public void init()
 	{
+		try{
+
+
+			bkgd = ImageIO.read(new File("background.jpg"));
+			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
+			setPreferredSize(size);
+			setMinimumSize(size);
+			setMaximumSize(size);
+			setSize(size);
+			setLayout(null);
+			
+		}catch(IOException error){
+
+
+		}
 		
 		setLayout(new FlowLayout(FlowLayout.CENTER));	
 		
@@ -349,4 +370,11 @@ public class InteractivePage extends JPanel {
 		amountWaterUsed = temporaryFootPrint.getTotalAmountOfWater();
 	*/	
 	}
+	
+	public void paintComponent(Graphics g){
+
+		
+		g.drawImage(bkgd, 0,0, null);
+
+		}
 }	

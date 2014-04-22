@@ -1,13 +1,17 @@
 package Water;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -33,7 +37,7 @@ public class ScreenWithDraw extends JPanel implements Runnable {
 	//i was thinking about having a string that was 
 	//meat, grains or fruits that said which it should be ???? not sure yet
 	private String type;
-	
+	private Image bkgd;
 	
 	public ScreenWithDraw(String foodType){
 		type = foodType;
@@ -51,6 +55,21 @@ public class ScreenWithDraw extends JPanel implements Runnable {
 	}
 	public void init()
 	{
+		try{
+
+
+			bkgd = ImageIO.read(new File("background.jpg"));
+			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
+			setPreferredSize(size);
+			setMinimumSize(size);
+			setMaximumSize(size);
+			setSize(size);
+			setLayout(null);
+			
+		}catch(IOException error){
+
+
+		}
 		addNotify();
 				
        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 50, 15));
@@ -111,7 +130,8 @@ public class ScreenWithDraw extends JPanel implements Runnable {
 	@Override
 	public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			//draw the picture of the plate
+			//draw the picture of the plate			
+				g.drawImage(bkgd, 0,0, null);
 			Graphics2D graphicsObject2d = (Graphics2D) g;
 			graphicsObject2d.drawImage(platePicture, 200, 200, this);
 
@@ -149,5 +169,4 @@ public class ScreenWithDraw extends JPanel implements Runnable {
 			beforeTime = System.currentTimeMillis();
 		}
 	}
-	
 }
