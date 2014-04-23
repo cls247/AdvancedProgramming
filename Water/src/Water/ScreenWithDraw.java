@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.TransferHandler;
 
 /**
@@ -44,6 +45,8 @@ public class ScreenWithDraw extends JPanel implements Runnable, Global {
 	private Image bkgd;
 	final JPanel jp = new JPanel();
 	JPanel jp2 = new JPanel();
+	private int countTheCows=0;
+	private JTextArea countCows=new JTextArea("00");
 
 	
 	public ScreenWithDraw(String foodType){
@@ -98,6 +101,9 @@ public class ScreenWithDraw extends JPanel implements Runnable, Global {
 			final JButton lambButton = new JButton();
 			final JButton cowButton = new JButton();
 
+			final JButton newChickenButton = new JButton();
+			final JButton newLambButton = new JButton();
+			final JButton newCowButton = new JButton();
 			
 			//when am image is clicked, update the appropriate variables
 			//and change the icons accordingly
@@ -105,16 +111,24 @@ public class ScreenWithDraw extends JPanel implements Runnable, Global {
 			cowButton.setIcon(beefIcon);
 			lambButton.setIcon(lambIcon);
 			chickenButton.setIcon(chickenIcon);
+			newCowButton.setIcon(beefIcon);
+			newLambButton.setIcon(lambIcon);
+			newChickenButton.setIcon(chickenIcon);
+			
 			jp2.add(chickenButton);
 			jp2.add(lambButton);
 			jp2.add(cowButton);
 			
 			cowButton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent arg0){
-					
-					
-					jp.add(cowButton);				
-					
+					jp.add(newCowButton);				
+					jp2.add(cowButton);
+					countTheCows++;
+					remove(countCows);
+					countCows=new JTextArea(String.valueOf(countTheCows));
+					jp.add(countCows);
+
+					validate();
 					currentUser.getFootPrint().setServingOfBeef(1);
 					
 					repaint();
@@ -126,7 +140,9 @@ public class ScreenWithDraw extends JPanel implements Runnable, Global {
 				public void actionPerformed(ActionEvent arg0){
 					
 					
-					jp.add(chickenButton);
+					jp.add(newChickenButton);
+					jp2.add(chickenButton);
+					validate();
 					currentUser.getFootPrint().setServingOfChicken(1);
 					
 					repaint();
@@ -137,7 +153,9 @@ public class ScreenWithDraw extends JPanel implements Runnable, Global {
 				public void actionPerformed(ActionEvent arg0){
 					
 					
-					jp.add(lambButton);
+					jp.add(newLambButton);
+					jp2.add(lambButton);
+					validate();
 					currentUser.getFootPrint().setServingOfLamb(1);
 					
 					repaint();

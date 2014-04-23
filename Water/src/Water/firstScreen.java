@@ -1,10 +1,12 @@
 package Water;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,48 +56,49 @@ public class firstScreen
 		pane.add(aboutScreen);
 		pane.add(interact);
 		pane.add(tips);
-		
+		/*
 		//make all the screens with the appropriate questions
 		ScreenWithTwoQuestions chooseWaterBottle = new ScreenWithTwoQuestions("Do you use recyclable bottles?", 
 		"Do you use plastic water bottles?", 
 		"How many water bottles do you use a week?", "bottle");
-		pane.add(chooseWaterBottle);
+		//pane.add(chooseWaterBottle);
 		ScreenWithTwoQuestions waterPlants = new ScreenWithTwoQuestions("Do you use sprinkles?", 
 		"Do you water your lawn by hand?", 
 		"How many times a week do you water the lawn?", "plants");
-		pane.add(waterPlants);
+		//pane.add(waterPlants);
 		ScreenWithTwoQuestions washDishes = new ScreenWithTwoQuestions("Do you use a dishwasher?", 
 		"Do you wash dishes by hand?", 
 		"How many times a week do you wash dishes", "dishes");
-		pane.add(washDishes);
+		//pane.add(washDishes);
 		ScreenWithTwoQuestions washClothes = new ScreenWithTwoQuestions("Do you use a washing machine?", 
 		"Do you wash clothes by hand", 
 		"How many loads of laundry do you do in a week?", "clothes");
-		pane.add(washClothes);
+		//pane.add(washClothes);
 		ScreenWithTwoQuestions bathingWin = new ScreenWithTwoQuestions("Do you take showers?", 
 		"Do you take baths", 
 		"How many times a week do you wash yourself?", "clothes");
-		pane.add(bathingWin);
+		//pane.add(bathingWin);
 		ScreenWithDraw tempBeef=new ScreenWithDraw("meat");
 		ScreenWithFoodQuestions  chooseMeat = new ScreenWithFoodQuestions("How many servings of meat do you eat each week?");
-		pane.add(chooseMeat);
+		//pane.add(chooseMeat);
 
 		ScreenWithFoodQuestions  chooseGrains = new ScreenWithFoodQuestions("How many servings of grains do you eat each week?");
-		pane.add(chooseGrains);
+		//pane.add(chooseGrains);
 
 		ScreenWithFoodQuestions  chooseFruitsAndVeggies = new ScreenWithFoodQuestions("How many servings of fruits and veggies do you eat each week?");
-		pane.add(chooseFruitsAndVeggies);
+		//pane.add(chooseFruitsAndVeggies);
 
 		TipScreen finalScreen = new TipScreen();
-		pane.add(finalScreen);
-
+		//pane.add(finalScreen);
+		*/
 		//make tabs for all of the screen so that we can flip between them.
 		tabs.addTab("Home", welcomeScreen);
 		tabs.addTab("Teacher", teacherScreen);
 		tabs.addTab("About", aboutScreen);
 		tabs.addTab("Interactive", interact);
 		tabs.addTab("Tips", tips);
-		
+		//this is what i took out
+		/*
 		tabs.addTab("Water bottles", chooseWaterBottle);
 		tabs.addTab("Water plants", waterPlants);
 		
@@ -112,6 +115,7 @@ public class firstScreen
 		tabs.addTab("final", finalScreen);
 		
 		finalScreen.updateTotal();
+		*/
 		pane.add(tabs, BorderLayout.CENTER);
 		
 	}
@@ -125,11 +129,13 @@ public class firstScreen
 	private static void createAndShowGUI()
 	{
 
+
 		//here you make the frame to contain all the tabs
-		JFrame frame = new JFrame("Water");
+		final JFrame frame = new JFrame("Water");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setPreferredSize(new Dimension(800,600));
+		frame.setFocusable(true);
 		
 //		JPanel jp = new JPanel();
 //		jp.setPreferredSize(new Dimension(800,600));// changed it to preferredSize, Thanks!
@@ -143,10 +149,14 @@ public class firstScreen
 		frame.pack();
 		frame.setVisible(true);
 		
-//		//this is that thing that holds all the card
-//		final JPanel contentPane = new JPanel();
-//		contentPane.setLayout(new CardLayout(0, 0));
-//		contentPane.setPreferredSize(new Dimension(800, 600));
+		//this is that thing that holds all the card
+		final JPanel contentPane = new JPanel();
+		contentPane.setLayout(new CardLayout(0, 0));
+		contentPane.setPreferredSize(new Dimension(800, 600));
+		contentPane.setVisible(false);
+		contentPane.setFocusable(true);
+		//***********
+		frame.getContentPane().add(contentPane);
 //
 //		//make all the card and add them to the contentPane above
 //		WelcomeScreen welcomeWin = new WelcomeScreen();
@@ -164,30 +174,30 @@ public class firstScreen
 ////		InteractivePage interactiveWin=new InteractivePage();
 ////		contentPane.add(interactiveWin, CARD_JBUTTON);
 //		
-//		ScreenWithTwoQuestions chooseWaterBottle = new ScreenWithTwoQuestions("Do you use recyclable bottles?", 
-//				"Do you use plastic water bottles?", 
-//				"How many water bottles do you use a week?", "bottle");
-//		contentPane.add(chooseWaterBottle, CARD_JRADIOBUTTON);
-//		ScreenWithTwoQuestions waterPlants = new ScreenWithTwoQuestions("Do you use sprinkles?", 
-//				"Do you water your lawn by hand?", 
-//				"How many times a week do you water the lawn?", "plants");
-//		contentPane.add(waterPlants, CARD_JRADIOBUTTON);
-//		ScreenWithTwoQuestions washDishes = new ScreenWithTwoQuestions("Do you use a dishwasher?", 
-//				"Do you wash dishes by hand?", 
-//				"How many times a week do you wash dishes", "dishes");
-//		contentPane.add(washDishes, CARD_JRADIOBUTTON);
-//		ScreenWithTwoQuestions washClothes = new ScreenWithTwoQuestions("Do you use a washing machine?", 
-//				"Do you wash clothes by hand", 
-//				"How many loads of laundry do you do in a week?", "clothes");
-//		contentPane.add(washClothes, CARD_JRADIOBUTTON);
-//		ScreenWithTwoQuestions bathingWin = new ScreenWithTwoQuestions("Do you take showers?", 
-//				"Do you take baths", 
-//				"How many times a week do you wash yourself?", "clothes");
-//		contentPane.add(bathingWin, CARD_JRADIOBUTTON);
-//		TipScreen finalTipScreen=new TipScreen();
-//		contentPane.add(finalTipScreen, CARD_JRADIOBUTTON);
+		ScreenWithTwoQuestions chooseWaterBottle = new ScreenWithTwoQuestions("Do you use recyclable bottles?", 
+			"Do you use plastic water bottles?", 
+				"How many water bottles do you use a week?", "bottle");
+		contentPane.add(chooseWaterBottle, CARD_JRADIOBUTTON);
+		ScreenWithTwoQuestions waterPlants = new ScreenWithTwoQuestions("Do you use sprinkles?", 
+				"Do you water your lawn by hand?", 
+				"How many times a week do you water the lawn?", "plants");
+		contentPane.add(waterPlants, CARD_JRADIOBUTTON);
+		ScreenWithTwoQuestions washDishes = new ScreenWithTwoQuestions("Do you use a dishwasher?", 
+				"Do you wash dishes by hand?", 
+				"How many times a week do you wash dishes", "dishes");
+		contentPane.add(washDishes, CARD_JRADIOBUTTON);
+		ScreenWithTwoQuestions washClothes = new ScreenWithTwoQuestions("Do you use a washing machine?", 
+				"Do you wash clothes by hand", 
+				"How many loads of laundry do you do in a week?", "clothes");
+		contentPane.add(washClothes, CARD_JRADIOBUTTON);
+		ScreenWithTwoQuestions bathingWin = new ScreenWithTwoQuestions("Do you take showers?", 
+				"Do you take baths", 
+				"How many times a week do you wash yourself?", "clothes");
+		contentPane.add(bathingWin, CARD_JRADIOBUTTON);
+		TipScreen finalTipScreen=new TipScreen();
+		contentPane.add(finalTipScreen, CARD_JRADIOBUTTON);
 //		
-//        ScreenWithFoodQuestions  chooseMeat = new ScreenWithFoodQuestions("How many servings of meat do you eat each week?");
+ //       ScreenWithFoodQuestions  chooseMeat = new ScreenWithFoodQuestions("How many servings of meat do you eat each week?");
 //        contentPane.add(chooseMeat, CARD_JRADIOBUTTON);
 //        
 //        ScreenWithFoodQuestions  chooseGrains = new ScreenWithFoodQuestions("How many servings of grains do you eat each week?");
@@ -201,7 +211,8 @@ public class firstScreen
 //		
 //		
 //		//this is the buttons to go forward and backward
-//		JPanel buttonPanel = new JPanel(); 
+		JPanel buttonPanel = new JPanel(); 
+		buttonPanel.setFocusable(true);
 //		
 //		final JButton aboutButton = new JButton("ABOUT");
 //		final JButton teacherButton = new JButton("TEACHER");
@@ -211,17 +222,19 @@ public class firstScreen
 //		aboutButton.setBackground(Color.BLACK);       
 //		aboutButton.setForeground(Color.BLACK);
 //
-//		final JButton previousButton = new JButton("PREVIOUS");
-//		previousButton.setBackground(Color.BLACK);
-//		previousButton.setForeground(Color.BLACK);
-//		
+		final Button previousButton = new Button("PREVIOUS");
+		previousButton.setBackground(Color.BLACK);
+		previousButton.setForeground(Color.BLACK);
+		previousButton.setFocusable(true);
+		//		
 //
-//		final JButton nextButton = new JButton("NEXT");
-//		nextButton.setBackground(Color.RED);
-//		nextButton.setForeground(Color.BLACK);
+		final Button nextButton = new Button("NEXT");
+		nextButton.setBackground(Color.RED);
+		nextButton.setForeground(Color.BLACK);
+		nextButton.setFocusable(true);
 //
-//		buttonPanel.add(previousButton);
-//		buttonPanel.add(nextButton);
+		buttonPanel.add(previousButton);
+		buttonPanel.add(nextButton);
 //		buttonPanel.add(aboutButton);
 //		buttonPanel.add(teacherButton);
 //		buttonPanel.add(tipButton);
@@ -283,30 +296,35 @@ public class firstScreen
 //	
 //		
 //		//this flips to the previous card
-//		previousButton.addActionListener(new ActionListener()
-//		{
-//			public void actionPerformed(ActionEvent ae)
-//			{
-//				CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-//				cardLayout.previous(contentPane);
-//			}
-//		});
-//
-//		//this flips to the next card
-//		nextButton.addActionListener(new ActionListener()
-//		{
-//			public void actionPerformed(ActionEvent ae)
-//			{
-//				CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-//				cardLayout.next(contentPane);   
-//			}
-//		});
-//
-//		frame.add(contentPane, BorderLayout.CENTER);
-//		frame.add(buttonPanel, BorderLayout.PAGE_END);
+		previousButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent ae)
+			{
+				System.out.println("is this working");
+				contentPane.setVisible(true);
+				CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+				cardLayout.previous(contentPane);
+			}
+		});
 
-//		frame.pack();
-//		frame.setVisible(true);
+		//this flips to the next card
+		nextButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent ae)
+			{
+				System.out.println("is the next button wokring");
+				//frame.setVisible(false);
+				contentPane.setVisible(true);
+				CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+				cardLayout.next(contentPane);   
+			}
+		});
+
+		frame.add(contentPane, BorderLayout.CENTER);
+		frame.add(buttonPanel, BorderLayout.PAGE_END);
+
+		frame.pack();
+		frame.setVisible(true);
 	}
 
 	/**

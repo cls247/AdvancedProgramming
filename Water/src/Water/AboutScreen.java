@@ -1,13 +1,11 @@
 package Water;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
+import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -15,9 +13,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 /**
  * 
@@ -34,6 +30,7 @@ public class AboutScreen extends JPanel {
 	 * This is the background image of the screen.
 	 */
 	private Image bkgd;
+	Button switchScreens;
 	
     private static final String CARD_JBUTTON =  "Card JButton";
     
@@ -73,8 +70,27 @@ public class AboutScreen extends JPanel {
 	 */
 	public void init()
 	{
-		try{
+		/*
+		switchScreens=new Button("NEXT SCREEN");
+		
+		switchScreens.addActionListener(new ActionListener(){
 
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				AllTipScreen tips=new AllTipScreen();
+				tips.setVisible(true);
+				setVisible(false);
+				
+				
+			}
+			
+		});
+		
+		add(switchScreens, BorderLayout.CENTER);
+		validate();
+		*/
+		
+		try{
 
 			bkgd = ImageIO.read(new File("background.jpg"));
 			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
@@ -101,8 +117,7 @@ public class AboutScreen extends JPanel {
 	 */
 public void paintComponent(Graphics g){
 
-		
-		g.drawImage(bkgd, 0,0, null);
+		//g.drawImage(bkgd, 0,0, null);
 		Dimension d = this.getPreferredSize(); 
 		int fontSize = 15; 
 		g.setFont(new Font("Helvetica Neue", Font.PLAIN, fontSize)); 
@@ -118,6 +133,7 @@ public void paintComponent(Graphics g){
 //		
 		for (String line : aboutText.split("\n"))
             g.drawString(line, x, y += g.getFontMetrics().getHeight());
+		
 
 
 		
