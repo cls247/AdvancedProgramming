@@ -34,6 +34,8 @@ import javax.swing.SwingUtilities;
  */
 public class firstScreen
 {
+	private static int indexOfCardLayout=-1;
+	private static int numberOfCards=4;
 	private static final String CARD_JBUTTON =  "Card JButton";
 	private static final String CARD_JTEXTFIELD = "Card JTextField";    
 	private static final String CARD_JRADIOBUTTON = "Card JRadioButton";
@@ -300,10 +302,15 @@ public class firstScreen
 		{
 			public void actionPerformed(ActionEvent ae)
 			{
+				System.out.println("index of card"+indexOfCardLayout);
+				if(indexOfCardLayout-1>=0)
+				{
+				indexOfCardLayout--;
 				System.out.println("is this working");
 				contentPane.setVisible(true);
 				CardLayout cardLayout = (CardLayout) contentPane.getLayout();
 				cardLayout.previous(contentPane);
+				}
 			}
 		});
 
@@ -312,11 +319,15 @@ public class firstScreen
 		{
 			public void actionPerformed(ActionEvent ae)
 			{
+				if(indexOfCardLayout+1<=numberOfCards)
+				{
+				indexOfCardLayout++;
 				System.out.println("is the next button wokring");
 				//frame.setVisible(false);
 				contentPane.setVisible(true);
 				CardLayout cardLayout = (CardLayout) contentPane.getLayout();
 				cardLayout.next(contentPane);   
+				}
 			}
 		});
 
