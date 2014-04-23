@@ -1,18 +1,14 @@
 package Water;
 
-import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
@@ -32,8 +28,6 @@ public class AboutScreen extends JPanel {
 	private Image bkgd;
 	Button switchScreens;
 	
-    private static final String CARD_JBUTTON =  "Card JButton";
-    
     /**
      * This is a string that contains the text for the about page.
      */
@@ -117,20 +111,14 @@ public class AboutScreen extends JPanel {
 	 */
 public void paintComponent(Graphics g){
 
-		//g.drawImage(bkgd, 0,0, null);
+		g.drawImage(bkgd, 0,0, null);
 		Dimension d = this.getPreferredSize(); 
 		int fontSize = 15; 
 		g.setFont(new Font("Helvetica Neue", Font.PLAIN, fontSize)); 
 		
 		int x = 100;
 		int y = 50;
-		
-//		for (String line: aboutText.split("\n")){
-//			
-//			g.drawString(line, x += g.getFontMetrics().getHeight(), 200);
-//			
-//		}
-//		
+			
 		for (String line : aboutText.split("\n"))
             g.drawString(line, x, y += g.getFontMetrics().getHeight());
 		

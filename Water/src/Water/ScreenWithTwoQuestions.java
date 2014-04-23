@@ -40,6 +40,9 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 	private String thirdQuestion;
 	private String type;
 	private Image bkgd;
+	JLabel imageLabel;
+	ImageIcon waterBottle;
+	Image bottle;
 	
 	public ScreenWithTwoQuestions(String firstQuestion1, String secondQuestion1, String thirdQuestion1, String type1)
 	{
@@ -160,14 +163,7 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 	    });
 
         //we need to save this data, and error check to make sure that the numbers are responable
-	    
-	    
-	    JLabel imageLabel=new JLabel();
-	    ImageIcon waterBottle=currentUser.getFootPrint().getWaterBottle().getImage();
-
-	    
-	    imageLabel.setIcon(waterBottle);
-	    add(imageLabel);
+	   
 
 		
 		
@@ -178,9 +174,12 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 		
 	}
 	public void paintComponent(Graphics g){
-
-		
 		g.drawImage(bkgd, 0,0, null);
+		System.out.println("how many time is this called");
+	    waterBottle=currentUser.getFootPrint().getWaterBottle().getImage();	    
+	    bottle=waterBottle.getImage();
+	    g.drawImage(bottle, 0,0, null);
+		
 
 		}
 

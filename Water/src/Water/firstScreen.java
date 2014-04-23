@@ -6,19 +6,11 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Image;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.File;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
@@ -36,9 +28,17 @@ public class firstScreen
 {
 	private static int indexOfCardLayout=-1;
 	private static int numberOfCards=4;
-	private static final String CARD_JBUTTON =  "Card JButton";
-	private static final String CARD_JTEXTFIELD = "Card JTextField";    
 	private static final String CARD_JRADIOBUTTON = "Card JRadioButton";
+	private static WelcomeScreen welcomeScreen;
+	static TeacherPage teacherScreen;
+	AboutScreen aboutScreen;
+	static InteractivePage interact;
+	static AllTipScreen tips;
+	static ScreenWithTwoQuestions chooseWaterBottle;
+	static ScreenWithTwoQuestions waterPlants;
+	static ScreenWithTwoQuestions washDishes;
+	static ScreenWithTwoQuestions bathingWin;
+	static ScreenWithTwoQuestions washClothes;
 
 	
 	public void addComponentToPane(final Container pane){
@@ -46,11 +46,11 @@ public class firstScreen
 		JTabbedPane tabs = new JTabbedPane();
 		
 		//create all of the first couple of screens
-		WelcomeScreen welcomeScreen = new WelcomeScreen();
-		TeacherPage teacherScreen = new TeacherPage();
-		AboutScreen aboutScreen=new AboutScreen();
-		InteractivePage interact=new InteractivePage();
-		AllTipScreen tips=new AllTipScreen();
+		welcomeScreen = new WelcomeScreen();
+		teacherScreen = new TeacherPage();
+		aboutScreen=new AboutScreen();
+		interact=new InteractivePage();
+		tips=new AllTipScreen();
 		
 		//add all the screens to the card layout
 		pane.add(welcomeScreen);
@@ -176,23 +176,23 @@ public class firstScreen
 ////		InteractivePage interactiveWin=new InteractivePage();
 ////		contentPane.add(interactiveWin, CARD_JBUTTON);
 //		
-		ScreenWithTwoQuestions chooseWaterBottle = new ScreenWithTwoQuestions("Do you use recyclable bottles?", 
+		chooseWaterBottle = new ScreenWithTwoQuestions("Do you use recyclable bottles?", 
 			"Do you use plastic water bottles?", 
 				"How many water bottles do you use a week?", "bottle");
 		contentPane.add(chooseWaterBottle, CARD_JRADIOBUTTON);
-		ScreenWithTwoQuestions waterPlants = new ScreenWithTwoQuestions("Do you use sprinkles?", 
+		waterPlants = new ScreenWithTwoQuestions("Do you use sprinkles?", 
 				"Do you water your lawn by hand?", 
 				"How many times a week do you water the lawn?", "plants");
 		contentPane.add(waterPlants, CARD_JRADIOBUTTON);
-		ScreenWithTwoQuestions washDishes = new ScreenWithTwoQuestions("Do you use a dishwasher?", 
+		washDishes = new ScreenWithTwoQuestions("Do you use a dishwasher?", 
 				"Do you wash dishes by hand?", 
 				"How many times a week do you wash dishes", "dishes");
 		contentPane.add(washDishes, CARD_JRADIOBUTTON);
-		ScreenWithTwoQuestions washClothes = new ScreenWithTwoQuestions("Do you use a washing machine?", 
+		washClothes = new ScreenWithTwoQuestions("Do you use a washing machine?", 
 				"Do you wash clothes by hand", 
 				"How many loads of laundry do you do in a week?", "clothes");
 		contentPane.add(washClothes, CARD_JRADIOBUTTON);
-		ScreenWithTwoQuestions bathingWin = new ScreenWithTwoQuestions("Do you take showers?", 
+		 bathingWin = new ScreenWithTwoQuestions("Do you take showers?", 
 				"Do you take baths", 
 				"How many times a week do you wash yourself?", "clothes");
 		contentPane.add(bathingWin, CARD_JRADIOBUTTON);
@@ -305,6 +305,7 @@ public class firstScreen
 				System.out.println("index of card"+indexOfCardLayout);
 				if(indexOfCardLayout-1>=0)
 				{
+
 				indexOfCardLayout--;
 				System.out.println("is this working");
 				contentPane.setVisible(true);
@@ -321,6 +322,7 @@ public class firstScreen
 			{
 				if(indexOfCardLayout+1<=numberOfCards)
 				{
+
 				indexOfCardLayout++;
 				System.out.println("is the next button wokring");
 				//frame.setVisible(false);
