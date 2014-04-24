@@ -23,20 +23,24 @@ import javax.swing.JTextField;
  * @author Sand
  *
  */
-public class TipScreen extends JPanel implements Global{
+public class TipScreen extends JPanel implements Global, Screen, Runnable{
 	
 	FootPrint aFootPrint = currentUser.getFootPrint();
 	double waterUsed;
-	JTextField tip=new JTextField();
+	JTextArea tip=new JTextArea();
 	Tips waterTip;
 	private Image bkgd;
+	
+	private final int DELAY = 20;
+	private Thread thread;
 	
 	public TipScreen()
 	{
 		init();
 	
 		updateTotal();
-		
+		setLayout(null);
+		tip.setBounds(150, 150, 200, 300);
 		add(tip);
 		
 	}
@@ -44,8 +48,10 @@ public class TipScreen extends JPanel implements Global{
 	{
 		waterUsed=aFootPrint.getTotalAmountOfWater();
 		calculateFootPrint();
+		
 	}
 	
+	@Override
 	public void init()
 	{
 		try{
@@ -64,37 +70,64 @@ public class TipScreen extends JPanel implements Global{
 
 		}
 		setLayout(new GridLayout(2, 2));
+		thread = new Thread(this);
+		thread.start();
 	}
 	
 	public void calculateFootPrint(){
 		
 		//this is just a temporary tip display
-		if((waterUsed >=0) && (waterUsed <=100)){
+		if((waterUsed >=0) && (waterUsed <=10000)){
 			
-			tip=new JTextField("You used "+ String.valueOf(waterUsed) +" liters of water. You used a regular amount of water."+
-			"In addition, " );/*+ waterTip.getTip(aFootPrint.getBottle().getCurrentBottle())+
-			currentUser.getFootPrint().Tips());*/
+			tip.setText("You used "+ String.valueOf(waterUsed) +" liters of water. \nYou used a regular amount of water."+
+			"In addition, \n"+ currentUser.getFootPrint().Tips());
 			
 		}else{
 			
-			tip=new JTextField("You used an abnormal amount of water."+
-			"In addition, ");/* + waterTip.getTip(aFootPrint.getBottle().getCurrentBottle())+
-			currentUser.getFootPrint().Tips());*/
+			tip.setText("You used an abnormal amount of water."+
+			"In addition, \n" +currentUser.getFootPrint().Tips());
 			
 		}
 		
 		
 	}
 	public void paintComponent(Graphics g){
-	
-		System.out.println("painting");
-		updateTotal();
-		remove(tip);
-		tip=new JTextField("You used "+ String.valueOf(waterUsed) +" liters of water. You used a regular amount of water."+
-				"In addition, " );
-		add(tip);
+		
+		super.paintComponent(g);
 		g.drawImage(bkgd, 0,0, null);
+//		System.out.println("painting");
+		updateTotal();
+//		remove(tip);
+		System.out.println(waterUsed);
+//		tip.setText("You used "+ waterUsed +" liters of water. You used a regular amount of water."+
+//				"Also" );
+//		add(tip);
 
 		}
+	@Override
+	public void run() {
+		long beforeTime, timeDiff, timeSleep;
+		beforeTime = System.currentTimeMillis();
+
+
+		while (true) {
+			repaint();
+			timeDiff = System.currentTimeMillis() - beforeTime;
+			timeSleep = DELAY - timeDiff;
+
+			if (timeSleep < 0) {
+				timeSleep = 2;
+			}
+
+			try {
+				Thread.sleep(timeSleep);
+			} catch (InterruptedException e) {
+				System.out.println("Interrupted: " + e.getMessage());
+			}
+
+			beforeTime = System.currentTimeMillis();
+		}
+		
+	}
 
 }

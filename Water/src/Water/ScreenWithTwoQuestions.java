@@ -7,12 +7,15 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -32,7 +35,7 @@ import javax.swing.event.ChangeListener;
  *
  */
 
-public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Global{
+public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Runnable, Global, Screen{
 
 	
 	private String firstQuestion;
@@ -43,6 +46,8 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 	JLabel imageLabel;
 	ImageIcon waterBottle;
 	Image bottle;
+	private final int DELAY = 20;
+	private Thread bottleThread;
 	
 	public ScreenWithTwoQuestions(String firstQuestion1, String secondQuestion1, String thirdQuestion1, String type1)
 	{
@@ -52,8 +57,13 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 		type=type1;
 		init();
 	}
+	@Override
 	public void init()
 	{
+		setPreferredSize(new Dimension(800,600));
+		
+		bottleThread=new Thread(this);
+		bottleThread.start();
 		try{
 
 
@@ -140,6 +150,10 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 	    m_numberSpinnerModel = new SpinnerNumberModel(current, min, max, step);
 	    m_numberSpinner = new JSpinner(m_numberSpinnerModel);
 	    add(m_numberSpinner);
+	    
+	    ((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).setPreferredSize(new Dimension(10,10));
+	    ((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).getTextField().setEditable(false);
+	    
 	    m_numberSpinner.addChangeListener(new ChangeListener()
 	    {
 
@@ -147,7 +161,9 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 			public void stateChanged(ChangeEvent arg0) {
 				// TODO Auto-generated method stub
 				Double answer= (Double) (m_numberSpinner.getValue());
+				
 			    int temp=answer.intValue();
+			    System.out.println("the value of the spinner is"+temp);
 		        if(type=="bottle")
 					Global.currentUser.getFootPrint().setNumberOfWaterBottles(temp);				
 				if(type=="plants")
@@ -173,15 +189,40 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Gl
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
 	public void paintComponent(Graphics g){
+		super.paintComponent(g);
 		g.drawImage(bkgd, 0,0, null);
-		System.out.println("how many time is this called");
-	    waterBottle=currentUser.getFootPrint().getWaterBottle().getImage();	    
+//		System.out.println("how many time is this called");
+//		System.out.println("the current water bottle is paint is "+ currentUser.getFootPrint().getWaterBottle().getCurrentBottle());
+	    waterBottle=currentUser.getFootPrint().getWaterBottle().getImage();
 	    bottle=waterBottle.getImage();
 	    g.drawImage(bottle, 0,0, null);
-		
-
-		}
-
 	}
+	
+	@Override
+	public void run() {
+		long beforeTime, timeDiff, timeSleep;
+		beforeTime = System.currentTimeMillis();
 
+
+		while (true) {
+				repaint();
+			timeDiff = System.currentTimeMillis() - beforeTime;
+			timeSleep = DELAY - timeDiff;
+
+			if (timeSleep < 0) {
+				timeSleep = 2;
+			}
+
+			try {
+				Thread.sleep(timeSleep);
+			} catch (InterruptedException e) {
+				System.out.println("Interrupted: " + e.getMessage());
+			}
+
+			beforeTime = System.currentTimeMillis();
+		}
+	}
+}

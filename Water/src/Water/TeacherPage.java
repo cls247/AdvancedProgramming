@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  * @author Sand
  *
  */
-public class TeacherPage extends JPanel{
+public class TeacherPage extends JPanel implements Screen{
 
 	
 	private static final String CARD_JBUTTON =  "Card JButton";
@@ -33,6 +33,7 @@ public class TeacherPage extends JPanel{
 		init();
 	}
 	
+	@Override
 	public void init()
 	{
 		

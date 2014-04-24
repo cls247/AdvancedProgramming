@@ -69,7 +69,10 @@ public class Bottle {
 		//this method takes in the total amount of 
 		//water and it sets the water bottle index (currentBottle)
 		//to the correct index according to the amount of water
+		waterLevel=total;
 		currentBottle=(int) Math.floor(((double)waterLevel)/1000);
+		System.out.println("The water level is "+waterLevel);
+		System.out.println("the current water bottle is "+currentBottle);
 		
 	}
 	

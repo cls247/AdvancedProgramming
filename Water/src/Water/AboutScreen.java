@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  * @author Sand
  *
  */
-public class AboutScreen extends JPanel {
+public class AboutScreen extends JPanel implements Screen {
 
 	/**
 	 * This is the background image of the screen.
@@ -62,6 +62,7 @@ public class AboutScreen extends JPanel {
 	 * This method sets up the screen for the about page
 	 * and sets the background image as the background image.
 	 */
+	@Override
 	public void init()
 	{
 		/*

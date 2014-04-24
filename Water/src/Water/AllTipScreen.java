@@ -21,7 +21,7 @@ import javax.swing.JPanel;
  * @author Sand
  *
  */
-public class AllTipScreen extends JPanel {
+public class AllTipScreen extends JPanel implements Screen{
 
 	/**
 	 * This is the string that will be populated with all the tips to be printed
@@ -49,6 +49,7 @@ public class AllTipScreen extends JPanel {
 	 * This method sets the background image of the screen and 
 	 * populates the string with all the tips to be printed. 
 	 */
+	@Override
 	public void init()
 	{
 		try{

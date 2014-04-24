@@ -21,7 +21,7 @@ import javax.swing.SpinnerNumberModel;
  * @author Sand
  *
  */
-public class ScreenWithFoodQuestions extends JPanel{
+public class ScreenWithFoodQuestions extends JPanel implements Screen{
 
 	/**
 	 * Questions that are input
@@ -35,6 +35,8 @@ public class ScreenWithFoodQuestions extends JPanel{
 		firstQuestion=firstQuestion1;
 		init();
 	}
+	
+	@Override
 	public void init()
 	{
 		try{

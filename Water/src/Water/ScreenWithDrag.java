@@ -32,12 +32,10 @@ import javax.swing.TransferHandler;
  *
  */
 
-public class ScreenWithDraw extends JPanel implements Runnable, Global {
+public class ScreenWithDrag extends JPanel implements Runnable, Global, Screen {
 
 	private ImageIcon plate=new ImageIcon("Water/plate.jpg");
 	private Image platePicture=plate.getImage();
-	private Thread dragToPlate=new Thread();
-	private final int DELAY = 20;
 	private ArrayList<String> picturesToDrag=new ArrayList<String>();
 	//i was thinking about having a string that was 
 	//meat, grains or fruits that said which it should be ???? not sure yet
@@ -47,9 +45,11 @@ public class ScreenWithDraw extends JPanel implements Runnable, Global {
 	JPanel jp2 = new JPanel();
 	private int countTheCows=0;
 	private JTextArea countCows=new JTextArea("00");
+	private final int DELAY = 20;
+	private Thread bottleThread;
 
 	
-	public ScreenWithDraw(String foodType){
+	public ScreenWithDrag(String foodType){
 		type = foodType;
 		init();
 	}
@@ -58,11 +58,12 @@ public class ScreenWithDraw extends JPanel implements Runnable, Global {
 	 * This will take in an array of pictures that will be dragged
 	 * @param pics
 	 */
-	public ScreenWithDraw(ArrayList<String> pics)
+	public ScreenWithDrag(ArrayList<String> pics)
 	{
 		picturesToDrag=pics;
 		init();
 	}
+	@Override
 	public void init()
 	{
 //		try{
@@ -183,9 +184,10 @@ public class ScreenWithDraw extends JPanel implements Runnable, Global {
 	@Override
 	public void addNotify() {
 		super.addNotify();
-		dragToPlate = new Thread(this);
-		dragToPlate.start();
+		bottleThread = new Thread(this);
+		bottleThread.start();
 	} 
+	
 	@Override
 	public void paintComponent(Graphics g) {
 			super.paintComponent(g);
@@ -198,20 +200,12 @@ public class ScreenWithDraw extends JPanel implements Runnable, Global {
 	
 	@Override
 	public void run() {
-
-		
-		//************
-		//below here is just the stuff to create a thread and have it move smoothly
 		long beforeTime, timeDiff, timeSleep;
 		beforeTime = System.currentTimeMillis();
 
 
 		while (true) {
-
-			repaint();
-
-			//proper time delay to make the elements
-			//loop like that are properly animated
+				repaint();
 			timeDiff = System.currentTimeMillis() - beforeTime;
 			timeSleep = DELAY - timeDiff;
 

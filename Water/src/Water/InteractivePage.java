@@ -43,7 +43,7 @@ import javax.swing.event.ChangeListener;
  *
  */
 
-public class InteractivePage extends JPanel {
+public class InteractivePage extends JPanel implements Screen{
 	
 
 	private int meatX=20, meatY=60, meatHeight=100, meatWidth=100;
@@ -88,6 +88,7 @@ public class InteractivePage extends JPanel {
 		init();		
 	}	
 	
+	@Override
 	public void init()
 	{
 		try{

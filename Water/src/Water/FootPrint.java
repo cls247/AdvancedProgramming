@@ -1,4 +1,4 @@
-package Water;
+ package Water;
 
 /** 
  * This is an example of a footprint. It has lots of private
@@ -12,7 +12,7 @@ package Water;
 public class FootPrint {
 
 	//this is where a database would come in handy
-	//there are stilll a bunch more private data variables that 
+	//there are still a bunch more private data variables that 
 	//we have to add and then we have to add setters
 	//for each of those
 	private boolean usesRecyclableWaterBottle=false;
@@ -76,6 +76,7 @@ public class FootPrint {
 	{
 		usesRecyclableWaterBottle=usesRecyclableWaterBottle1;
 		updateTotalAmountOfWater();
+		
 	}
 	public void setUsesPlasticWaterBottle(boolean usesPlasticWaterBottle1)
 	{
@@ -245,7 +246,16 @@ public class FootPrint {
 		{
 			totalLitersAmountOfWater+=litersPerLoadsOfClothesHandWashing*numberOfLoadsOfClothes;
 		}	
+		if(usesSprinklers)
+		{
+			totalLitersAmountOfWater+=literPerSprinklerPerTime*numberOfTimesWaterPlants;
+		}
+		if(handWaters)
+		{
+			totalLitersAmountOfWater+=literPerHandWaterTime*numberOfTimesWaterPlants;
+		}
 		System.out.println("totalLitersofWater"+totalLitersAmountOfWater);
+		waterBottle.setWaterBottle(totalLitersAmountOfWater);
 		
 	}
 	public Bottle getWaterBottle()

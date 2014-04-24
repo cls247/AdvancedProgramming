@@ -1,43 +1,48 @@
 package Water;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  * This is just the Welcome screen that is the first screen
  * that is shown. It welcomes the user and has buttons to 
- * manuvere throughout the program. 
+ * Maneuver throughout the program. 
  * @author Sand
  *
  */
-class WelcomeScreen extends JPanel
+class StartScreen extends JPanel
 {
 	private String welcomeText = "Welcome to Help2Out, a water footprint calculator!";
 
-	private static final String CARD_JBUTTON =  "Card JButton";
-	private ActionListener action;
-	JTextArea aboutText=new JTextArea(welcomeText);
-	
 	Image bkgd;
 
-	public WelcomeScreen()
+
+	public StartScreen()
 	{
 		init();
 	}
 	private void init() 
 	{   
-		try{
-
+		
+		try{	
 
 			bkgd = ImageIO.read(new File("background.jpg"));
 			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
@@ -46,24 +51,11 @@ class WelcomeScreen extends JPanel
 			setMaximumSize(size);
 			setSize(size);
 			setLayout(null);
-			
+						
 		}catch(IOException error){
 
 
-		}
-
-		//	JTabbedPane tabs = new JTabbedPane();
-		//	
-		//	AboutScreen welcomeScreen = new AboutScreen();
-		//	
-		//	add(welcomeScreen);
-		//	
-		//	tabs.addTab("about", welcomeScreen);
-		//
-		//	add(tabs, BorderLayout.CENTER);
-		//    
-		//
-		//    
+		}  
 
 	}
 
