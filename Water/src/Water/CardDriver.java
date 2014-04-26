@@ -55,7 +55,7 @@ class CardDriver extends JPanel
 	}
 	private void init() 
 	{   		
-		JPanel bigPane = new JPanel();
+		JPanel bigPane = new JPanel(new BorderLayout());
 
 		JPanel buttonPanel = new JPanel(); 
 		buttonPanel.setFocusable(true);
