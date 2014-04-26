@@ -1,30 +1,16 @@
 package Water;
 
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.TextField;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Handler;
 
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -45,7 +31,7 @@ import javax.swing.event.ChangeListener;
  *
  */
 
-public class InteractivePage extends JPanel {
+public class InteractivePage extends JPanel implements Screen{
 	
 
 	//there should be a temporary food print in order to 
@@ -61,43 +47,46 @@ public class InteractivePage extends JPanel {
 	int sliderForNumberOfWashes=0;
 	int sliderForNumberOfLoadsOfClothes=0;*/
 	
-	JPanel topPanel = new JPanel();
-	JPanel jp = new JPanel();
-	
+	private JPanel topPanel = new JPanel();
+	private JPanel jp = new JPanel();
+	private User currentUser;
 	//add text areas for each slider to display the total
 	//for that slider
-	JTextField textTotal1=new JTextField("00");
-	JTextField textTotal2=new JTextField("00");
-	JTextField textTotal3=new JTextField("00");
-	JTextField textTotal4=new JTextField("00");
-	JTextField textTotal5=new JTextField("00");
-	JTextField textTotal6=new JTextField("00");
-	JTextField textTotal7=new JTextField("00");
-	JTextField textTotal8=new JTextField("00");
-	JTextField textTotal9=new JTextField("00");
-	JTextField textTotal10=new JTextField("00");
-	JTextField textTotal11=new JTextField("00");
-	JTextField textTotal12=new JTextField("00");
-	JTextField textTotal13=new JTextField("00");
+	private JTextField textTotal1=new JTextField("00");
+	private JTextField textTotal2=new JTextField("00");
+	private JTextField textTotal3=new JTextField("00");
+	private JTextField textTotal4=new JTextField("00");
+	private JTextField textTotal5=new JTextField("00");
+	private JTextField textTotal6=new JTextField("00");
+	private JTextField textTotal7=new JTextField("00");
+	private JTextField textTotal8=new JTextField("00");
+	private JTextField textTotal9=new JTextField("00");
+	private JTextField textTotal10=new JTextField("00");
+	private JTextField textTotal11=new JTextField("00");
+	private JTextField textTotal12=new JTextField("00");
+	private JTextField textTotal13=new JTextField("00");
 	
 	//text areas for tracking total water consumption and its status
-	JTextField textWater = new JTextField("00");
-	JLabel consumptionStatus = new JLabel("");
+	private JTextField textWater = new JTextField("00");
+	private JLabel consumptionStatus = new JLabel("");
+	//consumptionStatus.setWrapText(true);
+	private Dimension consumptionStatusSize = new Dimension(100,75);
+	//consumptionStatus.setMinimumSize(new Dimension(100,75));
 	
 	//labels for each slider
-	JLabel label1 = new JLabel("Water Bottles Used");
-	JLabel label2 = new JLabel("Loads of Clothing");
-	JLabel label3 = new JLabel("Sets of Dishes Washed");
-	JLabel label4 = new JLabel("Number of Baths/Showers");
-	JLabel label5 = new JLabel("Plant Waterings");
-	JLabel label6 = new JLabel("Servings of Beef");
-	JLabel label7 = new JLabel("Servings of Chicken");
-	JLabel label8 = new JLabel("Servings of Lamb");
-	JLabel label9 = new JLabel("Servings of Eggs");
-	JLabel label10 = new JLabel("Servings of Lentils");
-	JLabel label11 = new JLabel("Servings of Pasta");
-	JLabel label12 = new JLabel("Servings of Corn");
-	JLabel label13 = new JLabel("Servings of Green Veggies");
+	private JLabel label1 = new JLabel("Water Bottles Used");
+	private JLabel label2 = new JLabel("Loads of Clothing");
+	private JLabel label3 = new JLabel("Sets of Dishes Washed");
+	private JLabel label4 = new JLabel("Number of Baths/Showers");
+	private JLabel label5 = new JLabel("Plant Waterings");
+	private JLabel label6 = new JLabel("Servings of Beef");
+	private JLabel label7 = new JLabel("Servings of Chicken");
+	private JLabel label8 = new JLabel("Servings of Lamb");
+	private JLabel label9 = new JLabel("Servings of Eggs");
+	private JLabel label10 = new JLabel("Servings of Lentils");
+	private JLabel label11 = new JLabel("Servings of Pasta");
+	private JLabel label12 = new JLabel("Servings of Corn");
+	private JLabel label13 = new JLabel("Servings of Green Veggies");
 	
 	/**
 	 * This is the background image
@@ -105,9 +94,9 @@ public class InteractivePage extends JPanel {
 	private Image bkgd;
 	//TextField totalText=new TextField("00");
 	
-	double amountWaterUsed = 0;
+	private double amountWaterUsed = 0;
 	
-	double currentWaterLevel = temporaryFootPrint.getBottle().getWaterLevel();
+	private double currentWaterLevel = temporaryFootPrint.getBottle().getWaterLevel();
 	
 	public InteractivePage()
 	{
@@ -124,26 +113,27 @@ public class InteractivePage extends JPanel {
 		try{
 
 			//set the background image
+			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			bkgd = ImageIO.read(new File("background.jpg"));
-			Dimension jpSize = new Dimension(750,500);
+			Dimension jpSize = new Dimension(500,500);
 			jp.setPreferredSize(jpSize);
 			jp.setMinimumSize(jpSize);
 			jp.setMaximumSize(jpSize);
 			jp.setSize(jpSize);
 			jp.setLayout(new GridLayout(15,3));			
 			
-			Dimension topPanelSize = new Dimension(750,75);
+			Dimension topPanelSize = new Dimension(500,150);
 			topPanel.setPreferredSize(topPanelSize);
 			topPanel.setMinimumSize(topPanelSize);
 			topPanel.setMaximumSize(topPanelSize);
 			topPanel.setSize(topPanelSize);
-			topPanel.setLayout(new GridLayout(2,2));				
+			topPanel.setLayout(new GridLayout(2,2));
+			topPanel.setBackground(Color.WHITE);
 		}catch(IOException error){
 
 
 		}
 
-		
 		//displays the total amount of water used
 		topPanel.add(textWater);
 		topPanel.add(new JLabel());
@@ -505,8 +495,9 @@ public class InteractivePage extends JPanel {
 		sliderScrollPane.setVisible(true);
 		sliderScrollPane.setFocusable(true);
 		sliderScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
-		Dimension scrollSize = new Dimension(775,400);
+		Dimension scrollSize = new Dimension(100,400);
 		sliderScrollPane.setPreferredSize(scrollSize);
+		sliderScrollPane.setBackground(Color.WHITE);
 		
 		this.add(topPanel);
 		this.add(sliderScrollPane);
@@ -598,13 +589,48 @@ public class InteractivePage extends JPanel {
 	
 	public void getConsumptionStatus(){
 		double consumptionLevel = Double.parseDouble(textWater.getText());
+
 		if (consumptionLevel < 1500) {
 			consumptionStatus.setForeground(Color.GREEN);
-			consumptionStatus.setText("You are consuming a healthy amount of water");
+			consumptionStatus.setText("<html><p>You are consuming a healthy amount of water</p></html>");
 		} 
 		else {
 			consumptionStatus.setForeground(Color.RED);
 			consumptionStatus.setText("You are consuming too much water");
 		}
 	}
-}	
+	@Override
+	public User passOnUser() {
+		return currentUser;
+	}
+	@Override
+	public void receiveUser(User setCurrentUser) {
+		currentUser=setCurrentUser;
+		
+	}
+	
+	/*public void createSlider(String sliderNumber, String setMethod){
+		String sliderName = "slider"+ sliderNumber;
+		final new JSlider(sliderName);
+		slider13.setValue(0);
+		slider13.addChangeListener(new ChangeListener()
+		{
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				// TODO Auto-generated method stub
+				//this will hold the value of the slider
+				System.out.println(slider.getValue());
+				temporaryFootPrint.setServingOfCorn(slider13.getValue());
+				textTotal13.setText(String.valueOf(slider13.getValue()));
+				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
+				getConsumptionStatus();
+			}
+			
+		});
+		slider13.setMajorTickSpacing(10); 
+		slider13.setPaintLabels(true); 
+		slider13.setPaintTicks(true); 
+		jp.add(slider13, "Fruits and Vegetables Servings");	
+	}*/
+}

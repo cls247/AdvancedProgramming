@@ -48,7 +48,7 @@ class CardDriver extends JPanel
 	private Image bkgd;
 
 	private static int indexOfCardLayout=-1;
-	private static int numberOfCards=6;
+	private static int numberOfCards=7;
 
 	JPanel pages;
 
@@ -130,7 +130,11 @@ class CardDriver extends JPanel
 		TipScreen finalTipScreen=new TipScreen();
 		pages.add(finalTipScreen, "sixth");
 		
+		InteractivePage interactive = new InteractivePage();
+		pages.add(interactive, "seventh");
+		
 		allTheScreens.add((Screen) finalTipScreen);
+		allTheScreens.add((Screen) interactive);
 		previousButton.setVisible(false);
 
 		previousButton.addActionListener(new ActionListener()
