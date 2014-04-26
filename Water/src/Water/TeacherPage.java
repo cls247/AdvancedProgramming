@@ -25,7 +25,7 @@ public class TeacherPage extends JPanel implements Screen{
 	
 	private static final String CARD_JBUTTON =  "Card JButton";
     private ActionListener action; 
-    Image bkgd;
+    private Image bkgd;
     private String aboutText="This is where we would write how a teacher would use this calculator.";
 	
 	public TeacherPage()

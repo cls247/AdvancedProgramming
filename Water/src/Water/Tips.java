@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class Tips {
 
-	ArrayList <String> listOfTips;
-	int maxNumberOfTips = 21;
+	private ArrayList <String> listOfTips;
+	private int maxNumberOfTips = 21;
 	
 	public Tips(){
 		
@@ -23,7 +23,12 @@ public class Tips {
 		
 	}
 	
-	//return the tip according to the bottle level. I think this should somehow be changed to water level.
+	/**
+	 * getTip(int index)
+	 * 
+	 * @return the tip according to the bottle level. I think this should somehow be changed to water level.
+	 * @param index
+	 */
 	public String getTip(int index){
 		
 		return listOfTips.get(index);

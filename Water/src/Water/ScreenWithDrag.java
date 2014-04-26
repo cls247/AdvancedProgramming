@@ -29,7 +29,7 @@ import javax.swing.JScrollPane;
  *
  */
 
-public class ScreenWithDrag extends JPanel implements Runnable, Global, Screen {
+public class ScreenWithDrag extends JPanel implements Runnable, Screen {
 
 	private ImageIcon plate=new ImageIcon("Water/plate.jpg");
 	private Image platePicture=plate.getImage();
@@ -538,15 +538,24 @@ public class ScreenWithDrag extends JPanel implements Runnable, Global, Screen {
 		}
 	}
 
-
+	/**
+	 * passOnUser()
+	 * This method returns the user to the control class.
+	 */
 	@Override
 	public User passOnUser() {
 		return currentUser;
 	}
-
+	
+	/**
+	 *  receiveUser(User setCurrentUser)
+	 * This method takes in a User and sets the current
+	 * user to the user that is passed in.
+	 */
 	@Override
 	public void receiveUser(User setCurrentUser) {
 		currentUser=setCurrentUser;
 		
 	}
+
 }

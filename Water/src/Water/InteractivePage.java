@@ -36,20 +36,12 @@ public class InteractivePage extends JPanel implements Screen{
 
 	//there should be a temporary food print in order to 
 	//keep updating the footprint according to the bars that change
-	FootPrint temporaryFootPrint=new FootPrint();
-	/*Rectangle meatBar=new Rectangle(meatX, meatY, meatWidth, meatHeight);
-	double sliderForFootPrint;
-	int sliderForWaterBottles=0;
-	int sliderForNumberOfTimesDoesDishes=0;
-	int sliderForServingOfBeef=0;
-	int sliderForServingOfChicken=0;
-	int sliderForServingOfCorn=0;
-	int sliderForNumberOfWashes=0;
-	int sliderForNumberOfLoadsOfClothes=0;*/
+	private FootPrint temporaryFootPrint=new FootPrint();
+	
 	
 	private JPanel topPanel = new JPanel();
 	private JPanel jp = new JPanel();
-	private User currentUser;
+	private User currentUser=new User();
 	//add text areas for each slider to display the total
 	//for that slider
 	private JTextField textTotal1=new JTextField("00");
@@ -93,10 +85,6 @@ public class InteractivePage extends JPanel implements Screen{
 	 */
 	private Image bkgd;
 	//TextField totalText=new TextField("00");
-	
-	private double amountWaterUsed = 0;
-	
-	private double currentWaterLevel = temporaryFootPrint.getBottle().getWaterLevel();
 	
 	public InteractivePage()
 	{
@@ -599,38 +587,24 @@ public class InteractivePage extends JPanel implements Screen{
 			consumptionStatus.setText("You are consuming too much water");
 		}
 	}
+	/**
+	 * passOnUser()
+	 * This method returns the user to the control class.
+	 */
 	@Override
 	public User passOnUser() {
 		return currentUser;
 	}
+	
+	/**
+	 *  receiveUser(User setCurrentUser)
+	 * This method takes in a User and sets the current
+	 * user to the user that is passed in.
+	 */
 	@Override
 	public void receiveUser(User setCurrentUser) {
 		currentUser=setCurrentUser;
 		
 	}
-	
-	/*public void createSlider(String sliderNumber, String setMethod){
-		String sliderName = "slider"+ sliderNumber;
-		final new JSlider(sliderName);
-		slider13.setValue(0);
-		slider13.addChangeListener(new ChangeListener()
-		{
 
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				System.out.println(slider.getValue());
-				temporaryFootPrint.setServingOfCorn(slider13.getValue());
-				textTotal13.setText(String.valueOf(slider13.getValue()));
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		slider13.setMajorTickSpacing(10); 
-		slider13.setPaintLabels(true); 
-		slider13.setPaintTicks(true); 
-		jp.add(slider13, "Fruits and Vegetables Servings");	
-	}*/
 }

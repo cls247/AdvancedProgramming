@@ -111,6 +111,4 @@ public class Bottle {
 		return currentBottle;
 		
 	}
-	
-
 }

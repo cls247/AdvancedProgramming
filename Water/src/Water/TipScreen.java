@@ -27,15 +27,23 @@ import javax.swing.JTextField;
  * @author Sand
  *
  */
-public class TipScreen extends JPanel implements Global, Screen, Runnable{
+public class TipScreen extends JPanel implements Screen, Runnable{
 	
 	private double waterUsed;
 	private JTextArea tip=new JTextArea();
+	// image for the background
 	private Image bkgd;
+	//the user that is being updated
 	private User currentUser=new User();
+	//set delay for the thread
 	private final int DELAY = 20;
 	private Thread thread;
 	
+	/**
+	 * TipScreen()
+	 * 
+	 * This sets the default details of teh screen
+	 */
 	public TipScreen()
 	{
 		init();
@@ -45,6 +53,12 @@ public class TipScreen extends JPanel implements Global, Screen, Runnable{
 		add(tip);
 		
 	}
+	
+	/**
+	 * updateTotal()
+	 * This method gets the current water total.
+	 */
+	
 	public void updateTotal()
 	{
 		waterUsed=currentUser.getFootPrint().getTotalAmountOfWater();
@@ -76,6 +90,13 @@ public class TipScreen extends JPanel implements Global, Screen, Runnable{
 		thread.start();
 	}
 	
+	
+	/**
+	 * calculateFootPrint()
+	 * 
+	 * This methods sets the text to be printed on this scree
+	 * by getting specific tips for the user input. 
+	 */
 	public void calculateFootPrint(){
 		
 		//this is just a temporary tip display
@@ -91,23 +112,21 @@ public class TipScreen extends JPanel implements Global, Screen, Runnable{
 			"In addition, \n" +currentUser.getFootPrint().Tips());
 			tip.setWrapStyleWord(true);
 			
-		}
-		
+		}	
 		
 	}
 	public void paintComponent(Graphics g){
 		
 		super.paintComponent(g);
 		g.drawImage(bkgd, 0,0, null);
-//		System.out.println("painting");
+
 		updateTotal();
-//		remove(tip);
+
 		System.out.println(waterUsed);
-//		tip.setText("You used "+ waterUsed +" liters of water. You used a regular amount of water."+
-//				"Also" );
-//		add(tip);
 
 		}
+	
+	
 	@Override
 	public void run() {
 		long beforeTime, timeDiff, timeSleep;
@@ -133,10 +152,21 @@ public class TipScreen extends JPanel implements Global, Screen, Runnable{
 		}
 		
 	}
+	
+	/**
+	 * passOnUser()
+	 * This method returns the user to the control class.
+	 */
 	@Override
 	public User passOnUser() {
 		return currentUser;
 	}
+	
+	/**
+	 *  receiveUser(User setCurrentUser)
+	 * This method takes in a User and sets the current
+	 * user to the user that is passed in.
+	 */
 	@Override
 	public void receiveUser(User setCurrentUser) {
 		currentUser=setCurrentUser;
