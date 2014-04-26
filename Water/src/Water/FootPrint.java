@@ -106,42 +106,42 @@ public class FootPrint {
 	
 	public void setServingOfBeef(int setServingOfBeef)
 	{
-		servingOfBeef=setServingOfBeef;
+		servingOfBeef+=setServingOfBeef;
 		updateTotalAmountOfWater();
 	}
 	public void setServingOfChicken(int setServingOfChicken )
 	{
-		servingOfChicken=setServingOfChicken;
+		servingOfChicken+=setServingOfChicken;
 		updateTotalAmountOfWater();
 	}
 	public void setServingOfLamb(int setServingOfLamb)
 	{
-		servingOfLamb=setServingOfLamb;
+		servingOfLamb+=setServingOfLamb;
 		updateTotalAmountOfWater();
 	}
 	public void setServingOfEggs(int setServingOfEggs)
 	{
-		servingOfEggs=setServingOfEggs;
+		servingOfEggs+=setServingOfEggs;
 		updateTotalAmountOfWater();
 	}
 	public void setServingOfVeges(int setServingOfVeges)
 	{
-		servingOfVeges=setServingOfVeges;
+		servingOfVeges+=setServingOfVeges;
 		updateTotalAmountOfWater();
 	}
 	public void setServingOfLentils(int setServingOfLentils)
 	{
-		servingOfLentils=setServingOfLentils;
+		servingOfLentils+=setServingOfLentils;
 		updateTotalAmountOfWater();
 	}
 	public void setServingOfPasta(int setServingOfPasta)
 	{
-		servingOfPasta=setServingOfPasta;
+		servingOfPasta+=setServingOfPasta;
 		updateTotalAmountOfWater();
 	}
 	public void setServingOfCorn(int setServingOfCorn)
 	{
-		servingOfCorn=setServingOfCorn;
+		servingOfCorn+=setServingOfCorn;
 		updateTotalAmountOfWater();
 	}
 	public void setTakesShowers(boolean setTakesShowers)

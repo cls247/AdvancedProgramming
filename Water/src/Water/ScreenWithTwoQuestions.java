@@ -66,7 +66,6 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 		bottleThread.start();
 		try{
 
-
 			bkgd = ImageIO.read(new File("background.jpg"));
 			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
 			setPreferredSize(size);
@@ -81,12 +80,19 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 		}
 		//we need to save all this data, I didn't do that
 		//here we would add the background image
-		setLayout(new GridLayout(4, 4));
+//		setLayout(new GridLayout(4, 4));
 		//ask the first question
-		JLabel firstQuestionLabel = new JLabel(firstQuestion+"?", JLabel.CENTER);
+		JLabel firstQuestionLabel = new JLabel(firstQuestion+"?");
+		firstQuestionLabel.setVisible(true);
+		firstQuestionLabel.setSize(250,20);
+		firstQuestionLabel.setLocation(125, 100);
 		add(firstQuestionLabel);
+		
 		//answer the first question
 		final JCheckBox firstQuestionBox = new JCheckBox();
+		firstQuestionBox.setVisible(true);
+		firstQuestionBox.setSize(50,20);
+		firstQuestionBox.setLocation(400, 100);
 		add(firstQuestionBox);
 		firstQuestionBox.addActionListener(new ActionListener()
 		{
@@ -107,12 +113,21 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 			}
 			
 		});
+		
 		//ask the second questions
-		JLabel secondQuestionlabel = new JLabel(secondQuestion+"?", JLabel.CENTER);
+		JLabel secondQuestionlabel = new JLabel(secondQuestion+"?");
+		secondQuestionlabel.setVisible(true);
+		secondQuestionlabel.setSize(250,20);
+		secondQuestionlabel.setLocation(125,200);
 		add(secondQuestionlabel);
+		
 		//answer the second question
 		final JCheckBox secondQuestionBox = new JCheckBox();
+		secondQuestionBox.setVisible(true);
+		secondQuestionBox.setSize(50,20);
+		secondQuestionBox.setLocation(400, 200);
 		add(secondQuestionBox);
+		
 		//need error checking to make sure that these two questions are mutually exclusive
 		secondQuestionBox.addActionListener(new ActionListener(){
 
@@ -133,7 +148,10 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 			
 		});
 		//ask the third question
-		JLabel thirdQuestionLabel = new JLabel(thirdQuestion+"?", JLabel.CENTER);
+		JLabel thirdQuestionLabel = new JLabel(thirdQuestion+"?");
+		thirdQuestionLabel.setVisible(true);
+		thirdQuestionLabel.setSize(350,20);
+		thirdQuestionLabel.setLocation(125, 300);
 		add(thirdQuestionLabel);
 		//answer the third question
 		//JFormattedTextField answerToThirdQuestion = new JFormattedTextField();
@@ -149,10 +167,13 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 	    Double step = new Double(1.00);
 	    m_numberSpinnerModel = new SpinnerNumberModel(current, min, max, step);
 	    m_numberSpinner = new JSpinner(m_numberSpinnerModel);
-	    add(m_numberSpinner);
 	    
+	    m_numberSpinner.setSize(100,50);
+	    m_numberSpinner.setLocation(500,300);
 	    ((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).setPreferredSize(new Dimension(10,10));
 	    ((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).getTextField().setEditable(false);
+	    add(m_numberSpinner);
+	   
 	    
 	    m_numberSpinner.addChangeListener(new ChangeListener()
 	    {
@@ -198,7 +219,7 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 //		System.out.println("the current water bottle is paint is "+ currentUser.getFootPrint().getWaterBottle().getCurrentBottle());
 	    waterBottle=currentUser.getFootPrint().getWaterBottle().getImage();
 	    bottle=waterBottle.getImage();
-	    g.drawImage(bottle, 0,0, null);
+	    g.drawImage(bottle, 600,20, null);
 	}
 	
 	@Override
