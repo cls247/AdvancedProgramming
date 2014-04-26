@@ -15,18 +15,18 @@ public class FootPrint {
 	//there are still a bunch more private data variables that 
 	//we have to add and then we have to add setters
 	//for each of those
-	private boolean usesRecyclableWaterBottle=false;
+	private boolean usesRecyclableWaterBottle=true;
 	private boolean usesPlasticWaterBottle=false;
 	private final double literPerWaterBottle=.6;
 	private int numberOfWaterBottles=0;
 	
-	private boolean usesSprinklers=false;
+	private boolean usesSprinklers=true;
 	private final int literPerSprinklerPerTime=90;
 	private boolean handWaters=false;
 	private final int literPerHandWaterTime=50;
 	private int numberOfTimesWaterPlants;
 	
-	private boolean usesDishWasher=false;
+	private boolean usesDishWasher=true;
 	private final int literPerDishWater=3;
 	private boolean doesDishedByHand=false;
 	private final int literPerDishesByHand=10;
@@ -39,7 +39,7 @@ public class FootPrint {
 	private int servingOfLamb=0;
 	private final int literPerServingOfLamb=914;
 	private int servingOfVeges=0;
-	private final int literPerServingOfVeges=20;
+	private final int literPerServingOfVeggies=20;
 	private int servingOfLentils=0;
 	private final int literPerServingOfLentils=59;
 	private int servingOfPasta=0;
@@ -49,13 +49,13 @@ public class FootPrint {
 	private int servingOfEggs=0;
 	private final int literPerServingOfEggs=135;
 	
-	private boolean takesShowers=false;
+	private boolean takesShowers=true;
 	private final double literPerShowerPerMinute=35;
 	private boolean takesBaths=false;
 	private final double litersPerBath=50;
 	private int numberOfWashes=0;
 	
-	private boolean usesWashingMachine=false;
+	private boolean usesWashingMachine=true;
 	private boolean handWashesClothes=false;
 	private int numberOfLoadsOfClothes=0;
 	private final int litersPerLoadsOfClothersWashingMachine=20;
@@ -72,15 +72,17 @@ public class FootPrint {
 	{
 		waterBottle=new Bottle();
 	}
-	public void setUsesRecyclableWaterBottle(boolean usesRecyclableWaterBottle1)
+	public void setUsesRecyclableWaterBottle()
 	{
-		usesRecyclableWaterBottle=usesRecyclableWaterBottle1;
+		usesRecyclableWaterBottle=true;
+		usesPlasticWaterBottle=false;
 		updateTotalAmountOfWater();
 		
 	}
-	public void setUsesPlasticWaterBottle(boolean usesPlasticWaterBottle1)
+	public void setUsesPlasticWaterBottle()
 	{
-		usesPlasticWaterBottle=usesPlasticWaterBottle1;
+		usesPlasticWaterBottle=true;
+		usesRecyclableWaterBottle=false;
 		updateTotalAmountOfWater();
 	}
 	public void setNumberOfWaterBottles(int numberOfWaterBottles1)
@@ -88,14 +90,16 @@ public class FootPrint {
 		numberOfWaterBottles=numberOfWaterBottles1;
 		updateTotalAmountOfWater();
 	}	
-	public void setUsesDishWasher(boolean usesDishWasher1)
+	public void setUsesDishWasher()
 	{
-		usesDishWasher=usesDishWasher1;
+		usesDishWasher=true;
+		doesDishedByHand=false;
 		updateTotalAmountOfWater();
 	}
-	public void setDoesDishedByHand(boolean doesDishedByHand1)
+	public void setDoesDishedByHand()
 	{
-		doesDishedByHand=doesDishedByHand1;
+		usesDishWasher=false;
+		doesDishedByHand=true;
 		updateTotalAmountOfWater();
 	}
 	public void setNumberOfTimesDoesDishes(int setNumberOfTimesDoesDishes)
@@ -144,14 +148,16 @@ public class FootPrint {
 		servingOfCorn+=setServingOfCorn;
 		updateTotalAmountOfWater();
 	}
-	public void setTakesShowers(boolean setTakesShowers)
+	public void setTakesShowers()
 	{
-		takesShowers=setTakesShowers;
+		takesShowers=true;
+		takesBaths=false;
 		updateTotalAmountOfWater();
 	}
-	public void setTakesBaths(boolean setTakesBaths)
+	public void setTakesBaths()
 	{
-		takesBaths=setTakesBaths;
+		takesShowers=false;
+		takesBaths=true;
 		updateTotalAmountOfWater();
 	}
 	public void setNumberOfWashes(int setNumberOfWashes)
@@ -160,14 +166,16 @@ public class FootPrint {
 		updateTotalAmountOfWater();
 	}
 	
-	public void setUsesWashingMachine(boolean setUsesWashingMachine)
+	public void setUsesWashingMachine()
 	{
-		usesWashingMachine=setUsesWashingMachine;
+		usesWashingMachine=true;
+		handWashesClothes=false;
 		updateTotalAmountOfWater();
 	}
-	public void setHandWashesClothes(boolean setHandWashesClothes)
+	public void setHandWashesClothes()
 	{
-		handWashesClothes=setHandWashesClothes;
+		usesWashingMachine=false;
+		handWashesClothes=true;
 		updateTotalAmountOfWater();
 	}
 	public void setNumberOfLoadsOfClothes(int setNumberOfLoadsOfClothes)
@@ -175,14 +183,16 @@ public class FootPrint {
 		numberOfLoadsOfClothes=setNumberOfLoadsOfClothes;
 		updateTotalAmountOfWater();
 	}
-	public void setUsesSprinklers(boolean setUsesSprinklers)
+	public void setUsesSprinklers()
 	{
-		usesSprinklers=setUsesSprinklers;
+		usesSprinklers=true;
+		handWaters=false;
 		updateTotalAmountOfWater();
 	}
-	public void setHandWaters(boolean setHandWaters)
+	public void setHandWaters()
 	{
-		handWaters=setHandWaters;
+		usesSprinklers=false;
+		handWaters=true;
 		updateTotalAmountOfWater();
 	}
 
@@ -226,7 +236,7 @@ public class FootPrint {
 		totalLitersAmountOfWater+=servingOfBeef*literPerServingOfBeef;
 		totalLitersAmountOfWater+= servingOfChicken*literPerServingOfChicken;
 		totalLitersAmountOfWater+=servingOfLamb*literPerServingOfLamb;
-		totalLitersAmountOfWater+=servingOfVeges*literPerServingOfVeges;
+		totalLitersAmountOfWater+=servingOfVeges*literPerServingOfVeggies;
 		totalLitersAmountOfWater+=servingOfLentils*literPerServingOfLentils;
 		totalLitersAmountOfWater+=servingOfPasta*literPerServingOfPasta;
 		

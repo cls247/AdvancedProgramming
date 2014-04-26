@@ -113,6 +113,11 @@ public class InteractivePage extends JPanel {
 	{
 		init();		
 	}	
+	public InteractivePage(FootPrint temporaryFootprint)
+	{
+		//set the default values of all the sliders
+		init();		
+	}	
 	
 	public void init()
 	{
