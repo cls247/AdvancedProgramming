@@ -13,6 +13,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -34,32 +35,35 @@ class CardDriver extends JPanel
 
 	private static final String CARD_JBUTTON =  "Card JButton";
 	private ActionListener action;
-	JTextArea aboutText=new JTextArea(welcomeText);
-	static ScreenWithTwoQuestions chooseWaterBottle;
-	static ScreenWithTwoQuestions waterPlants;
-	static ScreenWithTwoQuestions washDishes;
-	static ScreenWithTwoQuestions bathingWin;
-	static ScreenWithTwoQuestions washClothes;
-	static ScreenWithDrag meatScreen;
-	
-	Image bkgd;
-	
+	private JTextArea aboutText=new JTextArea(welcomeText);
+	private static ScreenWithTwoQuestions chooseWaterBottle;
+	private static ScreenWithTwoQuestions waterPlants;
+	private static ScreenWithTwoQuestions washDishes;
+	private static ScreenWithTwoQuestions bathingWin;
+	private static ScreenWithTwoQuestions washClothes;
+	private static ScreenWithDrag meatScreen;
+	private ArrayList<Screen> allTheScreens=new ArrayList<Screen>();
+	private User currentUser=new User();
+
+	private Image bkgd;
+
 	private static int indexOfCardLayout=-1;
 	private static int numberOfCards=6;
-	
+
 	JPanel pages;
 
 	public CardDriver()
 	{
 		init();
 	}
+
 	private void init() 
 	{   		
 		JPanel bigPane = new JPanel(new BorderLayout());
 
 		JPanel buttonPanel = new JPanel(); 
 		buttonPanel.setFocusable(true);
-		
+
 		final JButton previousButton = new JButton("PREVIOUS");
 		previousButton.setBackground(Color.BLACK);
 		previousButton.setForeground(Color.BLACK);
@@ -72,45 +76,63 @@ class CardDriver extends JPanel
 
 		buttonPanel.add(previousButton);
 		buttonPanel.add(nextButton);
-	
-      
-//        //Put the JComboBox in a JPanel to get a nicer look.
-//      JPanel cbPane = new JPanel();
-//      String cbItems[] = { "first", "second", "third", "fourth", "fifth", "sixth" };
-//      JComboBox cBox = new JComboBox(cbItems);
-//      cBox.addItemListener(this);
-//      cbPane.add(cBox);
-//      
-      pages = new JPanel(new CardLayout());
-      
-      StartScreen startScreen = new StartScreen();
-      pages.add(startScreen,"start");
+
+
+		//        //Put the JComboBox in a JPanel to get a nicer look.
+		//      JPanel cbPane = new JPanel();
+		//      String cbItems[] = { "first", "second", "third", "fourth", "fifth", "sixth" };
+		//      JComboBox cBox = new JComboBox(cbItems);
+		//      cBox.addItemListener(this);
+		//      cbPane.add(cBox);
+		//      
+		pages = new JPanel(new CardLayout());
+
+		StartScreen startScreen = new StartScreen();
+		startScreen.receiveUser(currentUser);
+		pages.add(startScreen,"start");
+		
+		allTheScreens.add((Screen) startScreen);
 		chooseWaterBottle = new ScreenWithTwoQuestions("Do you use recyclable bottles?", 
 				"Do you use plastic water bottles?", 
-					"How many water bottles do you use a week?", "bottle");
-			pages.add(chooseWaterBottle, "first");
-			waterPlants = new ScreenWithTwoQuestions("Do you use sprinkles?", 
-					"Do you water your lawn by hand?", 
-					"How many times a week do you water the lawn?", "plants");
-			pages.add(waterPlants, "second");
-			washDishes = new ScreenWithTwoQuestions("Do you use a dishwasher?", 
-					"Do you wash dishes by hand?", 
-					"How many times a week do you wash dishes", "dishes");
-			pages.add(washDishes, "third");
-			washClothes = new ScreenWithTwoQuestions("Do you use a washing machine?", 
-					"Do you wash clothes by hand", 
-					"How many loads of laundry do you do in a week?", "clothes");
-			pages.add(washClothes, "fourth");
-			 bathingWin = new ScreenWithTwoQuestions("Do you take showers?", 
-					"Do you take baths", 
-					"How many times a week do you wash yourself?", "clothes");
-			pages.add(bathingWin, "fifth");
-			meatScreen=new ScreenWithDrag("meat");
-			pages.add(meatScreen, "sixth");
-			TipScreen finalTipScreen=new TipScreen();
-			pages.add(finalTipScreen, "sixth");
-			previousButton.setVisible(false);
-      
+				"How many water bottles do you use a week?", "bottle");
+		pages.add(chooseWaterBottle, "first");
+		
+		allTheScreens.add((Screen) chooseWaterBottle);
+		waterPlants = new ScreenWithTwoQuestions("Do you use sprinkles?", 
+				"Do you water your lawn by hand?", 
+				"How many times a week do you water the lawn?", "plants");
+		pages.add(waterPlants, "second");
+		
+		allTheScreens.add((Screen) waterPlants);
+		washDishes = new ScreenWithTwoQuestions("Do you use a dishwasher?", 
+				"Do you wash dishes by hand?", 
+				"How many times a week do you wash dishes", "dishes");
+		pages.add(washDishes, "third");
+		
+		allTheScreens.add((Screen) washDishes);
+		washClothes = new ScreenWithTwoQuestions("Do you use a washing machine?", 
+				"Do you wash clothes by hand", 
+				"How many loads of laundry do you do in a week?", "clothes");
+		pages.add(washClothes, "fourth");
+		
+		allTheScreens.add((Screen) washClothes);
+		bathingWin = new ScreenWithTwoQuestions("Do you take showers?", 
+				"Do you take baths", 
+				"How many times a week do you wash yourself?", "clothes");
+		pages.add(bathingWin, "fifth");
+		
+		allTheScreens.add((Screen) bathingWin);
+		meatScreen=new ScreenWithDrag("meat");
+		
+		allTheScreens.add((Screen) meatScreen);
+		pages.add(meatScreen, "sixth");
+		
+		TipScreen finalTipScreen=new TipScreen();
+		pages.add(finalTipScreen, "sixth");
+		
+		allTheScreens.add((Screen) finalTipScreen);
+		previousButton.setVisible(false);
+
 		previousButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae)
@@ -118,10 +140,12 @@ class CardDriver extends JPanel
 				System.out.println("index of card"+indexOfCardLayout);
 				if(indexOfCardLayout-1>=0)
 				{
-				indexOfCardLayout--;
-				System.out.println("is this working");
-				CardLayout cardLayout = (CardLayout) pages.getLayout();
-				cardLayout.previous(pages);
+					indexOfCardLayout--;
+					System.out.println("is this working");
+					CardLayout cardLayout = (CardLayout) pages.getLayout();
+
+					cardLayout.previous(pages);
+					moveUserBackward(indexOfCardLayout);
 				}
 				if(indexOfCardLayout==numberOfCards)
 					nextButton.setVisible(false);
@@ -142,12 +166,13 @@ class CardDriver extends JPanel
 				if(indexOfCardLayout+1<=numberOfCards)
 				{
 
-				indexOfCardLayout++;
-				System.out.println("is the next button wokring");
-				//frame.setVisible(false);
-				pages.setVisible(true);
-				CardLayout cardLayout = (CardLayout) pages.getLayout();
-				cardLayout.next(pages);   
+					indexOfCardLayout++;
+					System.out.println("is the next button wokring");
+					//frame.setVisible(false);
+					pages.setVisible(true);
+					CardLayout cardLayout = (CardLayout) pages.getLayout();
+					cardLayout.next(pages);  
+					moveUserForward(indexOfCardLayout);
 				}
 				if(indexOfCardLayout==numberOfCards)
 					nextButton.setVisible(false);
@@ -159,30 +184,30 @@ class CardDriver extends JPanel
 					previousButton.setVisible(false);
 			}
 		});
-	      bigPane.add(pages, BorderLayout.CENTER);
-	      bigPane.add(buttonPanel, BorderLayout.PAGE_END);
-			
-	      add(bigPane);
-		
-//		try{
-//
-//			
-//			
-//
-//			bkgd = ImageIO.read(new File("background.jpg"));
-//			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
-//			setPreferredSize(size);
-//			setMinimumSize(size);
-//			setMaximumSize(size);
-//			setSize(size);
-//			setLayout(null);
-//			
-//			
-//			
-//		}catch(IOException error){
-//
-//
-//		}
+		bigPane.add(pages, BorderLayout.CENTER);
+		bigPane.add(buttonPanel, BorderLayout.PAGE_END);
+
+		add(bigPane);
+
+		//		try{
+		//
+		//			
+		//			
+		//
+		//			bkgd = ImageIO.read(new File("background.jpg"));
+		//			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
+		//			setPreferredSize(size);
+		//			setMinimumSize(size);
+		//			setMaximumSize(size);
+		//			setSize(size);
+		//			setLayout(null);
+		//			
+		//			
+		//			
+		//		}catch(IOException error){
+		//
+		//
+		//		}
 
 		//	JTabbedPane tabs = new JTabbedPane();
 		//	
@@ -198,25 +223,66 @@ class CardDriver extends JPanel
 		//    
 
 	}
+	public void moveUserForward(int index){
 
-//	public void paintComponent(Graphics g){
-//
-//		
-//		g.drawImage(bkgd, 0,0, null);
-//		Dimension d = this.getPreferredSize(); 
-//		int fontSize = 20; 
-//		g.setFont(new Font("Helvetica Neue", Font.PLAIN, fontSize)); 
-//		g.drawString(welcomeText, 10, 200); 
-//		}
-	
-//	@Override
-//	public void itemStateChanged(ItemEvent arg0) {
-//        CardLayout cLayout = (CardLayout)(pages.getLayout());
-//        cLayout.show(pages, (String)arg0.getItem());
-//		
-//	}
+
+		int currentScreenIndex = index;
+
+		int nextScreenIndex = index+1;
+
+
+		Screen currentScreen = (Screen) allTheScreens.get(currentScreenIndex);
+
+		Screen nextScreen = (Screen) allTheScreens.get(nextScreenIndex);
+
+
+
+		User userToPass = currentScreen.passOnUser();
+
+
+		nextScreen.receiveUser(userToPass);
+
 
 	}
+	public void moveUserBackward(int index){
+
+
+		int currentScreenIndex = index;
+
+		int previousScreenIndex = index-1;
+
+
+		Screen currentScreen = (Screen) allTheScreens.get(currentScreenIndex);
+
+		Screen previousScreen = (Screen) allTheScreens.get(previousScreenIndex);
+
+
+
+		User userToPass = currentScreen.passOnUser();
+
+
+		previousScreen.receiveUser(userToPass);
+
+
+		}
+	//	public void paintComponent(Graphics g){
+	//
+	//		
+	//		g.drawImage(bkgd, 0,0, null);
+	//		Dimension d = this.getPreferredSize(); 
+	//		int fontSize = 20; 
+	//		g.setFont(new Font("Helvetica Neue", Font.PLAIN, fontSize)); 
+	//		g.drawString(welcomeText, 10, 200); 
+	//		}
+
+	//	@Override
+	//	public void itemStateChanged(ItemEvent arg0) {
+	//        CardLayout cLayout = (CardLayout)(pages.getLayout());
+	//        cLayout.show(pages, (String)arg0.getItem());
+	//		
+	//	}
+
+}
 
 
 

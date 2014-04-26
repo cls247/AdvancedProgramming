@@ -40,23 +40,24 @@ public class ScreenWithDrag extends JPanel implements Runnable, Global, Screen {
 	//meat, grains or fruits that said which it should be ???? not sure yet
 	private String type;
 	private Image bkgd;
-	final JPanel bottomPanel = new JPanel();
-	JPanel topPanel = new JPanel();
+	private final JPanel bottomPanel = new JPanel();
+	private JPanel topPanel = new JPanel();
+	private User currentUser;
 	//	JScrollPane animalScrollPane = new JScrollPane();
 
-	final int BUTTON_WIDTH = 115;
-	final int BUTTON_HEIGHT = 115; 
-	int buttonX = 0;
-	int buttonY = 0;
-	int rowCount = 0;
-	int columnCount = 0;
+	private final int BUTTON_WIDTH = 115;
+	private final int BUTTON_HEIGHT = 115; 
+	private int buttonX = 0;
+	private int buttonY = 0;
+	private int rowCount = 0;
+	private int columnCount = 0;
 
 	private ArrayList<Dimension> buttonDimensions = new ArrayList<Dimension>();
 	private ArrayList<JButton> buttonsOnRight = new ArrayList<JButton>();
 	
 
-	ImageIcon waterBottle;
-	Image bottle;
+	private ImageIcon waterBottle;
+	private Image bottle;
 	private Thread bottleThread;
 	
 	public ScreenWithDrag(String foodType){
@@ -535,5 +536,17 @@ public class ScreenWithDrag extends JPanel implements Runnable, Global, Screen {
 
 			beforeTime = System.currentTimeMillis();
 		}
+	}
+
+
+	@Override
+	public User passOnUser() {
+		return currentUser;
+	}
+
+	@Override
+	public void receiveUser(User setCurrentUser) {
+		currentUser=setCurrentUser;
+		
 	}
 }

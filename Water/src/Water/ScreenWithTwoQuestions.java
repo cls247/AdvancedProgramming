@@ -48,6 +48,12 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 	Image bottle;
 	private final int DELAY = 20;
 	private Thread bottleThread;
+	private User currentUser=new User();
+	
+	final JCheckBox firstQuestionBox = new JCheckBox();
+	final JCheckBox secondQuestionBox = new JCheckBox();
+	JSpinner m_numberSpinner = new JSpinner();
+	JLabel thirdQuestionLabel = new JLabel();
 	
 	public ScreenWithTwoQuestions(String firstQuestion1, String secondQuestion1, String thirdQuestion1, String type1)
 	{
@@ -89,7 +95,7 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 		add(firstQuestionLabel);
 		
 		//answer the first question
-		final JCheckBox firstQuestionBox = new JCheckBox();
+//		final JCheckBox firstQuestionBox = new JCheckBox();
 		firstQuestionBox.setVisible(true);
 		firstQuestionBox.setSize(50,20);
 		firstQuestionBox.setLocation(400, 100);
@@ -101,15 +107,16 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(type=="bottle")
-					Global.currentUser.getFootPrint().setUsesRecyclableWaterBottle(true);				
+					currentUser.getFootPrint().setUsesRecyclableWaterBottle();				
 				if(type=="plants")
-					Global.currentUser.getFootPrint().setUsesSprinklers(true);
+					currentUser.getFootPrint().setUsesSprinklers();
 				if(type=="bathing")
-					Global.currentUser.getFootPrint().setTakesShowers(true);
+					currentUser.getFootPrint().setTakesShowers();
 				if(type=="dishes")
-					Global.currentUser.getFootPrint().setUsesDishWasher(true);
+					currentUser.getFootPrint().setUsesDishWasher();
 				if(type=="clothes")
-					Global.currentUser.getFootPrint().setUsesWashingMachine(true);
+					currentUser.getFootPrint().setUsesWashingMachine();
+
 			}
 			
 		});
@@ -122,7 +129,7 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 		add(secondQuestionlabel);
 		
 		//answer the second question
-		final JCheckBox secondQuestionBox = new JCheckBox();
+//		final JCheckBox secondQuestionBox = new JCheckBox();
 		secondQuestionBox.setVisible(true);
 		secondQuestionBox.setSize(50,20);
 		secondQuestionBox.setLocation(400, 200);
@@ -135,31 +142,30 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(type=="bottle")
-					Global.currentUser.getFootPrint().setUsesPlasticWaterBottle(true);				
+					currentUser.getFootPrint().setUsesPlasticWaterBottle();				
 				if(type=="plants")
-					Global.currentUser.getFootPrint().setHandWaters(true);
+					currentUser.getFootPrint().setHandWaters();
 				if(type=="bathing")
-					Global.currentUser.getFootPrint().setTakesBaths(true);
+					currentUser.getFootPrint().setTakesBaths();
 				if(type=="dishes")
-					Global.currentUser.getFootPrint().setDoesDishedByHand(true);
+					currentUser.getFootPrint().setDoesDishedByHand();
 				if(type=="clothes")
-					Global.currentUser.getFootPrint().setHandWashesClothes(true);
+					currentUser.getFootPrint().setHandWashesClothes();
+
 			}
 			
 		});
 		//ask the third question
-		JLabel thirdQuestionLabel = new JLabel(thirdQuestion+"?");
-		thirdQuestionLabel.setVisible(true);
+		thirdQuestionLabel = new JLabel(thirdQuestion+"?");
 		thirdQuestionLabel.setSize(350,20);
 		thirdQuestionLabel.setLocation(125, 300);
-		add(thirdQuestionLabel);
+
 		//answer the third question
 		//JFormattedTextField answerToThirdQuestion = new JFormattedTextField();
 		//answerToThirdQuestion.setBounds(25, 330, 56, 20);
         //add(answerToThirdQuestion);
         //answerToThirdQuestion.setValue(new Double(10.0));
         //String answer=answerToThirdQuestion.getText();
-		final JSpinner m_numberSpinner;
 	    SpinnerNumberModel m_numberSpinnerModel;
 	    Double current = new Double(1.00);
 	    Double min = new Double(0.00);
@@ -172,7 +178,6 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 	    m_numberSpinner.setLocation(500,300);
 	    ((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).setPreferredSize(new Dimension(10,10));
 	    ((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).getTextField().setEditable(false);
-	    add(m_numberSpinner);
 	   
 	    
 	    m_numberSpinner.addChangeListener(new ChangeListener()
@@ -186,18 +191,77 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 			    int temp=answer.intValue();
 			    System.out.println("the value of the spinner is"+temp);
 		        if(type=="bottle")
-					Global.currentUser.getFootPrint().setNumberOfWaterBottles(temp);				
+					currentUser.getFootPrint().setNumberOfWaterBottles(temp);				
 				if(type=="plants")
-					Global.currentUser.getFootPrint().setNumberOfTimesWaterPlants(temp);
+					currentUser.getFootPrint().setNumberOfTimesWaterPlants(temp);
 				if(type=="bathing")
-					Global.currentUser.getFootPrint().setNumberOfWashes(temp);
+					currentUser.getFootPrint().setNumberOfWashes(temp);
 				if(type=="dishes")
-					Global.currentUser.getFootPrint().setNumberOfTimesDoesDishes(temp);
+					currentUser.getFootPrint().setNumberOfTimesDoesDishes(temp);
 				if(type=="clothes")
-					Global.currentUser.getFootPrint().setNumberOfLoadsOfClothes(temp);
+					currentUser.getFootPrint().setNumberOfLoadsOfClothes(temp);
 			}
-	    	
 	    });
+	    
+	    add(m_numberSpinner);
+	    add(thirdQuestionLabel);
+	    
+	    m_numberSpinner.setVisible(false);
+	    thirdQuestionLabel.setVisible(false);
+		
+//		if(selected){
+//			//ask the third question
+//			JLabel thirdQuestionLabel = new JLabel(thirdQuestion+"?");
+//			thirdQuestionLabel.setVisible(true);
+//			thirdQuestionLabel.setSize(350,20);
+//			thirdQuestionLabel.setLocation(125, 300);
+//			add(thirdQuestionLabel);
+//			//answer the third question
+//			//JFormattedTextField answerToThirdQuestion = new JFormattedTextField();
+//			//answerToThirdQuestion.setBounds(25, 330, 56, 20);
+//	        //add(answerToThirdQuestion);
+//	        //answerToThirdQuestion.setValue(new Double(10.0));
+//	        //String answer=answerToThirdQuestion.getText();
+//			final JSpinner m_numberSpinner;
+//		    SpinnerNumberModel m_numberSpinnerModel;
+//		    Double current = new Double(1.00);
+//		    Double min = new Double(0.00);
+//		    Double max = new Double(100.00);
+//		    Double step = new Double(1.00);
+//		    m_numberSpinnerModel = new SpinnerNumberModel(current, min, max, step);
+//		    m_numberSpinner = new JSpinner(m_numberSpinnerModel);
+//		    
+//		    m_numberSpinner.setSize(100,50);
+//		    m_numberSpinner.setLocation(500,300);
+//		    ((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).setPreferredSize(new Dimension(10,10));
+//		    ((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).getTextField().setEditable(false);
+//		    add(m_numberSpinner);
+//		   
+//		    
+//		    m_numberSpinner.addChangeListener(new ChangeListener()
+//		    {
+//	
+//				@Override
+//				public void stateChanged(ChangeEvent arg0) {
+//					// TODO Auto-generated method stub
+//					Double answer= (Double) (m_numberSpinner.getValue());
+//					
+//				    int temp=answer.intValue();
+//				    System.out.println("the value of the spinner is"+temp);
+//			        if(type=="bottle")
+//						Global.currentUser.getFootPrint().setNumberOfWaterBottles(temp);				
+//					if(type=="plants")
+//						Global.currentUser.getFootPrint().setNumberOfTimesWaterPlants(temp);
+//					if(type=="bathing")
+//						Global.currentUser.getFootPrint().setNumberOfWashes(temp);
+//					if(type=="dishes")
+//						Global.currentUser.getFootPrint().setNumberOfTimesDoesDishes(temp);
+//					if(type=="clothes")
+//						Global.currentUser.getFootPrint().setNumberOfLoadsOfClothes(temp);
+//				}
+//		    });
+//	    	
+//		}
 
         //we need to save this data, and error check to make sure that the numbers are responable
 	   
@@ -220,6 +284,80 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 	    waterBottle=currentUser.getFootPrint().getWaterBottle().getImage();
 	    bottle=waterBottle.getImage();
 	    g.drawImage(bottle, 600,20, null);
+	    
+	    addMoreQuestions();
+	}
+	
+	private void addMoreQuestions(){
+		
+		
+//		//ask the third question
+//		JLabel thirdQuestionLabel = new JLabel(thirdQuestion+"?");
+//		thirdQuestionLabel.setSize(350,20);
+//		thirdQuestionLabel.setLocation(125, 300);
+//
+//		//answer the third question
+//		//JFormattedTextField answerToThirdQuestion = new JFormattedTextField();
+//		//answerToThirdQuestion.setBounds(25, 330, 56, 20);
+//        //add(answerToThirdQuestion);
+//        //answerToThirdQuestion.setValue(new Double(10.0));
+//        //String answer=answerToThirdQuestion.getText();
+//		final JSpinner m_numberSpinner;
+//	    SpinnerNumberModel m_numberSpinnerModel;
+//	    Double current = new Double(1.00);
+//	    Double min = new Double(0.00);
+//	    Double max = new Double(100.00);
+//	    Double step = new Double(1.00);
+//	    m_numberSpinnerModel = new SpinnerNumberModel(current, min, max, step);
+//	    m_numberSpinner = new JSpinner(m_numberSpinnerModel);
+//	    
+//	    m_numberSpinner.setSize(100,50);
+//	    m_numberSpinner.setLocation(500,300);
+//	    ((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).setPreferredSize(new Dimension(10,10));
+//	    ((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).getTextField().setEditable(false);
+//	   
+//	    
+//	    m_numberSpinner.addChangeListener(new ChangeListener()
+//	    {
+//
+//			@Override
+//			public void stateChanged(ChangeEvent arg0) {
+//				// TODO Auto-generated method stub
+//				Double answer= (Double) (m_numberSpinner.getValue());
+//				
+//			    int temp=answer.intValue();
+//			    System.out.println("the value of the spinner is"+temp);
+//		        if(type=="bottle")
+//					Global.currentUser.getFootPrint().setNumberOfWaterBottles(temp);				
+//				if(type=="plants")
+//					Global.currentUser.getFootPrint().setNumberOfTimesWaterPlants(temp);
+//				if(type=="bathing")
+//					Global.currentUser.getFootPrint().setNumberOfWashes(temp);
+//				if(type=="dishes")
+//					Global.currentUser.getFootPrint().setNumberOfTimesDoesDishes(temp);
+//				if(type=="clothes")
+//					Global.currentUser.getFootPrint().setNumberOfLoadsOfClothes(temp);
+//			}
+//	    });
+//	    
+//	    add(m_numberSpinner);
+//	    add(thirdQuestionLabel);
+//	    
+//	    m_numberSpinner.setVisible(false);
+//	    thirdQuestionLabel.setVisible(false);
+	    
+		if(firstQuestionBox.isSelected() || secondQuestionBox.isSelected()){
+		    
+		    m_numberSpinner.setVisible(true);
+			thirdQuestionLabel.setVisible(true);
+	    	
+		}else if((!firstQuestionBox.isSelected())){
+			
+			m_numberSpinner.setVisible(false);
+			thirdQuestionLabel.setVisible(false);
+			
+		}
+		
 	}
 	
 	@Override
@@ -230,6 +368,7 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 
 		while (true) {
 				repaint();
+			    
 			timeDiff = System.currentTimeMillis() - beforeTime;
 			timeSleep = DELAY - timeDiff;
 
@@ -245,5 +384,13 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 
 			beforeTime = System.currentTimeMillis();
 		}
+	}
+	@Override
+	public User passOnUser() {
+		return currentUser;
+	}
+	@Override
+	public void receiveUser(User setCurrentUser) {
+		currentUser=setCurrentUser;		
 	}
 }

@@ -29,6 +29,7 @@ public class ScreenWithFoodQuestions extends JPanel implements Screen{
 	private String firstQuestion;
 	private String secondQuestion;
 	private Image bkgd;
+	private User currentUser;
 	
 	public ScreenWithFoodQuestions(String firstQuestion1)
 	{
@@ -83,6 +84,17 @@ public class ScreenWithFoodQuestions extends JPanel implements Screen{
 		//draw the background image
 		g.drawImage(bkgd, 0,0, null);
 
+		}
+
+		@Override
+		public User passOnUser() {
+			return currentUser;
+		}
+
+		@Override
+		public void receiveUser(User setCurrentUser) {
+			currentUser=setCurrentUser;
+			
 		}
 
 }

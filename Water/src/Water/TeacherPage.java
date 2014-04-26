@@ -66,4 +66,16 @@ public class TeacherPage extends JPanel implements Screen{
 			g.drawString(aboutText, 10, 200); 
 	    	
 	    }
+
+	@Override
+	public User passOnUser() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void receiveUser(User currentUser) {
+		// TODO Auto-generated method stub
+		
+	}
 }

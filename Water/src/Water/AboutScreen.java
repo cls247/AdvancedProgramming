@@ -65,25 +65,6 @@ public class AboutScreen extends JPanel implements Screen {
 	@Override
 	public void init()
 	{
-		/*
-		switchScreens=new Button("NEXT SCREEN");
-		
-		switchScreens.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				AllTipScreen tips=new AllTipScreen();
-				tips.setVisible(true);
-				setVisible(false);
-				
-				
-			}
-			
-		});
-		
-		add(switchScreens, BorderLayout.CENTER);
-		validate();
-		*/
 		
 		try{
 
@@ -122,13 +103,16 @@ public void paintComponent(Graphics g){
 			
 		for (String line : aboutText.split("\n"))
             g.drawString(line, x, y += g.getFontMetrics().getHeight());
+
+	}
+	@Override
+	public User passOnUser() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void receiveUser(User currentUser) {
+		// TODO Auto-generated method stub
 		
-
-
-		
-//		g.drawString(aboutText, 10, 200); 
-//		
-//		}
-
 	}
 }

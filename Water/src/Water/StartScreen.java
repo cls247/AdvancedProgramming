@@ -28,18 +28,20 @@ import javax.swing.JTextField;
  * @author Sand
  *
  */
-class StartScreen extends JPanel
+class StartScreen extends JPanel implements Screen
 {
 	private String welcomeText = "Welcome to Help2Out, a water footprint calculator!";
 
-	Image bkgd;
-
+	private Image bkgd;
+	private User currentUser;
 
 	public StartScreen()
 	{
 		init();
 	}
-	private void init() 
+	
+	@Override
+	public void init() 
 	{   
 		
 		try{	
@@ -68,6 +70,14 @@ class StartScreen extends JPanel
 		g.setFont(new Font("Helvetica Neue", Font.PLAIN, fontSize)); 
 		g.drawString(welcomeText, 10, 200); 
 		}
+	@Override
+	public User passOnUser() {
+		return currentUser;
+	}
+	@Override
+	public void receiveUser(User setCurrentUser) {
+		currentUser=setCurrentUser;
+	}
 
 	}
 

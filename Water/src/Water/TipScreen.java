@@ -1,15 +1,19 @@
 package Water;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.TextArea;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -25,28 +29,25 @@ import javax.swing.JTextField;
  */
 public class TipScreen extends JPanel implements Global, Screen, Runnable{
 	
-	FootPrint aFootPrint = currentUser.getFootPrint();
-	double waterUsed;
-	JTextArea tip=new JTextArea();
-	Tips waterTip;
+	private double waterUsed;
+	private JTextArea tip=new JTextArea();
 	private Image bkgd;
-	
+	private User currentUser=new User();
 	private final int DELAY = 20;
 	private Thread thread;
 	
 	public TipScreen()
 	{
 		init();
-	
-		updateTotal();
 		setLayout(null);
-		tip.setBounds(150, 150, 200, 300);
+		updateTotal();
+		tip.setBounds(150, 150, 400, 400);
 		add(tip);
 		
 	}
 	public void updateTotal()
 	{
-		waterUsed=aFootPrint.getTotalAmountOfWater();
+		waterUsed=currentUser.getFootPrint().getTotalAmountOfWater();
 		calculateFootPrint();
 		
 	}
@@ -63,13 +64,14 @@ public class TipScreen extends JPanel implements Global, Screen, Runnable{
 			setMinimumSize(size);
 			setMaximumSize(size);
 			setSize(size);
-			setLayout(null);
+			//setLayout(null);
 			
 		}catch(IOException error){
 
 
 		}
-		setLayout(new GridLayout(2, 2));
+		
+		setLayout(new FlowLayout());
 		thread = new Thread(this);
 		thread.start();
 	}
@@ -81,11 +83,13 @@ public class TipScreen extends JPanel implements Global, Screen, Runnable{
 			
 			tip.setText("You used "+ String.valueOf(waterUsed) +" liters of water. \nYou used a regular amount of water."+
 			"In addition, \n"+ currentUser.getFootPrint().Tips());
+			tip.setWrapStyleWord(true);
 			
 		}else{
 			
 			tip.setText("You used an abnormal amount of water."+
 			"In addition, \n" +currentUser.getFootPrint().Tips());
+			tip.setWrapStyleWord(true);
 			
 		}
 		
@@ -127,6 +131,15 @@ public class TipScreen extends JPanel implements Global, Screen, Runnable{
 
 			beforeTime = System.currentTimeMillis();
 		}
+		
+	}
+	@Override
+	public User passOnUser() {
+		return currentUser;
+	}
+	@Override
+	public void receiveUser(User setCurrentUser) {
+		currentUser=setCurrentUser;
 		
 	}
 

@@ -128,9 +128,9 @@ public class FootPrint {
 		servingOfEggs+=setServingOfEggs;
 		updateTotalAmountOfWater();
 	}
-	public void setServingOfVeges(int setServingOfVeges)
+	public void setServingOfVeggies(int setServingOfVeggies)
 	{
-		servingOfVeges+=setServingOfVeges;
+		servingOfVeges+=setServingOfVeggies;
 		updateTotalAmountOfWater();
 	}
 	public void setServingOfLentils(int setServingOfLentils)

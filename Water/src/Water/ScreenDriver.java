@@ -27,19 +27,22 @@ import javax.swing.SwingUtilities;
  */
 public class ScreenDriver
 {
-	private static int indexOfCardLayout=-1;
-	private static int numberOfCards=4;
-	private static final String CARD_JRADIOBUTTON = "Card JRadioButton";
+	//create all the screens that are going to be tabs
+	//from the first page
+	
 	private static CardDriver welcomeScreen;
-	static TeacherPage teacherScreen;
-	AboutScreen aboutScreen;
-	static InteractivePage interact;
-	static AllTipScreen tips;
+	private static TeacherPage teacherScreen;
+	private static AboutScreen aboutScreen;
+	private static InteractivePage interact;
+	private static AllTipScreen tips;
+	
+	/*
 	static ScreenWithTwoQuestions chooseWaterBottle;
 	static ScreenWithTwoQuestions waterPlants;
 	static ScreenWithTwoQuestions washDishes;
 	static ScreenWithTwoQuestions bathingWin;
 	static ScreenWithTwoQuestions washClothes;
+	*/
 
 	
 	public void addComponentToPane(final Container pane){
@@ -131,9 +134,7 @@ public class ScreenDriver
 	 */
 	private static void createAndShowGUI()
 	{
-
-
-		//here you make the frame to contain all the tabs
+    	//here you make the frame to contain all the tabs
 		final JFrame frame = new JFrame("Water");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
