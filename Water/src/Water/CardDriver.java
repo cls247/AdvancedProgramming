@@ -87,21 +87,25 @@ class CardDriver extends JPanel
 		buttonPanel.setFocusable(true);
 
 		//add a button to go forward
-		previousButton = new JButton("PREVIOUS");
-		previousButton.setBackground(Color.BLACK);
-		previousButton.setForeground(Color.BLACK);
-		previousButton.setFocusable(true);
+		makePreviousButton();
 
-		nextButton = new JButton("NEXT");
-		nextButton.setBackground(Color.RED);
-		nextButton.setForeground(Color.BLACK);
-		nextButton.setFocusable(true);
+		makeNextButton();
 
 		buttonPanel.add(previousButton);
 		buttonPanel.add(nextButton);
     
 		pages = new JPanel(new CardLayout());
 
+		makeScreens();
+
+		bigPane.add(pages, BorderLayout.CENTER);
+		bigPane.add(buttonPanel, BorderLayout.PAGE_END);
+
+		add(bigPane);
+
+	}
+
+	private void makeScreens() {
 		StartScreen startScreen = new StartScreen();
 		startScreen.receiveUser(currentUser);
 		pages.add(startScreen,"start");
@@ -150,6 +154,47 @@ class CardDriver extends JPanel
 
 		allTheScreens.add((Screen) finalTipScreen);
 		allTheScreens.add((Screen) interactive);
+	}
+
+	private void makeNextButton() {
+		nextButton = new JButton("NEXT");
+		nextButton.setBackground(Color.RED);
+		nextButton.setForeground(Color.BLACK);
+		nextButton.setFocusable(true);
+		
+		//this flips to the next card
+				nextButton.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent ae)
+					{
+						if(indexOfCardLayout+1<=numberOfCards)
+						{
+
+							indexOfCardLayout++;
+							System.out.println("is the next button wokring");
+							//frame.setVisible(false);
+							pages.setVisible(true);
+							CardLayout cardLayout = (CardLayout) pages.getLayout();
+							cardLayout.next(pages);  
+							moveUserForward(indexOfCardLayout);
+						}
+						if(indexOfCardLayout==numberOfCards)
+							nextButton.setVisible(false);
+						else
+							nextButton.setVisible(true);
+						if(indexOfCardLayout!=0)
+							previousButton.setVisible(true);
+						else
+							previousButton.setVisible(false);
+					}
+				});
+	}
+
+	private void makePreviousButton() {
+		previousButton = new JButton("PREVIOUS");
+		previousButton.setBackground(Color.BLACK);
+		previousButton.setForeground(Color.BLACK);
+		previousButton.setFocusable(true);
 		previousButton.setVisible(false);
 
 		//this moves backward through the card layout
@@ -177,38 +222,6 @@ class CardDriver extends JPanel
 					previousButton.setVisible(false);
 			}
 		});
-
-		//this flips to the next card
-		nextButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent ae)
-			{
-				if(indexOfCardLayout+1<=numberOfCards)
-				{
-
-					indexOfCardLayout++;
-					System.out.println("is the next button wokring");
-					//frame.setVisible(false);
-					pages.setVisible(true);
-					CardLayout cardLayout = (CardLayout) pages.getLayout();
-					cardLayout.next(pages);  
-					moveUserForward(indexOfCardLayout);
-				}
-				if(indexOfCardLayout==numberOfCards)
-					nextButton.setVisible(false);
-				else
-					nextButton.setVisible(true);
-				if(indexOfCardLayout!=0)
-					previousButton.setVisible(true);
-				else
-					previousButton.setVisible(false);
-			}
-		});
-		bigPane.add(pages, BorderLayout.CENTER);
-		bigPane.add(buttonPanel, BorderLayout.PAGE_END);
-
-		add(bigPane);
-
 	}
 	
 	
@@ -221,8 +234,6 @@ class CardDriver extends JPanel
 	 * @param index is the index of the screen that is being updated
 	 */
 	public void moveUserForward(int index){
-
-
 		int currentScreenIndex = index;
 		int nextScreenIndex = index+1;
 		//get the current screen and the next screen and update

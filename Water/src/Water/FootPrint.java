@@ -419,14 +419,7 @@ public class FootPrint {
 		{
 			totalLitersAmountOfWater+=literPerDishesByHand*numberOfTimesDoesDishes;
 		}
-		totalLitersAmountOfWater+=servingOfBeef*literPerServingOfBeef;
-		totalLitersAmountOfWater+= servingOfChicken*literPerServingOfChicken;
-		totalLitersAmountOfWater+=servingOfLamb*literPerServingOfLamb;
-		totalLitersAmountOfWater+=servingOfCorn*literPerServingOfCorn;
-		totalLitersAmountOfWater+=servingOfVeges*literPerServingOfVeggies;
-		totalLitersAmountOfWater+=servingOfLentils*literPerServingOfLentils;
-		totalLitersAmountOfWater+=servingOfEggs*literPerServingOfEggs;
-		totalLitersAmountOfWater+=servingOfPasta*literPerServingOfPasta;
+		calculateWaterForFood();
 
 		if(takesShowers)
 		{
@@ -456,6 +449,18 @@ public class FootPrint {
 		waterBottle.setWaterBottle(totalLitersAmountOfWater);
 
 	}
+
+	private void calculateWaterForFood() {
+		totalLitersAmountOfWater+=servingOfBeef*literPerServingOfBeef;
+		totalLitersAmountOfWater+= servingOfChicken*literPerServingOfChicken;
+		totalLitersAmountOfWater+=servingOfLamb*literPerServingOfLamb;
+		totalLitersAmountOfWater+=servingOfCorn*literPerServingOfCorn;
+		totalLitersAmountOfWater+=servingOfVeges*literPerServingOfVeggies;
+		totalLitersAmountOfWater+=servingOfLentils*literPerServingOfLentils;
+		totalLitersAmountOfWater+=servingOfEggs*literPerServingOfEggs;
+		totalLitersAmountOfWater+=servingOfPasta*literPerServingOfPasta;
+	}
+	
 	public Bottle getWaterBottle()
 	{
 		return waterBottle;
