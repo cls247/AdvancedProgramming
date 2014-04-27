@@ -107,6 +107,10 @@ public class FootPrint {
 		numberOfWaterBottles=numberOfWaterBottles1;
 		updateTotalAmountOfWater();
 	}	
+	
+	public int getNumberOfWaterBottles(){
+		return numberOfWaterBottles;
+	}
 
 	/**
 	 * setUsesDishWasher()
@@ -148,6 +152,10 @@ public class FootPrint {
 		numberOfTimesDoesDishes=setNumberOfTimesDoesDishes;
 		updateTotalAmountOfWater();
 	}
+	
+	public int getNumberOfTimesDoesDishes(){
+		return numberOfTimesDoesDishes;
+	}
 
 	/**setServingOfBeef(int setServingOfBeef)
 	 * 
@@ -158,8 +166,12 @@ public class FootPrint {
 	 */
 	public void setServingOfBeef(int setServingOfBeef)
 	{
-		servingOfBeef+=setServingOfBeef;
+		servingOfBeef=setServingOfBeef;
 		updateTotalAmountOfWater();
+	}
+	
+	public int getServingOfBeef(){
+		return servingOfBeef;
 	}
 
 	/**
@@ -172,8 +184,12 @@ public class FootPrint {
 	 */
 	public void setServingOfChicken(int setServingOfChicken )
 	{
-		servingOfChicken+=setServingOfChicken;
+		servingOfChicken=setServingOfChicken;
 		updateTotalAmountOfWater();
+	}
+	
+	public int getServingOfChicken(){
+		return servingOfChicken;
 	}
 
 	/**
@@ -186,8 +202,12 @@ public class FootPrint {
 	 */
 	public void setServingOfLamb(int setServingOfLamb)
 	{
-		servingOfLamb+=setServingOfLamb;
+		servingOfLamb=setServingOfLamb;
 		updateTotalAmountOfWater();
+	}
+	
+	public int getServingOfLamb(){
+		return servingOfLamb;
 	}
 
 	/**
@@ -200,10 +220,13 @@ public class FootPrint {
 	 */
 	public void setServingOfEggs(int setServingOfEggs)
 	{
-		servingOfEggs+=setServingOfEggs;
+		servingOfEggs=setServingOfEggs;
 		updateTotalAmountOfWater();
 	}
 
+	public int getServingOfEggs(){
+		return servingOfEggs;
+	}
 	/**
 	 * setServingOfVeggies(int setServingOfVeggies)
 	 * 
@@ -214,8 +237,12 @@ public class FootPrint {
 	 */
 	public void setServingOfVeggies(int setServingOfVeggies)
 	{
-		servingOfVeges+=setServingOfVeggies;
+		servingOfVeges=setServingOfVeggies;
 		updateTotalAmountOfWater();
+	}
+	
+	public int getServingsOfVeggies(){
+		return servingOfVeges;
 	}
 
 	/**
@@ -229,11 +256,13 @@ public class FootPrint {
 	 */
 	public void setServingOfLentils(int setServingOfLentils)
 	{
-		servingOfLentils+=setServingOfLentils;
+		servingOfLentils=setServingOfLentils;
 		updateTotalAmountOfWater();
 	}
 
-
+	public int getServingOfLentils(){
+		return servingOfLentils;
+	}
 	/**
 	 *  setServingOfPasta(int setServingOfPasta)
 	 * 
@@ -245,10 +274,14 @@ public class FootPrint {
 	 */
 	public void setServingOfPasta(int setServingOfPasta)
 	{
-		servingOfPasta+=setServingOfPasta;
+		servingOfPasta=setServingOfPasta;
 		updateTotalAmountOfWater();
 	}
 
+	public int getServingOfPasta(){
+		return servingOfPasta;
+	}
+	
 	/**
 	 *  setServingOfCorn(int setServingOfCorn)
 	 * 
@@ -260,10 +293,13 @@ public class FootPrint {
 	 */
 	public void setServingOfCorn(int setServingOfCorn)
 	{
-		servingOfCorn+=setServingOfCorn;
+		servingOfCorn=setServingOfCorn;
 		updateTotalAmountOfWater();
 	}
 
+	public int getServingOfCorn(){
+		return servingOfCorn;
+	}
 	/**
 	 *  setTakesShowers()
 	 * 
@@ -309,6 +345,10 @@ public class FootPrint {
 		numberOfWashes=setNumberOfWashes;
 		updateTotalAmountOfWater();
 	}
+	
+	public int getNumberOfWashes(){
+		return numberOfWashes;
+	}
 
 	/**
 	 * setUsesWashingMachine()
@@ -353,6 +393,11 @@ public class FootPrint {
 		updateTotalAmountOfWater();
 	}
 	
+	public int getNumberOfLoadsOfClothes(){
+		return numberOfLoadsOfClothes;
+	}
+	
+	
 	/**
 	 * setUsesSprinklers()
 	 * 
@@ -389,6 +434,10 @@ public class FootPrint {
 		numberOfTimesWaterPlants=setNumberOfTimesWaterPlants;
 		updateTotalAmountOfWater();
 	}
+	
+	public int getNumberOfTimesWaterPlants(){
+		return numberOfTimesWaterPlants;
+	}
 
 	/**
 	 * updateTotalAmountOfWater()
@@ -408,9 +457,12 @@ public class FootPrint {
 		//is entered so it would be like we are
 		//keeping a running total
 		//total=(amount of beef)*(how much water in beef) etc etc etc	
-		
+
+		System.out.println("liter er water boottle"+literPerWaterBottle);
+		System.out.println("number of water bottle"+numberOfWaterBottles);
+		System.out.println("totalLitersofWater"+totalLitersAmountOfWater);
 		totalLitersAmountOfWater= (literPerWaterBottle*numberOfWaterBottles);
-		
+		System.out.println("totalLitersofWater"+totalLitersAmountOfWater);
 		if(usesDishWasher)
 		{
 			totalLitersAmountOfWater+=literPerDishWater*numberOfTimesDoesDishes;
@@ -419,7 +471,7 @@ public class FootPrint {
 		{
 			totalLitersAmountOfWater+=literPerDishesByHand*numberOfTimesDoesDishes;
 		}
-		calculateWaterForFood();
+		calcualteWaterForFood();
 
 		if(takesShowers)
 		{
@@ -450,17 +502,16 @@ public class FootPrint {
 
 	}
 
-	private void calculateWaterForFood() {
+	private void calcualteWaterForFood() {
 		totalLitersAmountOfWater+=servingOfBeef*literPerServingOfBeef;
 		totalLitersAmountOfWater+= servingOfChicken*literPerServingOfChicken;
 		totalLitersAmountOfWater+=servingOfLamb*literPerServingOfLamb;
-		totalLitersAmountOfWater+=servingOfCorn*literPerServingOfCorn;
 		totalLitersAmountOfWater+=servingOfVeges*literPerServingOfVeggies;
 		totalLitersAmountOfWater+=servingOfLentils*literPerServingOfLentils;
-		totalLitersAmountOfWater+=servingOfEggs*literPerServingOfEggs;
 		totalLitersAmountOfWater+=servingOfPasta*literPerServingOfPasta;
+		totalLitersAmountOfWater+=servingOfEggs*literPerServingOfEggs;
+		totalLitersAmountOfWater+=servingOfCorn*literPerServingOfCorn;
 	}
-	
 	public Bottle getWaterBottle()
 	{
 		return waterBottle;
@@ -468,6 +519,7 @@ public class FootPrint {
 
 	public double getTotalAmountOfWater()
 	{
+		System.out.println("*********Getting Water*********" + totalLitersAmountOfWater);
 		return totalLitersAmountOfWater;
 	}
 
@@ -476,7 +528,50 @@ public class FootPrint {
 		return waterBottle;
 
 	}
+	
+	public void setUsesRecyclableWaterBottleUnclicked(){
+		usesRecyclableWaterBottle = false;
+	}
+	
+	public void setUsesPlasticWaterBottleUnclicked(){
+		usesPlasticWaterBottle = false;
+	}
 
+	public void setUsesDishWasherUnclicked(){
+		usesDishWasher=false;
+	}
+
+	public void setDoesDishesByHandUnclicked(){
+		doesDishedByHand=false;
+	}
+
+	public void setShowersUnclicked(){
+		takesShowers= false;
+	}
+	
+	public void setBathsUnclicked(){
+		takesBaths = false;
+	}
+	
+	public void setUsesWashingMachineUnclicked(){
+		usesWashingMachine=false;
+	}
+	
+	public void setHandWashesClothesUnclicked(){
+		handWashesClothes=false;
+	}
+	
+	public void setUsesSprinklersUnclicked(){
+		usesSprinklers = false;
+	}
+	
+	public void setHandWatersUnclicked(){
+		handWaters=false;
+	}
+
+	public void refreshTotal(){
+		updateTotalAmountOfWater();
+	}
 	/**
 	 * Tips()
 	 * 
@@ -491,25 +586,43 @@ public class FootPrint {
 	public String Tips()
 	{
 		String tipsToReturn="";
+		tipsToReturn = setTips(tipsToReturn);
+		return tipsToReturn;
+	}
+
+private String setTips(String tipsToReturn) {
+		
 		if(usesPlasticWaterBottle)
-			tipsToReturn+="You should try using Recycleable Water Bottles. \n";
+			tipsToReturn+="You should try using Recycleable Water Bottles. \n" ;
 		if(doesDishedByHand)
 			tipsToReturn+="You should consider using a dishwasher to wash you dishes.\n" +
-					"It actually uses less water";
+					"It actually uses less water" +"Make sure you turn of the water when not using it. \n"
+					+"Make sure no sinks or water sources have leaks. \n" +"Scrap excess food off of dishes instead of rinsing them before putting them in dish washer \n"
+					+ "\nOr at least try to consolidate your dishwashing\n" +"If washing dishes by hand, don't let the water run. Fill a basin with water instead.";
 		if(takesBaths)
-			tipsToReturn+="You shoudl take showers instead of baths. They use less water. \n";
+			tipsToReturn+="You should take showers instead of baths. They use less water. \n"
+					+ "Or at least try to make your showers quick \n" 		
+					+"Don't fill bathtubs to the tops with water to reduce splashing\n";
 		if (servingOfLamb+servingOfChicken+servingOfBeef>=5)
-			return "You should try decreasing the amount of Meat you eat. \n"
-			+"Vegetables use less water to produce. They are better for the "
-			+ "environment and for you. \n";
+			tipsToReturn += "You should try decreasing the amount of Meat you eat. \n"
+					+"Vegetables use less water to produce. They are better for the "
+					+ "environment and for you. \n";
 		if(numberOfWashes>7 && takesShowers)
 			tipsToReturn+="You should shower less times per week. It will conserver water\n";
 		else if(numberOfWashes>7)
 			tipsToReturn+="You should shower less times per week. It will conserver water\n";
 		if(usesWashingMachine || usesDishWasher)
-			tipsToReturn+="You should be sure that you are using water efficient appliances.";
+			tipsToReturn+="You should be sure that you are using water efficient appliances.\n" 		
+					+"Washing dark colored clothes in cold water helps to save water \n";
+		if(usesSprinklers){
+			tipsToReturn += "Water dry spots on your lawn by hand instead of using a sprinkler system. \n" 	
+					+"Only water your lawn when it is absolutely necessary. \n" 		
+					+"Collect rain water and use it to water lawns and garden\n"
+					+"Don't water your lawn on windy days\n"
+					+"Lawns can go a lot longer without water than you thing.\n";
+		}
+		tipsToReturn += "Use water calculators like this one to track your water each month!\n";
 		return tipsToReturn;
-
 	}
 
 

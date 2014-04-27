@@ -74,20 +74,7 @@ public class AboutScreen extends JPanel implements Screen {
 	public void init()
 	{
 
-		try{
-
-			bkgd = ImageIO.read(new File("background.jpg"));
-			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
-			setPreferredSize(size);
-			setMinimumSize(size);
-			setMaximumSize(size);
-			setSize(size);
-			setLayout(null);
-
-		}catch(IOException error){
-
-
-		}	
+	 drawBackground();
 	}
 
 	/**
@@ -132,6 +119,32 @@ public class AboutScreen extends JPanel implements Screen {
 	public void receiveUser(User setCurrentUser) {
 		currentUser=setCurrentUser;
 
+	}
+
+	@Override
+	public void drawBackground() {
+		try {
+
+			// process the image file
+			bkgd = ImageIO.read(new File("background.jpg"));
+
+			// set the size of the frame based on the size of the image so that
+			// the entire background is covered
+			Dimension size = new Dimension(bkgd.getWidth(null),
+					bkgd.getHeight(null));
+
+			// set all of the dimensions using the size
+			setPreferredSize(size);
+			setMinimumSize(size);
+			setMaximumSize(size);
+			setSize(size);
+			setLayout(null);
+
+			// if there is an error with the file, throw and IOException
+		} catch (IOException error) {
+			System.out.println("Error in drawBackground: image file failed to load!");
+		}
+		
 	}
 
 }

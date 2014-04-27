@@ -105,6 +105,13 @@ class CardDriver extends JPanel
 
 	}
 
+	/**
+	 * makeScreens()
+	 * 
+	 * This method makes all the screen to be flipped 
+	 * through throughout the CardDriver.
+	 */
+	
 	private void makeScreens() {
 		StartScreen startScreen = new StartScreen();
 		startScreen.receiveUser(currentUser);
@@ -156,6 +163,13 @@ class CardDriver extends JPanel
 		allTheScreens.add((Screen) interactive);
 	}
 
+	/**
+	 * makeNextButton()
+	 * 
+	 * This method makes the "next" buttons and writes
+	 * the code for what it does when it is clicked.
+	 * 
+	 */
 	private void makeNextButton() {
 		nextButton = new JButton("NEXT");
 		nextButton.setBackground(Color.RED);
@@ -189,6 +203,15 @@ class CardDriver extends JPanel
 					}
 				});
 	}
+	
+	/**
+	 * makePreviousButton()
+	 * 
+	 * This method makes the "previous" button and
+	 * has the code for what occurs when the button
+	 * is pressed.
+	 * 
+	 */
 
 	private void makePreviousButton() {
 		previousButton = new JButton("PREVIOUS");
@@ -244,6 +267,15 @@ class CardDriver extends JPanel
 		nextScreen.receiveUser(userToPass);
 	}
 
+	
+	/**
+	 * moveUserBackward(int index)
+	 * 
+	 * This method is used to move the User from one screen
+	 * to the next screen moving in a backward direction.
+	 * 
+	 * @param index is the index of the screen that is being updated
+	 */
 	public void moveUserBackward(int index){
 		int currentScreenIndex = index;
 		int previousScreenIndex = index-1;

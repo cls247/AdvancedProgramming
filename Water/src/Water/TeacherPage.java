@@ -26,7 +26,20 @@ public class TeacherPage extends JPanel implements Screen{
 	private static final String CARD_JBUTTON =  "Card JButton";
     private ActionListener action; 
     private Image bkgd;
-    private String aboutText="This is where we would write how a teacher would use this calculator.";
+    private String aboutText=
+    		" Teachers: You can use this program to educate your students"
+			+ "\n about the dangers of over consuming water and some common"
+			+ "\n habits that use up the most water. Many people, especially"
+			+ "\n kids, are unaware of how their use of water can affect the"
+			+ "\n environment. Even worse, many are unaware about how the things"
+			+ "\n they do and the things that they eat affect their water footprint,"
+			+ "\n and by how much. By educating kids in the classroom about water"
+			+ "\n consumption, they can learn new habits to take home with them that "
+			+ "\n can help change the way they and their families consume water. By "
+			+ "\n teaching kids good habits early on, we can help shape the way the"
+			+ "\n next treats the environment. Teachers have an amazing ability to "
+			+ "\n influence the students they interact with, and as such you, as a teacher,"
+			+ "\n can use this program to teach, lead, and inspire a new generation.";
 	
 	public TeacherPage()
 	{
@@ -40,18 +53,7 @@ public class TeacherPage extends JPanel implements Screen{
 		setLayout(new GridLayout(2, 2));
 		
 		//Just write something and then put it here
-		try{
-			//set the background image
-			bkgd = ImageIO.read(new File("background.jpg"));
-			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
-			setPreferredSize(size);
-			setMinimumSize(size);
-			setMaximumSize(size);
-			setSize(size);
-			setLayout(null);
-			
-		}catch(IOException error){
-		}
+		drawBackground();
 
 	}
 	
@@ -63,8 +65,13 @@ public class TeacherPage extends JPanel implements Screen{
 			Dimension d = this.getPreferredSize(); 
 			int fontSize = 20; 
 			g.setFont(new Font("Helvetica Neue", Font.PLAIN, fontSize)); 
-			g.drawString(aboutText, 10, 200); 
-	    	
+			
+			int x = 110;
+			int y = 50;
+
+			for (String line : aboutText.split("\n"))
+				g.drawString(line, x, y += g.getFontMetrics().getHeight());
+
 	    }
 
 	@Override
@@ -76,6 +83,32 @@ public class TeacherPage extends JPanel implements Screen{
 	@Override
 	public void receiveUser(User currentUser) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void drawBackground() {
+		try {
+
+			// process the image file
+			bkgd = ImageIO.read(new File("background.jpg"));
+
+			// set the size of the frame based on the size of the image so that
+			// the entire background is covered
+			Dimension size = new Dimension(bkgd.getWidth(null),
+					bkgd.getHeight(null));
+
+			// set all of the dimensions using the size
+			setPreferredSize(size);
+			setMinimumSize(size);
+			setMaximumSize(size);
+			setSize(size);
+			setLayout(null);
+
+			// if there is an error with the file, throw and IOException
+		} catch (IOException error) {
+			System.out.println("Error in drawBackground: image file failed to load!");
+		}
 		
 	}
 }

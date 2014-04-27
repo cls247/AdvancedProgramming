@@ -23,9 +23,9 @@ import javax.swing.JScrollPane;
 /**
  * This should be the template for the page that has dragging features. This
  * will be used for the grains, meats and fruits and vegetables.
- *
+ * 
  * @author Sand
- *
+ * 
  */
 
 public class FoodServingScreen extends JPanel implements Runnable, Screen {
@@ -42,15 +42,15 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 	private JPanel foodButtonPanel = new JPanel();
 	private JScrollPane foodScrollPane = new JScrollPane(bottomPanel);
 
-	private final int ROWS = 7;
-	private final int COLUMNS = 7;
-	private final int BUTTON_WIDTH = 50;
-	private final int BUTTON_HEIGHT = 50;
+	private final int ROWS = 8;
+	private final int COLUMNS = 8;
+	private final int BUTTON_WIDTH = 95;
+	private final int BUTTON_HEIGHT = 95;
 	private ArrayList<JButton> buttonsOnBottomPanel = new ArrayList<JButton>();
 
-	private final ImageIcon chickenIcon = new ImageIcon("smallChicken.jpg");
-	private final ImageIcon lambIcon = new ImageIcon("lamb.jpeg");
-	private final ImageIcon beefIcon = new ImageIcon("cow.jpg");
+	private final ImageIcon chickenIcon = new ImageIcon("chicken.jpg");
+	private final ImageIcon lambIcon = new ImageIcon("lamb.jpg");
+	private final ImageIcon beefIcon = new ImageIcon("beef.jpg");
 	private final ImageIcon eggIcon = new ImageIcon("egg.jpg");
 	private final ImageIcon cornIcon = new ImageIcon("corn.jpg");
 	private final ImageIcon lentilIcon = new ImageIcon("lentils.jpg");
@@ -75,11 +75,11 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 	private int pastaServings = 0;
 	private int veggieServings = 0;
 
-	private User currentUser=new User();
+	private User currentUser = new User();
 
 	/**
 	 * ScreenWithDrag()
-	 *
+	 * 
 	 * Constructor that calls the init() function to initialize the screen and
 	 * its various components
 	 */
@@ -90,18 +90,18 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
 	/**
 	 * init()
-	 *
+	 * 
 	 * This method initialized the screen and its components. It calls functions
 	 * that initialize the background image, set the images of the buttons,
 	 * places them on the screen in their specific positions, and adds the two
 	 * different type of listeners.
-	 *
+	 * 
 	 */
 	public void init() {
 		// set the basic elements of the frame
-		// setBkgd() will paint the background image on the secreen
+		// setBkgd() will paint the background image on the screen
 		setPreferredSize(new Dimension(800, 600));
-		setBkgd();
+		drawBackground();
 
 		{
 			addNotify();
@@ -127,9 +127,8 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 			add(foodScrollPane);
 
 			final ActionListener bottomButtonListener = makeBottomButton();
-
 			final ActionListener topButtonListener = makeTopButton(bottomButtonListener);
-
+			
 			// add the listeners to every button
 			addAllListeners(topButtonListener);
 
@@ -281,50 +280,13 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 		};
 		return bottomButtonListener;
 	}
-
-	/**
-	 * setBkgd()
-	 *
-	 * This method created an image from an image file to set the background of
-	 * the frame so that it can be repainted every time. The other size
-	 * dimensions are set based on the size of the image so covered the entire
-	 * frame
-	 *
-	 * @exception error
-	 *                - if the file is not found, throws an IOException
-	 */
-	private void setBkgd() {
-		try {
-
-			// process the image file
-			bkgd = ImageIO.read(new File("background.jpg"));
-
-			// set the size of the frame based on the size of the image so that
-			// the entire background is covered
-			Dimension size = new Dimension(bkgd.getWidth(null),
-					bkgd.getHeight(null));
-
-			// set all of the dimensions using the size
-			setPreferredSize(size);
-			setMinimumSize(size);
-			setMaximumSize(size);
-			setSize(size);
-			setLayout(null);
-
-			// if there is an error with the file, throw and IOException
-		} catch (IOException error) {
-			System.out.println("Error in setBkgd: image file failed to load!");
-		}
-
-	}
-
 	/**
 	 * addAllListeners()
-	 *
+	 * 
 	 * This method takes in an ActionListener as a parameter to add it to each
 	 * of the buttons so that when they are clicked they can be added to the
 	 * bottom panel
-	 *
+	 * 
 	 * @param topButtonListener
 	 *            - listener that adds the selected button to the bottom panel
 	 */
@@ -342,7 +304,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
 	/**
 	 * initBottomPanel()
-	 *
+	 * 
 	 * Initializes the bottomPanel by setting its color, dimensions, visibility,
 	 * etc. The foodScrollPane, which the bottom panel is contained in, is also
 	 * initialized and the dimensions are set so that the user is able to scroll
@@ -361,9 +323,9 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
 		// ensures that the scrollbars will always be visible
 		foodScrollPane
-		.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		foodScrollPane
-		.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 		foodScrollPane.setPreferredSize(new Dimension(10, 1000));
 		bottomPanel.setOpaque(false);
@@ -372,7 +334,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
 	/**
 	 * initTopPanel()
-	 *
+	 * 
 	 * Initializes the top panel by setting the layoutManager and adding the
 	 * text at the top that instructs the user what to do
 	 */
@@ -395,7 +357,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
 	/**
 	 * initButtonPanel()
-	 *
+	 * 
 	 * Initialized the buttonPanel that contains the 7 food buttons. They are
 	 * placed in this panel so that their locations can be set and displayed
 	 * neatly within the button panel (locations set in initButtons().
@@ -422,7 +384,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
 	/**
 	 * initButtons()
-	 *
+	 * 
 	 * Initializes the icons and bounds of each button so that when they are
 	 * later added to the screen they have an icon and are neatly aligned
 	 */
@@ -432,41 +394,41 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 		// incrementing the
 		// x and y cordinates accordingly
 		cowButton.setIcon(beefIcon);
-		cowButton.setBounds(20, 135, BUTTON_WIDTH, BUTTON_HEIGHT);
+		cowButton.setBounds(120, 40, BUTTON_WIDTH, BUTTON_HEIGHT);
 
 		lambButton.setIcon(lambIcon);
-		lambButton.setBounds(20 + BUTTON_WIDTH, 135, BUTTON_WIDTH,
+		lambButton.setBounds(120 + BUTTON_WIDTH, 40, BUTTON_WIDTH,
 				BUTTON_HEIGHT);
 
 		chickenButton.setIcon(chickenIcon);
-		chickenButton.setBounds(20 + BUTTON_WIDTH * 2, 135, BUTTON_WIDTH,
+		chickenButton.setBounds(120 + BUTTON_WIDTH * 2, 40, BUTTON_WIDTH,
 				BUTTON_HEIGHT);
 
 		eggButton.setIcon(eggIcon);
-		eggButton.setBounds(20 + (BUTTON_WIDTH * 3), 135, BUTTON_WIDTH,
+		eggButton.setBounds(120 + (BUTTON_WIDTH * 3), 40, BUTTON_WIDTH,
 				BUTTON_HEIGHT);
 
 		cornButton.setIcon(cornIcon);
-		cornButton.setBounds(20, 135 + BUTTON_HEIGHT, BUTTON_WIDTH,
+		cornButton.setBounds(120, 40 + BUTTON_HEIGHT, BUTTON_WIDTH,
 				BUTTON_HEIGHT);
 
 		lentilButton.setIcon(lentilIcon);
-		lentilButton.setBounds(20 + BUTTON_WIDTH, 135 + BUTTON_HEIGHT,
+		lentilButton.setBounds(120 + BUTTON_WIDTH, 40 + BUTTON_HEIGHT,
 				BUTTON_WIDTH, BUTTON_HEIGHT);
 
 		pastaButton.setIcon(pastaIcon);
-		pastaButton.setBounds(20 + (BUTTON_WIDTH * 2), 135 + BUTTON_HEIGHT,
+		pastaButton.setBounds(120 + (BUTTON_WIDTH * 2), 40 + BUTTON_HEIGHT,
 				BUTTON_WIDTH, BUTTON_HEIGHT);
 
 		veggiesButton.setIcon(veggiesIcon);
-		veggiesButton.setBounds(20 + (BUTTON_WIDTH * 3), 135 + BUTTON_HEIGHT,
+		veggiesButton.setBounds(120 + (BUTTON_WIDTH * 3), 40 + BUTTON_HEIGHT,
 				BUTTON_WIDTH, BUTTON_HEIGHT);
 
 	}
 
 	/**
 	 * initIcons()
-	 *
+	 * 
 	 * Initializes the icon descriptions of each of image icons
 	 */
 	private void initIcons() {
@@ -484,7 +446,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
 	/**
 	 * repaintAfterDelete()
-	 *
+	 * 
 	 * Removes all of the buttons from the bottom panel and then recalculates
 	 * their positions so that there are no gaps in the panel between buttons
 	 * after one has been deleted
@@ -512,7 +474,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
 	/**
 	 * addNotify()
-	 *
+	 * 
 	 * This method creates a new Thread for the game to run on.
 	 */
 	@Override
@@ -526,42 +488,43 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
 	/**
 	 * paintComponent()
-	 *
-	 * Overriding the paintComponent method to paint the background, serving counters, and water bottle
-	 * on the screen. The serving counters increment each time the appropriate button is clicked, and the water
-	 * bottle is updated according to the waterLevel. When the water level going beyond the maximum allowed level,
-	 * the overflow design is painted
+	 * 
+	 * Overriding the paintComponent method to paint the background, serving
+	 * counters, and water bottle on the screen. The serving counters increment
+	 * each time the appropriate button is clicked, and the water bottle is
+	 * updated according to the waterLevel. When the water level going beyond
+	 * the maximum allowed level, the overflow design is painted
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		//paint the background
+		// paint the background
 		g.drawImage(bkgd, 0, 0, null);
 
 		// paint each of the serving counters
-		g.drawString("Servings of beef: ", 500, 40);
-		g.drawString(Integer.toString(cowServings), 640, 40);
+		g.drawString("Servings of beef: ", 520, 40);
+		g.drawString(Integer.toString(cowServings), 660, 40);
 
-		g.drawString("Servings of chicken: ", 500, 60);
-		g.drawString(Integer.toString(chickenServings), 640, 60);
+		g.drawString("Servings of chicken: ", 520, 60);
+		g.drawString(Integer.toString(chickenServings), 660, 60);
 
-		g.drawString("Servings of lamb: ", 500, 80);
-		g.drawString(Integer.toString(lambServings), 640, 80);
+		g.drawString("Servings of lamb: ", 520, 80);
+		g.drawString(Integer.toString(lambServings), 660, 80);
 
-		g.drawString("Servings of egg: ", 500, 100);
-		g.drawString(Integer.toString(eggServings), 640, 100);
+		g.drawString("Servings of egg: ", 520, 100);
+		g.drawString(Integer.toString(eggServings), 660, 100);
 
-		g.drawString("Servings of corn: ", 500, 120);
-		g.drawString(Integer.toString(cornServings), 640, 120);
+		g.drawString("Servings of corn: ", 520, 120);
+		g.drawString(Integer.toString(cornServings), 660, 120);
 
-		g.drawString("Servings of lentil: ", 500, 140);
-		g.drawString(Integer.toString(lentilServings), 640, 140);
+		g.drawString("Servings of lentil: ", 520, 140);
+		g.drawString(Integer.toString(lentilServings), 660, 140);
 
-		g.drawString("Servings of pasta: ", 500, 160);
-		g.drawString(Integer.toString(pastaServings), 640, 160);
+		g.drawString("Servings of pasta: ", 520, 160);
+		g.drawString(Integer.toString(pastaServings), 660, 160);
 
-		g.drawString("Servings of veggies: ", 500, 180);
-		g.drawString(Integer.toString(veggieServings), 640, 180);
+		g.drawString("Servings of veggies: ", 520, 180);
+		g.drawString(Integer.toString(veggieServings), 660, 180);
 
 		// paint the water bottle if it is not full
 		if (currentUser.getFootPrint().getWaterBottle().isNotFull()) {
@@ -579,7 +542,8 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 	/**
 	 * run()
 	 * 
-	 * Override the run method to start the thread and make the animation move smoothly
+	 * Override the run method to start the thread and make the animation move
+	 * smoothly
 	 */
 	@Override
 	public void run() {
@@ -613,12 +577,8 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 		}
 	}
 
-
-
-
 	/**
-	 * passOnUser()
-	 * This method returns the user to the control class.
+	 * passOnUser() This method returns the user to the control class.
 	 */
 	@Override
 	public User passOnUser() {
@@ -626,13 +586,49 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 	}
 
 	/**
-	 *  receiveUser(User setCurrentUser)
-	 * This method takes in a User and sets the current
-	 * user to the user that is passed in.
+	 * receiveUser(User setCurrentUser) This method takes in a User and sets the
+	 * current user to the user that is passed in.
 	 */
 	@Override
 	public void receiveUser(User setCurrentUser) {
-		currentUser=setCurrentUser;
+		currentUser = setCurrentUser;
+
+	}
+
+	/**
+	 * drawBackground()
+	 * 
+	 * This method created an image from an image file to set the background of
+	 * the frame so that it can be repainted every time. The other size
+	 * dimensions are set based on the size of the image so covered the entire
+	 * frame
+	 * 
+	 * @exception error
+	 *                - if the file is not found, throws an IOException
+	 */
+	@Override
+	public void drawBackground() {
+		try {
+
+			// process the image file
+			bkgd = ImageIO.read(new File("background.jpg"));
+
+			// set the size of the frame based on the size of the image so that
+			// the entire background is covered
+			Dimension size = new Dimension(bkgd.getWidth(null),
+					bkgd.getHeight(null));
+
+			// set all of the dimensions using the size
+			setPreferredSize(size);
+			setMinimumSize(size);
+			setMaximumSize(size);
+			setSize(size);
+			setLayout(null);
+
+			// if there is an error with the file, throw and IOException
+		} catch (IOException error) {
+			System.out.println("Error in setBkgd: image file failed to load!");
+		}
 
 	}
 

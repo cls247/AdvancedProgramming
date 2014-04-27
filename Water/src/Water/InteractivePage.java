@@ -36,35 +36,35 @@ public class InteractivePage extends JPanel implements Screen{
 
 	//there should be a temporary food print in order to 
 	//keep updating the footprint according to the bars that change
-	private FootPrint temporaryFootPrint=new FootPrint();
-	
 	
 	private JPanel topPanel = new JPanel();
-	private JPanel jp = new JPanel();
-	private User currentUser=new User();
+	private JPanel sliderPanel = new JPanel();
+
+	
+	//user received from the previous page and the water footprint associated with it
+	private FootPrint currentFootPrint = new FootPrint();
+	private User currentUser = new User();
+	
 	//add text areas for each slider to display the total
 	//for that slider
-	private JTextField textTotal1=new JTextField("00");
-	private JTextField textTotal2=new JTextField("00");
-	private JTextField textTotal3=new JTextField("00");
-	private JTextField textTotal4=new JTextField("00");
-	private JTextField textTotal5=new JTextField("00");
-	private JTextField textTotal6=new JTextField("00");
-	private JTextField textTotal7=new JTextField("00");
-	private JTextField textTotal8=new JTextField("00");
-	private JTextField textTotal9=new JTextField("00");
-	private JTextField textTotal10=new JTextField("00");
-	private JTextField textTotal11=new JTextField("00");
-	private JTextField textTotal12=new JTextField("00");
-	private JTextField textTotal13=new JTextField("00");
+	private JLabel textTotal1=new JLabel();
+	private JLabel textTotal2=new JLabel();
+	private JLabel textTotal3=new JLabel();
+	private JLabel textTotal4=new JLabel();
+	private JLabel textTotal5=new JLabel();
+	private JLabel textTotal6=new JLabel();
+	private JLabel textTotal7=new JLabel();
+	private JLabel textTotal8=new JLabel();
+	private JLabel textTotal9=new JLabel();
+	private JLabel textTotal10=new JLabel();
+	private JLabel textTotal11=new JLabel();
+	private JLabel textTotal12=new JLabel();
+	private JLabel textTotal13=new JLabel();
 	
 	//text areas for tracking total water consumption and its status
 	private JTextField textWater = new JTextField("00");
 	private JLabel consumptionStatus = new JLabel("");
-	//consumptionStatus.setWrapText(true);
-	private Dimension consumptionStatusSize = new Dimension(100,75);
-	//consumptionStatus.setMinimumSize(new Dimension(100,75));
-	
+
 	//labels for each slider
 	private JLabel label1 = new JLabel("Water Bottles Used");
 	private JLabel label2 = new JLabel("Loads of Clothing");
@@ -80,93 +80,110 @@ public class InteractivePage extends JPanel implements Screen{
 	private JLabel label12 = new JLabel("Servings of Corn");
 	private JLabel label13 = new JLabel("Servings of Green Veggies");
 	
-	/**
-	 * This is the background image
-	 */
-	private Image bkgd;
-	//TextField totalText=new TextField("00");
+	//sliders
+	final JSlider slider1 = new JSlider();
+	final JSlider slider2 = new JSlider();
+	final JSlider slider3 = new JSlider();
+	final JSlider slider4 = new JSlider();
+	final JSlider slider5 = new JSlider();
+	final JSlider slider6 = new JSlider();
+	final JSlider slider7 = new JSlider();
+	final JSlider slider8 = new JSlider();
+	final JSlider slider9 = new JSlider();
+	final JSlider slider10 = new JSlider();
+	final JSlider slider11 = new JSlider();
+	final JSlider slider12 = new JSlider();
+	final JSlider slider13 = new JSlider();
 	
+	//this is the background image
+	private Image bkgd;
+	
+	/**
+	 * starts the interactive page	
+	 */
 	public InteractivePage()
 	{
 		init();		
-	}	
-	public InteractivePage(FootPrint temporaryFootprint)
-	{
-		//set the default values of all the sliders
-		init();		
-	}	
+	}		
 	
+	/**
+	 * initializes and adds the panels to the page
+	 */
 	public void init()
 	{
-		try{
-
-			//set the background image
-			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-			bkgd = ImageIO.read(new File("background.jpg"));
-			Dimension jpSize = new Dimension(500,500);
-			jp.setPreferredSize(jpSize);
-			jp.setMinimumSize(jpSize);
-			jp.setMaximumSize(jpSize);
-			jp.setSize(jpSize);
-			jp.setLayout(new GridLayout(15,3));			
-			
-			Dimension topPanelSize = new Dimension(500,150);
-			topPanel.setPreferredSize(topPanelSize);
-			topPanel.setMinimumSize(topPanelSize);
-			topPanel.setMaximumSize(topPanelSize);
-			topPanel.setSize(topPanelSize);
-			topPanel.setLayout(new GridLayout(2,2));
-			topPanel.setBackground(Color.WHITE);
-		}catch(IOException error){
-
-
-		}
-
-		//displays the total amount of water used
-		topPanel.add(textWater);
-		topPanel.add(new JLabel());
+		//set the background image
+		drawBackground();
 		
+		//set the layout of the screen
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+	
+		//initialize the top panel
+		Dimension topPanelSize = new Dimension(500,150);
+		topPanel.setPreferredSize(topPanelSize);
+		topPanel.setMinimumSize(topPanelSize);
+		topPanel.setMaximumSize(topPanelSize);
+		topPanel.setSize(topPanelSize);
+		topPanel.setLayout(new GridLayout(4,1));
+		topPanel.setBackground(Color.WHITE);
+		
+		//initialize the slider panel
+		Dimension jpSize = new Dimension(500,500);
+		sliderPanel.setPreferredSize(jpSize);
+		sliderPanel.setMinimumSize(jpSize);
+		sliderPanel.setMaximumSize(jpSize);
+		sliderPanel.setSize(jpSize);
+		sliderPanel.setLayout(new GridLayout(15,3));			
+
+		//add the labels for displaying the total amount of water used
+		topPanel.add(new JLabel("<html><p text-align:center>TOTAL WATER CONSUMPTION</p></hmtl>"));
+		topPanel.add(textWater);
+		textWater.setSize(50, 50);
 		topPanel.add(consumptionStatus);
 		topPanel.add(new JLabel());
 		getConsumptionStatus();
 		
-		//labels for the first row
-		jp.add(label1);
-		jp.add(label2);
-		jp.add(label3);
-		
-		//sliders for the first row
-		
-		final JSlider slider = new JSlider();
-		slider.setValue(0);
-		slider.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				System.out.println(slider.getValue());
-				temporaryFootPrint.setNumberOfWaterBottles(slider.getValue());
-				textTotal1.setText(String.valueOf(slider.getValue()));
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
+		//add the sliders to the page
+		addSliders();
+	}
+	
+	public void addSliders(){
 		
 		//******
 		//This is a bunch of sliders that the user can manipulate.
 		//When the slider is called, it update the TextAreas and it updates
-		//the footprint based on wha twas input from the user. 
+		//the footprint based on what was input from the user. 
+		//labels for the first row
 		
-		slider.setMajorTickSpacing(10); 
-		slider.setPaintLabels(true); 
-		slider.setPaintTicks(true); 
-		jp.add(slider, "Water Bottles");		
+		//labels for the first row
+		sliderPanel.add(label1);
+		sliderPanel.add(label2);
+		sliderPanel.add(label3);
 		
-		final JSlider slider2 = new JSlider();
-		slider2.setValue(0);
+		//sliders for the first row		
+		
+		//add the sldier to the slider panel
+		sliderPanel.add(slider1, "Water Bottles");
+		
+		//create a new change listener
+		slider1.addChangeListener(new ChangeListener()
+		{
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				// change the number of water bottles in the footprint
+				//then update the various values on the screen
+				currentFootPrint.setNumberOfWaterBottles(slider1.getValue());
+				textTotal1.setText(String.valueOf(slider1.getValue()));
+				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
+				getConsumptionStatus();
+			}
+			
+		});
+		//set some preferences on the slider
+		slider1.setMajorTickSpacing(10); 
+		slider1.setPaintLabels(true); 
+		slider1.setPaintTicks(true); 
+		
 		slider2.addChangeListener(new ChangeListener()
 		{
 
@@ -175,9 +192,9 @@ public class InteractivePage extends JPanel implements Screen{
 				// TODO Auto-generated method stub
 				//this will hold the value of the slider
 				System.out.println(slider2.getValue());
-				temporaryFootPrint.setNumberOfLoadsOfClothes(slider2.getValue());
+				currentFootPrint.setNumberOfLoadsOfClothes(slider2.getValue());
 				textTotal2.setText(String.valueOf(slider2.getValue()));
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
+				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
 				getConsumptionStatus();
 			}
 			
@@ -185,10 +202,9 @@ public class InteractivePage extends JPanel implements Screen{
 		slider2.setMajorTickSpacing(10); 
 		slider2.setPaintLabels(true); 
 		slider2.setPaintTicks(true); 
-		jp.add(slider2, "Meat Servings");
+		sliderPanel.add(slider2, "Meat Servings");
 		
-		final JSlider slider3 = new JSlider();
-		slider3.setValue(0);
+		
 		slider3.addChangeListener(new ChangeListener()
 		{
 
@@ -196,10 +212,10 @@ public class InteractivePage extends JPanel implements Screen{
 			public void stateChanged(ChangeEvent e) {
 				// TODO Auto-generated method stub
 				//this will hold the value of the slider
-				System.out.println(slider.getValue());
-				temporaryFootPrint.setNumberOfTimesDoesDishes(slider3.getValue());
+				 
+				currentFootPrint.setNumberOfTimesDoesDishes(slider3.getValue());
 				textTotal3.setText(String.valueOf(slider3.getValue()));
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
+				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
 				getConsumptionStatus();
 			}
 			
@@ -207,20 +223,20 @@ public class InteractivePage extends JPanel implements Screen{
 		slider3.setMajorTickSpacing(10); 
 		slider3.setPaintLabels(true); 
 		slider3.setPaintTicks(true); 
-		jp.add(slider3, "Grain Servings");
-
+		sliderPanel.add(slider3, "Grain Servings");
+		
 		//displays values of the sliders in the first row
-		jp.add(textTotal1);
-		jp.add(textTotal2);
-		jp.add(textTotal3);
+		sliderPanel.add(textTotal1);
+		sliderPanel.add(textTotal2);
+		sliderPanel.add(textTotal3);
 		
 		//labels for the second row
-		jp.add(label4);
-		jp.add(label5);
-		jp.add(label6);
+		sliderPanel.add(label4);
+		sliderPanel.add(label5);
+		sliderPanel.add(label6);
 		
-		final JSlider slider4 = new JSlider();
-		slider4.setValue(0);
+		
+		//sliders for the second row
 		slider4.addChangeListener(new ChangeListener()
 		{
 
@@ -228,10 +244,10 @@ public class InteractivePage extends JPanel implements Screen{
 			public void stateChanged(ChangeEvent e) {
 				// TODO Auto-generated method stub
 				//this will hold the value of the slider
-				System.out.println(slider.getValue());
-				temporaryFootPrint.setNumberOfWashes(slider4.getValue());
+				 
+				currentFootPrint.setNumberOfWashes(slider4.getValue());
 				textTotal4.setText(String.valueOf(slider4.getValue()));
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
+				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
 				getConsumptionStatus();
 			}
 			
@@ -239,10 +255,8 @@ public class InteractivePage extends JPanel implements Screen{
 		slider4.setMajorTickSpacing(10); 
 		slider4.setPaintLabels(true); 
 		slider4.setPaintTicks(true); 
-		jp.add(slider4, "Fruits and Vegetables Servings");
+		sliderPanel.add(slider4, "Fruits and Vegetables Servings");
 		
-		final JSlider slider5 = new JSlider();
-		slider5.setValue(0);
 		slider5.addChangeListener(new ChangeListener()
 		{
 
@@ -250,10 +264,9 @@ public class InteractivePage extends JPanel implements Screen{
 			public void stateChanged(ChangeEvent e) {
 				// TODO Auto-generated method stub
 				//this will hold the value of the slider
-				System.out.println(slider.getValue());
-				temporaryFootPrint.setNumberOfTimesWaterPlants(slider5.getValue());
+				currentFootPrint.setNumberOfTimesWaterPlants(slider5.getValue());
 				textTotal5.setText(String.valueOf(slider5.getValue()));				
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
+				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
 				getConsumptionStatus();
 			}
 			
@@ -261,10 +274,8 @@ public class InteractivePage extends JPanel implements Screen{
 		slider5.setMajorTickSpacing(10); 
 		slider5.setPaintLabels(true); 
 		slider5.setPaintTicks(true); 
-		jp.add(slider5, "Fruits and Vegetables Servings");
+		sliderPanel.add(slider5, "Fruits and Vegetables Servings");
 		
-		final JSlider slider6 = new JSlider();
-		slider6.setValue(0);
 		slider6.addChangeListener(new ChangeListener()
 		{
 
@@ -272,10 +283,10 @@ public class InteractivePage extends JPanel implements Screen{
 			public void stateChanged(ChangeEvent e) {
 				// TODO Auto-generated method stub
 				//this will hold the value of the slider
-				System.out.println(slider.getValue());
-				temporaryFootPrint.setServingOfBeef(slider6.getValue());
+				 
+				currentFootPrint.setServingOfBeef(slider6.getValue());
 				textTotal6.setText(String.valueOf(slider6.getValue()));
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
+				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
 				getConsumptionStatus();
 			}
 			
@@ -283,20 +294,19 @@ public class InteractivePage extends JPanel implements Screen{
 		slider6.setMajorTickSpacing(10); 
 		slider6.setPaintLabels(true); 
 		slider6.setPaintTicks(true); 
-		jp.add(slider6, "Fruits and Vegetables Servings");
+		sliderPanel.add(slider6, "Fruits and Vegetables Servings");
 		
 		//displays values of the sliders in the second row
-		jp.add(textTotal4);
-		jp.add(textTotal5);
-		jp.add(textTotal6);
+		sliderPanel.add(textTotal4);
+		sliderPanel.add(textTotal5);
+		sliderPanel.add(textTotal6);
 		
 		//labels for the third row
-		jp.add(label7);
-		jp.add(label8);
-		jp.add(label9);
+		sliderPanel.add(label7);
+		sliderPanel.add(label8);
+		sliderPanel.add(label9);
 		
-		final JSlider slider7 = new JSlider();
-		slider7.setValue(0);
+		//sliders for the third row
 		slider7.addChangeListener(new ChangeListener()
 		{
 
@@ -304,10 +314,10 @@ public class InteractivePage extends JPanel implements Screen{
 			public void stateChanged(ChangeEvent e) {
 				// TODO Auto-generated method stub
 				//this will hold the value of the slider
-				System.out.println(slider.getValue());
-				temporaryFootPrint.setServingOfChicken(slider7.getValue());
+				 
+				currentFootPrint.setServingOfChicken(slider7.getValue());
 				textTotal7.setText(String.valueOf(slider7.getValue()));
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
+				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
 				getConsumptionStatus();
 			}
 			
@@ -315,10 +325,8 @@ public class InteractivePage extends JPanel implements Screen{
 		slider7.setMajorTickSpacing(10); 
 		slider7.setPaintLabels(true); 
 		slider7.setPaintTicks(true); 
-		jp.add(slider7, "Fruits and Vegetables Servings");
+		sliderPanel.add(slider7, "Fruits and Vegetables Servings");
 		
-		final JSlider slider8 = new JSlider();
-		slider8.setValue(0);
 		slider8.addChangeListener(new ChangeListener()
 		{
 
@@ -326,10 +334,10 @@ public class InteractivePage extends JPanel implements Screen{
 			public void stateChanged(ChangeEvent e) {
 				// TODO Auto-generated method stub
 				//this will hold the value of the slider
-				System.out.println(slider.getValue());
-				temporaryFootPrint.setServingOfLamb(slider8.getValue());
+				 
+				currentFootPrint.setServingOfLamb(slider8.getValue());
 				textTotal8.setText(String.valueOf(slider8.getValue()));
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
+				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
 				getConsumptionStatus();
 			}
 			
@@ -337,10 +345,8 @@ public class InteractivePage extends JPanel implements Screen{
 		slider8.setMajorTickSpacing(10); 
 		slider8.setPaintLabels(true); 
 		slider8.setPaintTicks(true); 
-		jp.add(slider8, "Fruits and Vegetables Servings");	
+		sliderPanel.add(slider8, "Fruits and Vegetables Servings");
 		
-		final JSlider slider9 = new JSlider();
-		slider9.setValue(0);
 		slider9.addChangeListener(new ChangeListener()
 		{
 
@@ -348,10 +354,10 @@ public class InteractivePage extends JPanel implements Screen{
 			public void stateChanged(ChangeEvent e) {
 				// TODO Auto-generated method stub
 				//this will hold the value of the slider
-				System.out.println(slider.getValue());
-				temporaryFootPrint.setServingOfEggs(slider9.getValue());
+				 
+				currentFootPrint.setServingOfEggs(slider9.getValue());
 				textTotal9.setText(String.valueOf(slider9.getValue()));
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
+				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
 				getConsumptionStatus();
 			}
 			
@@ -359,21 +365,19 @@ public class InteractivePage extends JPanel implements Screen{
 		slider9.setMajorTickSpacing(10); 
 		slider9.setPaintLabels(true); 
 		slider9.setPaintTicks(true); 
-		jp.add(slider9, "Fruits and Vegetables Servings");	
+		sliderPanel.add(slider9, "Fruits and Vegetables Servings");	
 		
-
 		//displays values of the sliders in the third row
-		jp.add(textTotal7);
-		jp.add(textTotal8);
-		jp.add(textTotal9);
+		sliderPanel.add(textTotal7);
+		sliderPanel.add(textTotal8);
+		sliderPanel.add(textTotal9);
 		
 		//labels for the fourth row
-		jp.add(label10);
-		jp.add(label11);
-		jp.add(label12);
+		sliderPanel.add(label10);
+		sliderPanel.add(label11);
+		sliderPanel.add(label12);
 		
-		final JSlider slider10 = new JSlider();
-		slider10.setValue(0);
+		//sliders for the fourth row
 		slider10.addChangeListener(new ChangeListener()
 		{
 
@@ -381,10 +385,10 @@ public class InteractivePage extends JPanel implements Screen{
 			public void stateChanged(ChangeEvent e) {
 				// TODO Auto-generated method stub
 				//this will hold the value of the slider
-				System.out.println(slider.getValue());
-				temporaryFootPrint.setServingOfLentils(slider10.getValue());
+				 
+				currentFootPrint.setServingOfLentils(slider10.getValue());
 				textTotal10.setText(String.valueOf(slider10.getValue()));
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
+				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
 				getConsumptionStatus();
 			}
 			
@@ -392,10 +396,8 @@ public class InteractivePage extends JPanel implements Screen{
 		slider10.setMajorTickSpacing(10); 
 		slider10.setPaintLabels(true); 
 		slider10.setPaintTicks(true); 
-		jp.add(slider10, "Fruits and Vegetables Servings");	
+		sliderPanel.add(slider10, "Fruits and Vegetables Servings");	
 		
-		final JSlider slider11 = new JSlider();
-		slider11.setValue(0);
 		slider11.addChangeListener(new ChangeListener()
 		{
 
@@ -403,10 +405,10 @@ public class InteractivePage extends JPanel implements Screen{
 			public void stateChanged(ChangeEvent e) {
 				// TODO Auto-generated method stub
 				//this will hold the value of the slider
-				System.out.println(slider.getValue());
-				temporaryFootPrint.setServingOfPasta(slider11.getValue());
+				 
+				currentFootPrint.setServingOfPasta(slider11.getValue());
 				textTotal11.setText(String.valueOf(slider11.getValue()));
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
+				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
 				getConsumptionStatus();
 			}
 			
@@ -414,10 +416,8 @@ public class InteractivePage extends JPanel implements Screen{
 		slider11.setMajorTickSpacing(10); 
 		slider11.setPaintLabels(true); 
 		slider11.setPaintTicks(true); 
-		jp.add(slider11, "Fruits and Vegetables Servings");	
+		sliderPanel.add(slider11, "Fruits and Vegetables Servings");	
 		
-		final JSlider slider12 = new JSlider();
-		slider12.setValue(0);
 		slider12.addChangeListener(new ChangeListener()
 		{
 
@@ -425,10 +425,10 @@ public class InteractivePage extends JPanel implements Screen{
 			public void stateChanged(ChangeEvent e) {
 				// TODO Auto-generated method stub
 				//this will hold the value of the slider
-				System.out.println(slider.getValue());
-				temporaryFootPrint.setServingOfCorn(slider12.getValue());
+				 
+				currentFootPrint.setServingOfCorn(slider12.getValue());
 				textTotal12.setText(String.valueOf(slider12.getValue()));
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
+				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
 				getConsumptionStatus();
 			}
 			
@@ -436,20 +436,19 @@ public class InteractivePage extends JPanel implements Screen{
 		slider12.setMajorTickSpacing(10); 
 		slider12.setPaintLabels(true); 
 		slider12.setPaintTicks(true); 
-		jp.add(slider12, "Fruits and Vegetables Servings");	
+		sliderPanel.add(slider12, "Fruits and Vegetables Servings");	
 		
 		//displays values of the sliders in the fourth row
-		jp.add(textTotal10);
-		jp.add(textTotal11);
-		jp.add(textTotal12);
+		sliderPanel.add(textTotal10);
+		sliderPanel.add(textTotal11);
+		sliderPanel.add(textTotal12);
 		
 		//labels for the fifth row
-		jp.add(label13);
-		jp.add(new JLabel());
-		jp.add(new JLabel());
-				
-		final JSlider slider13 = new JSlider();
-		slider13.setValue(0);
+		sliderPanel.add(label13);
+		sliderPanel.add(new JLabel());
+		sliderPanel.add(new JLabel());
+		
+		//sliders for the fifth row
 		slider13.addChangeListener(new ChangeListener()
 		{
 
@@ -457,10 +456,10 @@ public class InteractivePage extends JPanel implements Screen{
 			public void stateChanged(ChangeEvent e) {
 				// TODO Auto-generated method stub
 				//this will hold the value of the slider
-				System.out.println(slider.getValue());
-				temporaryFootPrint.setServingOfCorn(slider13.getValue());
+				 
+				currentFootPrint.setServingOfVeggies(slider13.getValue());
 				textTotal13.setText(String.valueOf(slider13.getValue()));
-				textWater.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));
+				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
 				getConsumptionStatus();
 			}
 			
@@ -468,128 +467,108 @@ public class InteractivePage extends JPanel implements Screen{
 		slider13.setMajorTickSpacing(10); 
 		slider13.setPaintLabels(true); 
 		slider13.setPaintTicks(true); 
-		jp.add(slider13, "Fruits and Vegetables Servings");	
+		sliderPanel.add(slider13, "Fruits and Vegetables Servings");	
 		
 		//blank filler labels
-		jp.add(new JLabel());
-		jp.add(new JLabel());
+		sliderPanel.add(new JLabel());
+		sliderPanel.add(new JLabel());
 		
 		//displays values of the sliders in the fifth row
-		jp.add(textTotal13);
+		sliderPanel.add(textTotal13);
 
 				
-		JScrollPane sliderScrollPane = new JScrollPane(jp);
-		sliderScrollPane.setViewportView(jp);
+		//scroll pane to make the sliders scrollable
+		JScrollPane sliderScrollPane = new JScrollPane(sliderPanel);
+		sliderScrollPane.setViewportView(sliderPanel);
 		sliderScrollPane.setVisible(true);
 		sliderScrollPane.setFocusable(true);
 		sliderScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
-		Dimension scrollSize = new Dimension(100,400);
+		Dimension scrollSize = new Dimension(100,200);
 		sliderScrollPane.setPreferredSize(scrollSize);
 		sliderScrollPane.setBackground(Color.WHITE);
 		
+		//add the top and slider scroll panes to the page
 		this.add(topPanel);
 		this.add(sliderScrollPane);
-	
-		/*final JSlider sliderWaterBottle=new JSlider();	
-		sliderWaterBottle.setValue(0);
-		sliderWaterBottle.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				temporaryFootPrint.setNumberOfWaterBottles(sliderWaterBottle.getValue());
-				//totalText.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));				
-
-			}
-			
-		});
-		sliderWaterBottle.setMajorTickSpacing(10); 
-		sliderWaterBottle.setPaintLabels(true); 
-		sliderWaterBottle.setPaintTicks(true); 
-		sliderWaterBottle.setBounds(100, 0, 0, 10);
-		setLayout(new BorderLayout());
-		this.add(sliderWaterBottle);
-		
-		final JSlider chickenSlider=new JSlider();	
-		chickenSlider.setValue(50);
-		chickenSlider.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				temporaryFootPrint.setServingOfChicken(chickenSlider.getValue());
-				//totalText.setText(String.valueOf(temporaryFootPrint.getTotalAmountOfWater()));				
-
-			}
-			
-		});
-		chickenSlider.setMajorTickSpacing(10); 
-		chickenSlider.setPaintLabels(true); 
-		chickenSlider.setPaintTicks(true); 
-		chickenSlider.setBounds(100, 250, 0, 10);
-		setLayout(new BorderLayout());
-		this.add(chickenSlider);*/
 	}
 	
-	public void whatIfAnalysis(){
-		/*
-		//new values to be used in calculation
-		sliderForFootPrint = 0; //this should somehow get the value off the slider
-		temporaryFootPrint.getBottle().setWaterBottle(sliderForFootPrint);
+	/**
+	 * updates the values displayed on the sliders and the labels beneath them
+	 */
+	public void updateSliders(){
 		
-		sliderForWaterBottles = 0; //this should get the value off the slider
-		temporaryFootPrint.setNumberOfWaterBottles(sliderForWaterBottles);
+				//updates the sliders whenever a new user profile is passed in 
 		
-		sliderForNumberOfTimesDoesDishes=0; //this should get the value off the slider
-		temporaryFootPrint.setNumberOfTimesDoesDishes(sliderForNumberOfTimesDoesDishes);
+				slider1.setValue(currentFootPrint.getNumberOfWaterBottles());
+				textTotal1.setText(String.valueOf(currentFootPrint.getNumberOfWaterBottles()));
+				
+				slider2.setValue(currentFootPrint.getNumberOfLoadsOfClothes());
+				textTotal2.setText(String.valueOf(currentFootPrint.getNumberOfLoadsOfClothes()));
+				
+				slider3.setValue(currentFootPrint.getNumberOfTimesDoesDishes());
+				textTotal3.setText(String.valueOf(currentFootPrint.getNumberOfTimesDoesDishes()));
+				
+				slider4.setValue(currentFootPrint.getNumberOfWashes());
+				textTotal4.setText(String.valueOf(currentFootPrint.getNumberOfWashes()));
+				
+				slider5.setValue(currentFootPrint.getNumberOfTimesWaterPlants());
+				textTotal5.setText(String.valueOf(currentFootPrint.getNumberOfTimesWaterPlants()));
+				
+				slider6.setValue(currentFootPrint.getServingOfBeef());
+				textTotal6.setText(String.valueOf(currentFootPrint.getServingOfBeef()));
+					
+				slider7.setValue(currentFootPrint.getServingOfChicken());
+				textTotal7.setText(String.valueOf(currentFootPrint.getServingOfChicken()));
+						
+				slider8.setValue(currentFootPrint.getServingOfLamb());
+				textTotal8.setText(String.valueOf(currentFootPrint.getServingOfLamb()));
 		
-		sliderForServingOfBeef=0; //this should get the value off the slider
-		temporaryFootPrint.setServingOfBeef(sliderForServingOfBeef);
-		
-		sliderForServingOfChicken=0; //this should get the value off the slider
-		temporaryFootPrint.setServingOfChicken(sliderForServingOfChicken);
-		
-		sliderForServingOfCorn=0; //this should get the value off the slider
-		temporaryFootPrint.setServingOfCorn(sliderForServingOfCorn);
-		
-		sliderForNumberOfWashes=0; //this should get the value off the slider
-		temporaryFootPrint.setNumberOfWashes(sliderForNumberOfWashes);
-		
-		sliderForNumberOfLoadsOfClothes=0; //this should get the value off the slider
-		temporaryFootPrint.setNumberOfLoadsOfClothes(sliderForNumberOfLoadsOfClothes);
-		
-		temporaryFootPrint.updateTotalAmountOfWater();
-		
-		amountWaterUsed = temporaryFootPrint.getTotalAmountOfWater();
-	*/	
+				slider9.setValue(currentFootPrint.getServingOfEggs());
+				textTotal9.setText(String.valueOf(currentFootPrint.getServingOfEggs()));
+
+				slider10.setValue(currentFootPrint.getServingOfLentils());
+				textTotal10.setText(String.valueOf(currentFootPrint.getServingOfLentils()));
+				
+				slider11.setValue(currentFootPrint.getServingOfPasta());
+				textTotal11.setText(String.valueOf(currentFootPrint.getServingOfPasta()));
+					
+				slider12.setValue(currentFootPrint.getServingOfCorn());
+				textTotal12.setText(String.valueOf(currentFootPrint.getServingOfCorn()));
+						
+				slider13.setValue(currentFootPrint.getServingsOfVeggies());
+				textTotal13.setText(String.valueOf(currentFootPrint.getServingsOfVeggies()));
 	}
 	
+	/**
+	 * adds the background image to the screen
+	 */
 	public void paintComponent(Graphics g){
-
 		
 		g.drawImage(bkgd, 0,0, null);
-
-		}
+	}
 	
+	/**
+	 * changes the consumptionStatus label depending on the level of water being used
+	 */
 	public void getConsumptionStatus(){
+		//get the toal amount of water being used
 		double consumptionLevel = Double.parseDouble(textWater.getText());
-
+		
+		//if the total amount of water being used is below 1,500 liters/week, 
+		//tell the user that they are using a healthy amount of water
 		if (consumptionLevel < 1500) {
 			consumptionStatus.setForeground(Color.GREEN);
 			consumptionStatus.setText("<html><p>You are consuming a healthy amount of water</p></html>");
 		} 
+		//if the total amount of water being used is above 1,500 liters/week, 
+		//tell the user that they are using a healthy amount of water
 		else {
 			consumptionStatus.setForeground(Color.RED);
 			consumptionStatus.setText("You are consuming too much water");
 		}
 	}
 	/**
-	 * passOnUser()
-	 * This method returns the user to the control class.
+	 * returns the current user to be passed on to the next page
 	 */
 	@Override
 	public User passOnUser() {
@@ -597,14 +576,43 @@ public class InteractivePage extends JPanel implements Screen{
 	}
 	
 	/**
-	 *  receiveUser(User setCurrentUser)
-	 * This method takes in a User and sets the current
-	 * user to the user that is passed in.
+	 * receives the user from the previous page and updates values on the page
 	 */
 	@Override
 	public void receiveUser(User setCurrentUser) {
 		currentUser=setCurrentUser;
 		
+		//update the footprint associated with the user and the total amount of water displayed
+		currentFootPrint=currentUser.getFootPrint();
+		textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
+		
+		//update the sliders based on the new user
+		updateSliders();
 	}
 
+	@Override
+	public void drawBackground() {
+		try {
+
+			// process the image file
+			bkgd = ImageIO.read(new File("background.jpg"));
+
+			// set the size of the frame based on the size of the image so that
+			// the entire background is covered
+			Dimension size = new Dimension(bkgd.getWidth(null),
+					bkgd.getHeight(null));
+
+			// set all of the dimensions using the size
+			setPreferredSize(size);
+			setMinimumSize(size);
+			setMaximumSize(size);
+			setSize(size);
+			setLayout(null);
+
+			// if there is an error with the file, throw and IOException
+		} catch (IOException error) {
+			System.out.println("Error in drawBackground: image file failed to load!");
+		}
+		
+	}
 }
