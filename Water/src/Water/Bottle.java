@@ -28,8 +28,11 @@ public class Bottle {
 	
 	private int currentBottle=0;
 	
+	private int currentOverflow = 0;
+	
 	//this is an arraylist of all the water bottle from 1-21
 	private ArrayList <String> waterBottles=new ArrayList<String>();
+	private ArrayList <String> overflowBottles=new ArrayList<String>();
 	
 	/**
 	 * Bottle()
@@ -39,6 +42,7 @@ public class Bottle {
 	public Bottle()
 	{
 		addWater();
+		addOverflow();
 	}
 	
 	/**
@@ -49,10 +53,20 @@ public class Bottle {
 	public void addWater()
 	{		
 		//this should fill the array with all the different images
-		for(int i=0; i<=21; i++)
+		for(int i=0; i< 21; i++)
 		{
 			waterBottles.add("water"+String.valueOf(i+1) +".jpg");
 		}
+	}
+	
+	public void addOverflow(){
+		
+		for(int i=0; i< 22; i++){
+			
+			overflowBottles.add("overflow"+String.valueOf(i+1)+".jpg");
+			
+		}
+		
 	}
 	
 	/**
@@ -71,8 +85,12 @@ public class Bottle {
 		//to the correct index according to the amount of water
 		waterLevel=total;
 		currentBottle=(int) Math.floor(((double)waterLevel)/1000);
-		System.out.println("The water level is "+waterLevel);
-		System.out.println("the current water bottle is "+currentBottle);
+		
+		if(currentBottle >= 21){
+			
+			currentBottle = 21;
+			
+		}
 		
 	}
 	
@@ -84,9 +102,17 @@ public class Bottle {
 	 */
 	public ImageIcon getImage()
 	{
-		//this method returns the image of the current water bottle
-		System.out.println(waterBottles.get(currentBottle));
-		ImageIcon waterBottle = new ImageIcon(waterBottles.get(currentBottle));
+		
+		ImageIcon waterBottle;
+		if(currentBottle < 21){
+			//this method returns the image of the current water bottle
+			waterBottle = new ImageIcon(waterBottles.get(currentBottle));
+		}else{
+			
+			waterBottle = new ImageIcon(overflowBottles.get(currentOverflow % 22));
+			currentOverflow++;
+			
+		}
 		return waterBottle; 
 	}
 	
@@ -111,13 +137,27 @@ public class Bottle {
 		return currentBottle;
 		
 	}
-	
-	
 	/**
 	 * isNotFull()
 	 * @return if the currentBottle is less than or equal to 21
 	 */
 	public boolean isNotFull(){
 		return (currentBottle <= 21);
+	}
+	/**
+	 * getImageBottle()
+	 * 
+	 */
+	public String getImageBottle(int index)
+	{
+		return waterBottles.get(index);
+	}
+	/**
+	 * getOverFlowImage()
+	 * 
+	 */
+	public String getOverFlowImage(int index)
+	{
+		return overflowBottles.get(index);
 	}
 }

@@ -40,7 +40,7 @@ class CardDriver extends JPanel
 	private static ScreenWithTwoQuestions washDishes;
 	private static ScreenWithTwoQuestions bathingWin;
 	private static ScreenWithTwoQuestions washClothes;
-	private static ScreenWithDrag meatScreen;
+	private static FoodServingScreen meatScreen;
 	
 	//button to move backward and forward
 	private JButton previousButton;
@@ -56,10 +56,10 @@ class CardDriver extends JPanel
 	private User currentUser=new User();
 
 	//this is the current index of the card that the cardlayout is displaying
-	private static int indexOfCardLayout=-1;
+	private static int indexOfCardLayout=0;
 	
 	//this is the number of cards that there are in the cardlayout
-	private static int numberOfCards=7;
+	private static int numberOfCards=8;
 
 	//this is the JPanel that has the cardlayout that is going to be flippe through
 	private JPanel pages;
@@ -137,7 +137,7 @@ class CardDriver extends JPanel
 		pages.add(bathingWin, "fifth");
 
 		allTheScreens.add((Screen) bathingWin);
-		meatScreen=new ScreenWithDrag();
+		meatScreen=new FoodServingScreen();
 
 		allTheScreens.add((Screen) meatScreen);
 		pages.add(meatScreen, "sixth");
@@ -158,7 +158,7 @@ class CardDriver extends JPanel
 			public void actionPerformed(ActionEvent ae)
 			{
 				System.out.println("index of card"+indexOfCardLayout);
-				if(indexOfCardLayout-1>=0)
+				if(indexOfCardLayout-1>0)
 				{
 					indexOfCardLayout--;
 					System.out.println("is this working");

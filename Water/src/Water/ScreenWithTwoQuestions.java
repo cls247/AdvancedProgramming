@@ -1,22 +1,16 @@
 package Water;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -48,7 +42,6 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 	//image for the background
 	private Image bkgd;
 
-	private JLabel imageLabel;
 	private ImageIcon waterBottle;
 	Image bottle;
 

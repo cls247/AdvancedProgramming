@@ -1,21 +1,18 @@
 package Water;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.TextField;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 /**
  * 
- * This is the screen where the user can read a conclomeration
+ * This is the screen where the user can read a conglomeration
  * of a bunch of different tips for saving water.
  * The tips are divided into categories based on their category.
  * @author Sand

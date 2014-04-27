@@ -408,12 +408,9 @@ public class FootPrint {
 		//is entered so it would be like we are
 		//keeping a running total
 		//total=(amount of beef)*(how much water in beef) etc etc etc	
-
-		System.out.println("liter er water boottle"+literPerWaterBottle);
-		System.out.println("number of water bottle"+numberOfWaterBottles);
-		System.out.println("totalLitersofWater"+totalLitersAmountOfWater);
+		
 		totalLitersAmountOfWater= (literPerWaterBottle*numberOfWaterBottles);
-		System.out.println("totalLitersofWater"+totalLitersAmountOfWater);
+		
 		if(usesDishWasher)
 		{
 			totalLitersAmountOfWater+=literPerDishWater*numberOfTimesDoesDishes;
@@ -425,8 +422,10 @@ public class FootPrint {
 		totalLitersAmountOfWater+=servingOfBeef*literPerServingOfBeef;
 		totalLitersAmountOfWater+= servingOfChicken*literPerServingOfChicken;
 		totalLitersAmountOfWater+=servingOfLamb*literPerServingOfLamb;
+		totalLitersAmountOfWater+=servingOfCorn*literPerServingOfCorn;
 		totalLitersAmountOfWater+=servingOfVeges*literPerServingOfVeggies;
 		totalLitersAmountOfWater+=servingOfLentils*literPerServingOfLentils;
+		totalLitersAmountOfWater+=servingOfEggs*literPerServingOfEggs;
 		totalLitersAmountOfWater+=servingOfPasta*literPerServingOfPasta;
 
 		if(takesShowers)
@@ -464,7 +463,6 @@ public class FootPrint {
 
 	public double getTotalAmountOfWater()
 	{
-		System.out.println("*********Getting Water*********" + totalLitersAmountOfWater);
 		return totalLitersAmountOfWater;
 	}
 
