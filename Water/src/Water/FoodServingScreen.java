@@ -157,42 +157,42 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 				// set the icon of the new button so that the same button
 				// appears when added to the bottom screen
 				if (desc == "Cow") {
-					currentUser.getFootPrint().setServingOfBeef(1);
+					currentUser.getFootPrint().setServingOfBeef(currentUser.getFootPrint().getServingOfBeef() + 1);
 					newButton.setIcon(beefIcon);
 					cowServings++;
 				}
 				if (desc == "Lamb") {
-					currentUser.getFootPrint().setServingOfLamb(1);
+					currentUser.getFootPrint().setServingOfLamb(currentUser.getFootPrint().getServingOfLamb() + 1);
 					newButton.setIcon(lambIcon);
 					lambServings++;
 				}
 				if (desc == "Chicken") {
-					currentUser.getFootPrint().setServingOfChicken(1);
+					currentUser.getFootPrint().setServingOfChicken(currentUser.getFootPrint().getServingOfChicken() + 1);
 					newButton.setIcon(chickenIcon);
 					chickenServings++;
 				}
 				if (desc == "Egg") {
-					currentUser.getFootPrint().setServingOfEggs(1);
+					currentUser.getFootPrint().setServingOfEggs(currentUser.getFootPrint().getServingOfEggs() + 1);
 					newButton.setIcon(eggIcon);
 					eggServings++;
 				}
 				if (desc == "Corn") {
-					currentUser.getFootPrint().setServingOfLamb(1);
+					currentUser.getFootPrint().setServingOfLamb(currentUser.getFootPrint().getServingOfCorn() + 1);
 					newButton.setIcon(cornIcon);
 					cornServings++;
 				}
 				if (desc == "Lentils") {
-					currentUser.getFootPrint().setServingOfLentils(1);
+					currentUser.getFootPrint().setServingOfLentils(currentUser.getFootPrint().getServingOfLentils() + 1);
 					newButton.setIcon(lentilIcon);
 					lentilServings++;
 				}
 				if (desc == "Pasta") {
-					currentUser.getFootPrint().setServingOfPasta(1);
+					currentUser.getFootPrint().setServingOfPasta(currentUser.getFootPrint().getServingOfPasta() + 1);
 					newButton.setIcon(pastaIcon);
 					pastaServings++;
 				}
 				if (desc == "Veggies") {
-					currentUser.getFootPrint().setServingOfVeggies(1);
+					currentUser.getFootPrint().setServingOfVeggies(currentUser.getFootPrint().getServingsOfVeggies() + 1);
 					newButton.setIcon(veggiesIcon);
 					veggieServings++;
 				}
@@ -222,35 +222,35 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 				// description to know which button was clicked and which
 				// serving amount should be changed
 				if (desc == "Cow") {
-					currentUser.getFootPrint().setServingOfBeef(-1);
+					currentUser.getFootPrint().setServingOfBeef(currentUser.getFootPrint().getServingOfBeef()-1);
 					cowServings--;
 				}
 				if (desc == "Lamb") {
-					currentUser.getFootPrint().setServingOfLamb(-1);
+					currentUser.getFootPrint().setServingOfLamb(currentUser.getFootPrint().getServingOfLamb()-1);
 					lambServings--;
 				}
 				if (desc == "Chicken") {
-					currentUser.getFootPrint().setServingOfChicken(-1);
+					currentUser.getFootPrint().setServingOfChicken(currentUser.getFootPrint().getServingOfChicken()-1);
 					chickenServings--;
 				}
 				if (desc == "Egg") {
-					currentUser.getFootPrint().setServingOfEggs(-1);
+					currentUser.getFootPrint().setServingOfEggs(currentUser.getFootPrint().getServingOfEggs()-1);
 					eggServings--;
 				}
 				if (desc == "Corn") {
-					currentUser.getFootPrint().setServingOfLamb(-1);
+					currentUser.getFootPrint().setServingOfLamb(currentUser.getFootPrint().getServingOfCorn()-1);
 					cornServings--;
 				}
 				if (desc == "Lentils") {
-					currentUser.getFootPrint().setServingOfLentils(-1);
+					currentUser.getFootPrint().setServingOfLentils(currentUser.getFootPrint().getServingOfLentils()-1);
 					lentilServings--;
 				}
 				if (desc == "Pasta") {
-					currentUser.getFootPrint().setServingOfPasta(-1);
+					currentUser.getFootPrint().setServingOfPasta(currentUser.getFootPrint().getServingOfPasta()-1);
 					pastaServings--;
 				}
 				if (desc == "Veggies") {
-					currentUser.getFootPrint().setServingOfVeggies(-1);
+					currentUser.getFootPrint().setServingOfVeggies(currentUser.getFootPrint().getServingsOfVeggies()-1);
 					veggieServings--;
 				}
 
