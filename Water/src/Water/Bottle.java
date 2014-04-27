@@ -111,4 +111,13 @@ public class Bottle {
 		return currentBottle;
 		
 	}
+	
+	
+	/**
+	 * isNotFull()
+	 * @return if the currentBottle is less than or equal to 21
+	 */
+	public boolean isNotFull(){
+		return (currentBottle <= 21);
+	}
 }

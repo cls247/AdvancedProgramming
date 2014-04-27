@@ -137,7 +137,7 @@ class CardDriver extends JPanel
 		pages.add(bathingWin, "fifth");
 
 		allTheScreens.add((Screen) bathingWin);
-		meatScreen=new ScreenWithDrag("meat");
+		meatScreen=new ScreenWithDrag();
 
 		allTheScreens.add((Screen) meatScreen);
 		pages.add(meatScreen, "sixth");
