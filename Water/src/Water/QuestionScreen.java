@@ -29,27 +29,51 @@ import javax.swing.event.ChangeListener;
  *
  */
 
-public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Runnable, Screen{
+public class QuestionScreen extends JPanel implements ActionListener, Runnable, Screen{
 
 
+	//questions that are to be asked
 	private String firstQuestion;
 	private String secondQuestion;
 	private String thirdQuestion;
+	
+	//type of questions that are asked on this screen
 	private String type;
+	
+	//this image is the background
 	private Image bkgd;
 	JLabel imageLabel;
+	
+	//this is the image for the water bottle to print
 	ImageIcon waterBottle;
 	Image bottle;
 	private final int DELAY = 20;
+	
+	//this is the thread for this question to run on
 	private Thread bottleThread;
 	private User currentUser = new User();
 
+	//these are the toggle boxes for the first two questions
 	final JCheckBox firstQuestionBox = new JCheckBox();
 	final JCheckBox secondQuestionBox = new JCheckBox();
+	
+	//this is the label and answer box for the third question
 	JSpinner m_numberSpinner = new JSpinner();
 	JLabel thirdQuestionLabel = new JLabel();
 
-	public ScreenWithTwoQuestions(String firstQuestion1, String secondQuestion1, String thirdQuestion1, String type1)
+	
+	/**
+	 * QuestionScreen(String firstQuestion1, String secondQuestion1, String thirdQuestion1, String type1)
+	 * 
+	 * This constructor makes a screen that has the three questions that 
+	 * are passed in and sets a type for the screen.
+	 * 
+	 * @param firstQuestion1
+	 * @param secondQuestion1
+	 * @param thirdQuestion1
+	 * @param type1 this is the type that the question screen is going to be of
+	 */
+	public QuestionScreen(String firstQuestion1, String secondQuestion1, String thirdQuestion1, String type1)
 	{
 		firstQuestion=firstQuestion1;
 		secondQuestion=secondQuestion1;
@@ -57,10 +81,15 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 		type=type1;
 		init();
 	}
+	
+	/**
+	 * init()
+	 * 
+	 * This method sets all the main details for the screen.
+	 */
 	@Override
 	public void init()
 	{
-		
 		startThread();
 		drawBackground();
 		//setBackground();
@@ -69,27 +98,48 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 		createThirdLabelAndSpinner();
 	}
 	
+	/**
+	 * createThirdLabelAndSpinner()
+	 * 
+	 * This method sets up the third question and the answer
+	 * for the question.
+	 */
 	private void createThirdLabelAndSpinner() {
 		
 		//ask the third question
-		thirdQuestionLabel = new JLabel(thirdQuestion+"?");
+		thirdQuestionLabel = new JLabel(thirdQuestion);
 		thirdQuestionLabel.setSize(350,20);
 		thirdQuestionLabel.setLocation(125, 300);
 
+		//make a spinner for the third question to 
+		//be answered
 		SpinnerNumberModel m_numberSpinnerModel;
 		Double current = new Double(1.00);
 		Double min = new Double(0.00);
 		Double max = new Double(100.00);
 		Double step = new Double(1.00);
+		
+		//set the max
 		m_numberSpinnerModel = new SpinnerNumberModel(current, min, max, step);
 		m_numberSpinner = new JSpinner(m_numberSpinnerModel);
 
+		//set the default information on the spinner
 		m_numberSpinner.setSize(100,50);
 		m_numberSpinner.setLocation(500,300);
 		((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).setPreferredSize(new Dimension(10,10));
 		((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).getTextField().setEditable(false);
 
+		
+		spinnerAction();
 
+		add(m_numberSpinner);
+		add(thirdQuestionLabel);
+
+		m_numberSpinner.setVisible(false);
+		thirdQuestionLabel.setVisible(false);
+	}
+
+	private void spinnerAction() {
 		m_numberSpinner.addChangeListener(new ChangeListener()
 		{
 
@@ -112,17 +162,11 @@ public class ScreenWithTwoQuestions extends JPanel implements ActionListener, Ru
 					currentUser.getFootPrint().setNumberOfLoadsOfClothes(temp);
 			}
 		});
-
-		add(m_numberSpinner);
-		add(thirdQuestionLabel);
-
-		m_numberSpinner.setVisible(false);
-		thirdQuestionLabel.setVisible(false);
 	}
 	
 	private void createSecondLabelAndButton() {
 		//ask the second questions
-		JLabel secondQuestionlabel = new JLabel(secondQuestion+"?");
+		JLabel secondQuestionlabel = new JLabel(secondQuestion);
 		secondQuestionlabel.setVisible(true);
 		secondQuestionlabel.setSize(250,20);
 		secondQuestionlabel.setLocation(125,200);

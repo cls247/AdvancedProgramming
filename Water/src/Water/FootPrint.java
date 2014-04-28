@@ -13,7 +13,8 @@ public class FootPrint {
 
 	private boolean usesRecyclableWaterBottle=true;
 	private boolean usesPlasticWaterBottle=false;
-	private final double literPerWaterBottle=.6;
+	private final double literPerPlaticWaterBottle=1.8;
+	private final double literPerRecycableWaterBottle=.6;
 	private int numberOfWaterBottles=0;
 
 	private boolean usesSprinklers=true;
@@ -107,7 +108,7 @@ public class FootPrint {
 		numberOfWaterBottles=numberOfWaterBottles1;
 		updateTotalAmountOfWater();
 	}	
-	
+
 	public int getNumberOfWaterBottles(){
 		return numberOfWaterBottles;
 	}
@@ -152,7 +153,7 @@ public class FootPrint {
 		numberOfTimesDoesDishes=setNumberOfTimesDoesDishes;
 		updateTotalAmountOfWater();
 	}
-	
+
 	public int getNumberOfTimesDoesDishes(){
 		return numberOfTimesDoesDishes;
 	}
@@ -169,7 +170,7 @@ public class FootPrint {
 		servingOfBeef=setServingOfBeef;
 		updateTotalAmountOfWater();
 	}
-	
+
 	public int getServingOfBeef(){
 		return servingOfBeef;
 	}
@@ -187,7 +188,7 @@ public class FootPrint {
 		servingOfChicken=setServingOfChicken;
 		updateTotalAmountOfWater();
 	}
-	
+
 	public int getServingOfChicken(){
 		return servingOfChicken;
 	}
@@ -205,7 +206,7 @@ public class FootPrint {
 		servingOfLamb=setServingOfLamb;
 		updateTotalAmountOfWater();
 	}
-	
+
 	public int getServingOfLamb(){
 		return servingOfLamb;
 	}
@@ -240,7 +241,7 @@ public class FootPrint {
 		servingOfVeges=setServingOfVeggies;
 		updateTotalAmountOfWater();
 	}
-	
+
 	public int getServingsOfVeggies(){
 		return servingOfVeges;
 	}
@@ -281,7 +282,7 @@ public class FootPrint {
 	public int getServingOfPasta(){
 		return servingOfPasta;
 	}
-	
+
 	/**
 	 *  setServingOfCorn(int setServingOfCorn)
 	 * 
@@ -345,7 +346,7 @@ public class FootPrint {
 		numberOfWashes=setNumberOfWashes;
 		updateTotalAmountOfWater();
 	}
-	
+
 	public int getNumberOfWashes(){
 		return numberOfWashes;
 	}
@@ -392,12 +393,17 @@ public class FootPrint {
 		numberOfLoadsOfClothes=setNumberOfLoadsOfClothes;
 		updateTotalAmountOfWater();
 	}
-	
+
+	/**
+	 * getNumberOfLoadsOfClothes()
+	 * 
+	 * @return the numberOfLoadsOfClothes
+	 */
 	public int getNumberOfLoadsOfClothes(){
 		return numberOfLoadsOfClothes;
 	}
-	
-	
+
+
 	/**
 	 * setUsesSprinklers()
 	 * 
@@ -409,7 +415,7 @@ public class FootPrint {
 		handWaters=false;
 		updateTotalAmountOfWater();
 	}
-	
+
 	/**
 	 * setHandWaters()
 	 * 
@@ -434,7 +440,13 @@ public class FootPrint {
 		numberOfTimesWaterPlants=setNumberOfTimesWaterPlants;
 		updateTotalAmountOfWater();
 	}
-	
+
+	/**
+	 * getNumberOfTimesWaterPlants()
+	 * 
+	 * 
+	 * @return the numberOfTimesWaterPlants
+	 */
 	public int getNumberOfTimesWaterPlants(){
 		return numberOfTimesWaterPlants;
 	}
@@ -457,16 +469,28 @@ public class FootPrint {
 		//is entered so it would be like we are
 		//keeping a running total
 		//total=(amount of beef)*(how much water in beef) etc etc etc	
-
-		System.out.println("liter er water boottle"+literPerWaterBottle);
-		System.out.println("number of water bottle"+numberOfWaterBottles);
-		System.out.println("totalLitersofWater"+totalLitersAmountOfWater);
-		totalLitersAmountOfWater= (literPerWaterBottle*numberOfWaterBottles);
-		System.out.println("totalLitersofWater"+totalLitersAmountOfWater);
+		totalLitersAmountOfWater=0;
+		if(usesRecyclableWaterBottle)
+		{
+	
+		totalLitersAmountOfWater+= (literPerRecycableWaterBottle*numberOfWaterBottles);
+		System.out.println("totalLitersAmountOfWater"+totalLitersAmountOfWater);
+		System.out.println("literPerRecycableWaterBottle"+literPerRecycableWaterBottle);
+		System.out.println("numberOfWaterBottles"+numberOfWaterBottles);
+		}
+		if(usesPlasticWaterBottle)
+		{
+		totalLitersAmountOfWater+= (literPerPlaticWaterBottle*numberOfWaterBottles);
+		
+		System.out.println("totalLitersAmountOfWater"+totalLitersAmountOfWater);
+		System.out.println("literPerPlaticWaterBottle"+literPerPlaticWaterBottle);
+		System.out.println("numberOfWaterBottles"+numberOfWaterBottles);}
+		
 		if(usesDishWasher)
 		{
 			totalLitersAmountOfWater+=literPerDishWater*numberOfTimesDoesDishes;
 		}
+
 		if(doesDishedByHand)
 		{
 			totalLitersAmountOfWater+=literPerDishesByHand*numberOfTimesDoesDishes;
@@ -477,31 +501,42 @@ public class FootPrint {
 		{
 			totalLitersAmountOfWater+=literPerShowerPerMinute*numberOfWashes;
 		}
+
 		if(takesBaths)
 		{
 			totalLitersAmountOfWater+=litersPerBath*numberOfWashes;
 		}
+
 		if(usesWashingMachine)
 		{
 			totalLitersAmountOfWater+=litersPerLoadsOfClothersWashingMachine*numberOfLoadsOfClothes;
 		}
+
 		if(handWashesClothes)
 		{
 			totalLitersAmountOfWater+=litersPerLoadsOfClothesHandWashing*numberOfLoadsOfClothes;
 		}	
+
 		if(usesSprinklers)
 		{
 			totalLitersAmountOfWater+=literPerSprinklerPerTime*numberOfTimesWaterPlants;
 		}
+
 		if(handWaters)
 		{
 			totalLitersAmountOfWater+=literPerHandWaterTime*numberOfTimesWaterPlants;
 		}
-		System.out.println("totalLitersofWater"+totalLitersAmountOfWater);
+
 		waterBottle.setWaterBottle(totalLitersAmountOfWater);
 
 	}
 
+	/**
+	 * calcualteWaterForFood()
+	 * 
+	 * This method increases the total amount of water used
+	 * by the amount used for water.
+	 */
 	private void calcualteWaterForFood() {
 		totalLitersAmountOfWater+=servingOfBeef*literPerServingOfBeef;
 		totalLitersAmountOfWater+= servingOfChicken*literPerServingOfChicken;
@@ -512,66 +547,139 @@ public class FootPrint {
 		totalLitersAmountOfWater+=servingOfEggs*literPerServingOfEggs;
 		totalLitersAmountOfWater+=servingOfCorn*literPerServingOfCorn;
 	}
+
+	/**
+	 * getWaterBottle()
+	 * 
+	 * @return the water bottle
+	 */
 	public Bottle getWaterBottle()
 	{
 		return waterBottle;
 	}
 
+	/**
+	 * getTotalAmountOfWater()
+	 * 
+	 * @return the total amount of water
+	 * used in the water bottle 
+	 */
 	public double getTotalAmountOfWater()
 	{
-		System.out.println("*********Getting Water*********" + totalLitersAmountOfWater);
 		return totalLitersAmountOfWater;
 	}
 
+
+	/**
+	 * getBottle()
+	 * @return the water bottle
+	 */
 	public Bottle getBottle(){
 
 		return waterBottle;
 
 	}
-	
+
+	/**
+	 * setUsesRecyclableWaterBottleUnclicked()
+	 * 
+	 * This method sets usesRecyclableWaterBottle to false.
+	 */
 	public void setUsesRecyclableWaterBottleUnclicked(){
 		usesRecyclableWaterBottle = false;
 	}
-	
+
+	/**
+	 * setUsesPlasticWaterBottleUnclicked()
+	 * 
+	 * This method sets usesPlasticWaterBottle to false.
+	 */
 	public void setUsesPlasticWaterBottleUnclicked(){
 		usesPlasticWaterBottle = false;
 	}
 
+
+	/**
+	 *  setUsesDishWasherUnclicked()
+	 *  
+	 * This method sets usesDishWasher to false.
+	 */
 	public void setUsesDishWasherUnclicked(){
 		usesDishWasher=false;
 	}
 
+	/**
+	 * setDoesDishesByHandUnclicked()
+	 * 
+	 * This method sets doesDishedByHand to false.
+	 */
 	public void setDoesDishesByHandUnclicked(){
 		doesDishedByHand=false;
 	}
 
+	/**
+	 *setShowersUnclicked()
+	 * 
+	 * This method sets takesShowers to false.
+	 */
 	public void setShowersUnclicked(){
 		takesShowers= false;
 	}
-	
+
+	/**
+	 * setBathsUnclicked()
+	 * 
+	 * This method sets takesBaths to false.
+	 */
 	public void setBathsUnclicked(){
 		takesBaths = false;
 	}
-	
+
+	/**
+	 * setUsesWashingMachineUnclicked()
+	 * 
+	 * This method sets usesWashingMachine to false.
+	 */
 	public void setUsesWashingMachineUnclicked(){
 		usesWashingMachine=false;
 	}
-	
+
+	/**
+	 * setHandWashesClothesUnclicked()
+	 * 
+	 * This method sets handWashesClothes to false.
+	 */
 	public void setHandWashesClothesUnclicked(){
 		handWashesClothes=false;
 	}
-	
+
+	/**
+	 * setUsesSprinklersUnclicked()
+	 * 
+	 * This method sets usesSprinklers to false.
+	 */
 	public void setUsesSprinklersUnclicked(){
 		usesSprinklers = false;
 	}
-	
+
+	/**
+	 * setHandWatersUnclicked()
+	 * 
+	 * This method sets handWaters to false.
+	 */
 	public void setHandWatersUnclicked(){
 		handWaters=false;
 	}
 
+	/**
+	 * refreshTotal()
+	 * 
+	 * This method sets usesRecyclableWaterBottle to false.
+	 */
 	public void refreshTotal(){
 		updateTotalAmountOfWater();
 	}
+
 	/**
 	 * Tips()
 	 * 
@@ -590,8 +698,17 @@ public class FootPrint {
 		return tipsToReturn;
 	}
 
-private String setTips(String tipsToReturn) {
-		
+	/**
+	 * setTips(String tipsToReturn)
+	 * 
+	 * This method returns the tips that are specific
+	 * to the information entered in the footprint.
+	 * 
+	 * @param tipsToReturn 
+	 * @return
+	 */
+	private String setTips(String tipsToReturn) {
+
 		if(usesPlasticWaterBottle)
 			tipsToReturn+="You should try using Recycleable Water Bottles. \n" ;
 		if(doesDishedByHand)

@@ -35,11 +35,11 @@ class CardDriver extends JPanel
 	private String welcomeText = "Welcome to Help2Out, a water footprint calculator!";
 
 	//all the screens that answer questions
-	private static ScreenWithTwoQuestions chooseWaterBottle;
-	private static ScreenWithTwoQuestions waterPlants;
-	private static ScreenWithTwoQuestions washDishes;
-	private static ScreenWithTwoQuestions bathingWin;
-	private static ScreenWithTwoQuestions washClothes;
+	private static QuestionScreen chooseWaterBottle;
+	private static QuestionScreen waterPlants;
+	private static QuestionScreen washDishes;
+	private static QuestionScreen bathingWin;
+	private static QuestionScreen washClothes;
 	private static FoodServingScreen meatScreen;
 	
 	//buttons to move backward and forward
@@ -127,31 +127,31 @@ class CardDriver extends JPanel
 		pages.add(startScreen,"start");
 
 		allTheScreens.add((Screen) startScreen);
-		chooseWaterBottle = new ScreenWithTwoQuestions("Do you use recyclable bottles?", 
+		chooseWaterBottle = new QuestionScreen("Do you use recyclable bottles?", 
 				"Do you use plastic water bottles?", 
 				"How many water bottles do you use a week?", "bottle");
 		pages.add(chooseWaterBottle, "first");
 
 		allTheScreens.add((Screen) chooseWaterBottle);
-		waterPlants = new ScreenWithTwoQuestions("Do you use sprinkles?", 
+		waterPlants = new QuestionScreen("Do you use sprinklers?", 
 				"Do you water your lawn by hand?", 
 				"How many times a week do you water the lawn?", "plants");
 		pages.add(waterPlants, "second");
 
 		allTheScreens.add((Screen) waterPlants);
-		washDishes = new ScreenWithTwoQuestions("Do you use a dishwasher?", 
+		washDishes = new QuestionScreen("Do you use a dishwasher?", 
 				"Do you wash dishes by hand?", 
 				"How many times a week do you wash dishes", "dishes");
 		pages.add(washDishes, "third");
 
 		allTheScreens.add((Screen) washDishes);
-		washClothes = new ScreenWithTwoQuestions("Do you use a washing machine?", 
+		washClothes = new QuestionScreen("Do you use a washing machine?", 
 				"Do you wash clothes by hand", 
 				"How many loads of laundry do you do in a week?", "clothes");
 		pages.add(washClothes, "fourth");
 
 		allTheScreens.add((Screen) washClothes);
-		bathingWin = new ScreenWithTwoQuestions("Do you take showers?", 
+		bathingWin = new QuestionScreen("Do you take showers?", 
 				"Do you take baths", 
 				"How many times a week do you wash yourself?", "clothes");
 		pages.add(bathingWin, "fifth");
@@ -163,10 +163,10 @@ class CardDriver extends JPanel
 		pages.add(meatScreen, "sixth");
 
 		TipScreen finalTipScreen=new TipScreen();
-		pages.add(finalTipScreen, "sixth");
+		pages.add(finalTipScreen, "seventh");
 
 		InteractivePage interactive = new InteractivePage();
-		pages.add(interactive, "seventh");
+		pages.add(interactive, "eigth");
 
 		allTheScreens.add((Screen) finalTipScreen);
 		allTheScreens.add((Screen) interactive);
@@ -203,11 +203,11 @@ class CardDriver extends JPanel
 						}
 						//set the next and previous buttons only to be shown if 
 						//they are able to be pressed
-						if(indexOfCardLayout==numberOfCards)
-							nextButton.setVisible(false);
-						else
+						if(indexOfCardLayout!=numberOfCards)
 							nextButton.setVisible(true);
-						if(indexOfCardLayout!=0)
+						else
+							nextButton.setVisible(false);
+						if(indexOfCardLayout!=1)
 							previousButton.setVisible(true);
 						else
 							previousButton.setVisible(false);
@@ -247,13 +247,14 @@ class CardDriver extends JPanel
 					cardLayout.previous(pages);
 					moveUserBackward(indexOfCardLayout);
 				}
+
 				//set the buttons so they will only be shown if they can
 				//be pressed
-				if(indexOfCardLayout==numberOfCards)
-					nextButton.setVisible(false);
-				else
+				if(indexOfCardLayout!=numberOfCards)
 					nextButton.setVisible(true);
-				if(indexOfCardLayout!=0)
+				else
+					nextButton.setVisible(false);
+				if(indexOfCardLayout!=1)
 					previousButton.setVisible(true);
 				else
 					previousButton.setVisible(false);
@@ -272,7 +273,7 @@ class CardDriver extends JPanel
 	 */
 	public void moveUserForward(int index){
 		int currentScreenIndex = index;
-		int nextScreenIndex = index+1;
+		int nextScreenIndex = index;
 		//get the current screen and the next screen and update
 		//the user of the next screen
 		Screen currentScreen = (Screen) allTheScreens.get(currentScreenIndex);
@@ -292,7 +293,7 @@ class CardDriver extends JPanel
 	 */
 	public void moveUserBackward(int index){
 		int currentScreenIndex = index;
-		int previousScreenIndex = index-1;
+		int previousScreenIndex = index;
 		Screen currentScreen = (Screen) allTheScreens.get(currentScreenIndex);
 		Screen previousScreen = (Screen) allTheScreens.get(previousScreenIndex);
 		User userToPass = currentScreen.passOnUser();

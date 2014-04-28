@@ -33,16 +33,8 @@ public class ScreenDriver
 	private static CardDriver welcomeScreen;
 	private static TeacherPage teacherScreen;
 	private static AboutScreen aboutScreen;
-	private static InteractivePage interact;
 	private static AllTipScreen tips;
 	
-	/*
-	static ScreenWithTwoQuestions chooseWaterBottle;
-	static ScreenWithTwoQuestions waterPlants;
-	static ScreenWithTwoQuestions washDishes;
-	static ScreenWithTwoQuestions bathingWin;
-	static ScreenWithTwoQuestions washClothes;
-	*/
 
 	
 	public void addComponentToPane(final Container pane){
@@ -53,14 +45,12 @@ public class ScreenDriver
 		welcomeScreen = new CardDriver();
 		teacherScreen = new TeacherPage();
 		aboutScreen=new AboutScreen();
-		interact=new InteractivePage();
 		tips=new AllTipScreen();
 		
 		//add all the screens to the card layout
 		pane.add(welcomeScreen);
 		pane.add(teacherScreen);
 		pane.add(aboutScreen);
-		pane.add(interact);
 		pane.add(tips);
 		/*
 		//make all the screens with the appropriate questions
@@ -101,7 +91,6 @@ public class ScreenDriver
 		tabs.addTab("Home", welcomeScreen);
 		tabs.addTab("Teacher", teacherScreen);
 		tabs.addTab("About", aboutScreen);
-		tabs.addTab("Interactive", interact);
 		tabs.addTab("Tips", tips);
 		//this is what i took out
 		/*
