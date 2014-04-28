@@ -153,7 +153,7 @@ class CardDriver extends JPanel
 		allTheScreens.add((Screen) washClothes);
 		bathingWin = new QuestionScreen("Do you take showers?", 
 				"Do you take baths", 
-				"How many times a week do you wash yourself?", "clothes");
+				"How many times a week do you wash yourself?", "bathing");
 		pages.add(bathingWin, "fifth");
 
 		allTheScreens.add((Screen) bathingWin);
@@ -272,14 +272,18 @@ class CardDriver extends JPanel
 	 * @param index is the index of the screen that is being updated
 	 */
 	public void moveUserForward(int index){
+		
+		if(index <8)
+		{
 		int currentScreenIndex = index;
-		int nextScreenIndex = index;
+		int nextScreenIndex = index+1;
 		//get the current screen and the next screen and update
 		//the user of the next screen
 		Screen currentScreen = (Screen) allTheScreens.get(currentScreenIndex);
 		Screen nextScreen = (Screen) allTheScreens.get(nextScreenIndex);
 		User userToPass = currentScreen.passOnUser();
 		nextScreen.receiveUser(userToPass);
+		}
 	}
 
 	
@@ -293,7 +297,7 @@ class CardDriver extends JPanel
 	 */
 	public void moveUserBackward(int index){
 		int currentScreenIndex = index;
-		int previousScreenIndex = index;
+		int previousScreenIndex = index-1;
 		Screen currentScreen = (Screen) allTheScreens.get(currentScreenIndex);
 		Screen previousScreen = (Screen) allTheScreens.get(previousScreenIndex);
 		User userToPass = currentScreen.passOnUser();

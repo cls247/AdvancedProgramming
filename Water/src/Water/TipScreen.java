@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -165,14 +166,14 @@ public class TipScreen extends JPanel implements Screen, Runnable{
 	public void setTipsString(){
 		
 		if((waterUsed >=0) && (waterUsed <=10000)){
-			
-			tip.setText("You used "+ String.valueOf(waterUsed) +" liters of water. \nYou used a regular amount of water."+
+			String waterUsedString=new DecimalFormat("#0.0000").format(waterUsed);
+			tip.setText("You used "+ waterUsedString +" liters of water. \nYou used a regular amount of water."+
 			"\nIn addition: \n"+ currentUser.getFootPrint().Tips());
 			tip.setWrapStyleWord(true);
 			
 		}else{
-			
-			tip.setText("You used an abnormal amount of water."+
+			String waterUsedString=new DecimalFormat("#0.0000").format(waterUsed);
+			tip.setText("You used an abnormal amount of water."+ waterUsedString+"liters!"+
 			"\nIn addition: \n" +currentUser.getFootPrint().Tips());
 			tip.setWrapStyleWord(true);
 		

@@ -51,7 +51,7 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 	
 	//this is the thread for this question to run on
 	private Thread bottleThread;
-	private User currentUser = new User();
+	private User currentUser=new User();
 
 	//these are the toggle boxes for the first two questions
 	final JCheckBox firstQuestionBox = new JCheckBox();
@@ -114,7 +114,7 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 		//make a spinner for the third question to 
 		//be answered
 		SpinnerNumberModel m_numberSpinnerModel;
-		Double current = new Double(1.00);
+		Double current = new Double(0.00);
 		Double min = new Double(0.00);
 		Double max = new Double(100.00);
 		Double step = new Double(1.00);
@@ -222,7 +222,6 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 
 				secondQuestionBox.setSelected(false);
 
-
 				if(type=="bottle")
 					currentUser.getFootPrint().setUsesRecyclableWaterBottle();				
 				if(type=="plants")
@@ -320,7 +319,7 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 			if(type=="dishes")
 				currentUser.getFootPrint().setDoesDishesByHandUnclicked();
 			if(type=="clothes")
-				currentUser.getFootPrint().setDoesDishesByHandUnclicked();
+				currentUser.getFootPrint().setHandWashesClothesUnclicked();
 		}
 		
 		currentUser.getFootPrint().refreshTotal();
@@ -354,10 +353,12 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 	}
 	@Override
 	public User passOnUser() {
+		System.out.println("pass on user");
 		return currentUser;
 	}
 	@Override
 	public void receiveUser(User setCurrentUser) {
+		System.out.println("pass back user");
 		currentUser=setCurrentUser;		
 	}
 	@Override

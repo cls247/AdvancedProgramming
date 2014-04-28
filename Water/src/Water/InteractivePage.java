@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
@@ -61,6 +62,14 @@ public class InteractivePage extends JPanel implements Screen{
 	private JLabel textTotal12=new JLabel();
 	private JLabel textTotal13=new JLabel();
 	
+	JLabel[] textTotalArray = {
+		textTotal1, textTotal2, textTotal3,
+		textTotal4, textTotal5, textTotal6, 
+		textTotal7, textTotal8, textTotal9,
+		textTotal10, textTotal11, textTotal12,
+		textTotal13
+	};
+	
 	//text areas for tracking total water consumption and its status
 	private JTextField textWater = new JTextField("00");
 	private JLabel consumptionStatus = new JLabel("");
@@ -80,6 +89,14 @@ public class InteractivePage extends JPanel implements Screen{
 	private JLabel label12 = new JLabel("Servings of Corn");
 	private JLabel label13 = new JLabel("Servings of Green Veggies");
 	
+	JLabel[] labelArray = {
+		label1, label2, label3,
+		label4, label5, label6, 
+		label7, label8, label9,
+		label10, label11, label12,
+		label13
+	};
+	
 	//sliders
 	final JSlider slider1 = new JSlider();
 	final JSlider slider2 = new JSlider();
@@ -94,6 +111,33 @@ public class InteractivePage extends JPanel implements Screen{
 	final JSlider slider11 = new JSlider();
 	final JSlider slider12 = new JSlider();
 	final JSlider slider13 = new JSlider();
+	
+	JSlider[] sliderArray = {
+		slider1, slider2, slider3,
+		slider4, slider5, slider6,
+		slider7, slider8, slider9,
+		slider10, slider11, slider12,
+		slider13
+	};
+
+	//functions for updating the footprint depending on the slider
+	String[] setterFunctionArray = {
+			"setNumberOfWaterBottles", "setNumberOfLoadsOfClothes", "setNumberOfTimesDoesDishes",
+			"setNumberOfWashes", "setNumberOfTimesWaterPlants", "setServingOfBeef",
+			"setServingOfChicken", "setServingOfLamb", "setServingOfEggs",
+			"setServingOfLentils", "setServingOfPasta", "setServingOfCorn",
+			"setServingOfVeggies"
+	};
+	
+	 Class[] argTypes = new Class[] {int.class};
+	 
+	String[] getterFunctionArray = {
+			"getNumberOfWaterBottles", "getNumberOfLoadsOfClothes", "getNumberOfTimesDoesDishes",
+			"getNumberOfWashes", "getNumberOfTimesWaterPlants", "getServingOfBeef",
+			"getServingOfChicken", "getServingOfLamb", "getServingOfEggs",
+			"getServingOfLentils", "getServingOfPasta", "getServingOfCorn",
+			"getServingOfVeggies"
+	};
 	
 	//this is the background image
 	private Image bkgd;
@@ -142,341 +186,58 @@ public class InteractivePage extends JPanel implements Screen{
 		topPanel.add(new JLabel());
 		getConsumptionStatus();
 		
+		//check that all booleans from previous screens have been checked
+		checkBooleans();
+		
 		//add the sliders to the page
 		addSliders();
 	}
 	
-	public void addSliders(){
+	/**
+	 * If the user did not make a selection on one of the previous screens, the program assumes that
+	 * they use the least wasteful option
+	 */
+	public void checkBooleans(){
+		if (!currentFootPrint.getUsesDishWasher() && !currentFootPrint.getDoesDishesByHand()){
+			currentFootPrint.setUsesDishWasher();
+		}
 		
-		//******
+		if (!currentFootPrint.getHandWashesClothes() && !currentFootPrint.getUsesWashingMachine()){
+			currentFootPrint.setHandWashesClothes();
+		}
+		
+		if (!currentFootPrint.getTakesShowers() && !currentFootPrint.getTakesBaths()){
+			currentFootPrint.setTakesBaths();
+		}
+		
+		if (!currentFootPrint.getUsesSprinklers() && !currentFootPrint.getHandWaters()){
+			currentFootPrint.setHandWaters();
+		}
+		
+		if (!currentFootPrint.getUsesPlasticWaterBottle() && !currentFootPrint.getUsesRecyclableWaterBottle()){
+			currentFootPrint.setUsesRecyclableWaterBottle();
+		}
+	}
+
+	/**
+	 * adds rows of sliders to the slider panel
+	 */
+	public void addSliders(){
 		//This is a bunch of sliders that the user can manipulate.
 		//When the slider is called, it update the TextAreas and it updates
 		//the footprint based on what was input from the user. 
-		//labels for the first row
 		
-		//labels for the first row
-		sliderPanel.add(label1);
-		sliderPanel.add(label2);
-		sliderPanel.add(label3);
+		//first row of sliders
+		createSliderRow(1, 3);
+		//second row of sliders
+		createSliderRow(4, 6);
+		//third row of sliders
+		createSliderRow(7, 9);
+		//fourth row of sliders
+		createSliderRow(10, 12);
+		//fifth row of sliders
+		createSliderRow(13, 13);
 		
-		//sliders for the first row		
-		
-		//add the sldier to the slider panel
-		sliderPanel.add(slider1, "Water Bottles");
-		
-		//create a new change listener
-		slider1.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// change the number of water bottles in the footprint
-				//then update the various values on the screen
-				currentFootPrint.setNumberOfWaterBottles(slider1.getValue());
-				textTotal1.setText(String.valueOf(slider1.getValue()));
-				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		//set some preferences on the slider
-		slider1.setMajorTickSpacing(10); 
-		slider1.setPaintLabels(true); 
-		slider1.setPaintTicks(true); 
-		
-		slider2.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				System.out.println(slider2.getValue());
-				currentFootPrint.setNumberOfLoadsOfClothes(slider2.getValue());
-				textTotal2.setText(String.valueOf(slider2.getValue()));
-				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		slider2.setMajorTickSpacing(10); 
-		slider2.setPaintLabels(true); 
-		slider2.setPaintTicks(true); 
-		sliderPanel.add(slider2, "Meat Servings");
-		
-		
-		slider3.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				 
-				currentFootPrint.setNumberOfTimesDoesDishes(slider3.getValue());
-				textTotal3.setText(String.valueOf(slider3.getValue()));
-				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		slider3.setMajorTickSpacing(10); 
-		slider3.setPaintLabels(true); 
-		slider3.setPaintTicks(true); 
-		sliderPanel.add(slider3, "Grain Servings");
-		
-		//displays values of the sliders in the first row
-		sliderPanel.add(textTotal1);
-		sliderPanel.add(textTotal2);
-		sliderPanel.add(textTotal3);
-		
-		//labels for the second row
-		sliderPanel.add(label4);
-		sliderPanel.add(label5);
-		sliderPanel.add(label6);
-		
-		
-		//sliders for the second row
-		slider4.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				 
-				currentFootPrint.setNumberOfWashes(slider4.getValue());
-				textTotal4.setText(String.valueOf(slider4.getValue()));
-				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		slider4.setMajorTickSpacing(10); 
-		slider4.setPaintLabels(true); 
-		slider4.setPaintTicks(true); 
-		sliderPanel.add(slider4, "Fruits and Vegetables Servings");
-		
-		slider5.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				currentFootPrint.setNumberOfTimesWaterPlants(slider5.getValue());
-				textTotal5.setText(String.valueOf(slider5.getValue()));				
-				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		slider5.setMajorTickSpacing(10); 
-		slider5.setPaintLabels(true); 
-		slider5.setPaintTicks(true); 
-		sliderPanel.add(slider5, "Fruits and Vegetables Servings");
-		
-		slider6.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				 
-				currentFootPrint.setServingOfBeef(slider6.getValue());
-				textTotal6.setText(String.valueOf(slider6.getValue()));
-				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		slider6.setMajorTickSpacing(10); 
-		slider6.setPaintLabels(true); 
-		slider6.setPaintTicks(true); 
-		sliderPanel.add(slider6, "Fruits and Vegetables Servings");
-		
-		//displays values of the sliders in the second row
-		sliderPanel.add(textTotal4);
-		sliderPanel.add(textTotal5);
-		sliderPanel.add(textTotal6);
-		
-		//labels for the third row
-		sliderPanel.add(label7);
-		sliderPanel.add(label8);
-		sliderPanel.add(label9);
-		
-		//sliders for the third row
-		slider7.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				 
-				currentFootPrint.setServingOfChicken(slider7.getValue());
-				textTotal7.setText(String.valueOf(slider7.getValue()));
-				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		slider7.setMajorTickSpacing(10); 
-		slider7.setPaintLabels(true); 
-		slider7.setPaintTicks(true); 
-		sliderPanel.add(slider7, "Fruits and Vegetables Servings");
-		
-		slider8.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				 
-				currentFootPrint.setServingOfLamb(slider8.getValue());
-				textTotal8.setText(String.valueOf(slider8.getValue()));
-				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		slider8.setMajorTickSpacing(10); 
-		slider8.setPaintLabels(true); 
-		slider8.setPaintTicks(true); 
-		sliderPanel.add(slider8, "Fruits and Vegetables Servings");
-		
-		slider9.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				 
-				currentFootPrint.setServingOfEggs(slider9.getValue());
-				textTotal9.setText(String.valueOf(slider9.getValue()));
-				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		slider9.setMajorTickSpacing(10); 
-		slider9.setPaintLabels(true); 
-		slider9.setPaintTicks(true); 
-		sliderPanel.add(slider9, "Fruits and Vegetables Servings");	
-		
-		//displays values of the sliders in the third row
-		sliderPanel.add(textTotal7);
-		sliderPanel.add(textTotal8);
-		sliderPanel.add(textTotal9);
-		
-		//labels for the fourth row
-		sliderPanel.add(label10);
-		sliderPanel.add(label11);
-		sliderPanel.add(label12);
-		
-		//sliders for the fourth row
-		slider10.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				 
-				currentFootPrint.setServingOfLentils(slider10.getValue());
-				textTotal10.setText(String.valueOf(slider10.getValue()));
-				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		slider10.setMajorTickSpacing(10); 
-		slider10.setPaintLabels(true); 
-		slider10.setPaintTicks(true); 
-		sliderPanel.add(slider10, "Fruits and Vegetables Servings");	
-		
-		slider11.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				 
-				currentFootPrint.setServingOfPasta(slider11.getValue());
-				textTotal11.setText(String.valueOf(slider11.getValue()));
-				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		slider11.setMajorTickSpacing(10); 
-		slider11.setPaintLabels(true); 
-		slider11.setPaintTicks(true); 
-		sliderPanel.add(slider11, "Fruits and Vegetables Servings");	
-		
-		slider12.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				 
-				currentFootPrint.setServingOfCorn(slider12.getValue());
-				textTotal12.setText(String.valueOf(slider12.getValue()));
-				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		slider12.setMajorTickSpacing(10); 
-		slider12.setPaintLabels(true); 
-		slider12.setPaintTicks(true); 
-		sliderPanel.add(slider12, "Fruits and Vegetables Servings");	
-		
-		//displays values of the sliders in the fourth row
-		sliderPanel.add(textTotal10);
-		sliderPanel.add(textTotal11);
-		sliderPanel.add(textTotal12);
-		
-		//labels for the fifth row
-		sliderPanel.add(label13);
-		sliderPanel.add(new JLabel());
-		sliderPanel.add(new JLabel());
-		
-		//sliders for the fifth row
-		slider13.addChangeListener(new ChangeListener()
-		{
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				//this will hold the value of the slider
-				 
-				currentFootPrint.setServingOfVeggies(slider13.getValue());
-				textTotal13.setText(String.valueOf(slider13.getValue()));
-				textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-				getConsumptionStatus();
-			}
-			
-		});
-		slider13.setMajorTickSpacing(10); 
-		slider13.setPaintLabels(true); 
-		slider13.setPaintTicks(true); 
-		sliderPanel.add(slider13, "Fruits and Vegetables Servings");	
-		
-		//blank filler labels
-		sliderPanel.add(new JLabel());
-		sliderPanel.add(new JLabel());
-		
-		//displays values of the sliders in the fifth row
-		sliderPanel.add(textTotal13);
-
-				
 		//scroll pane to make the sliders scrollable
 		JScrollPane sliderScrollPane = new JScrollPane(sliderPanel);
 		sliderScrollPane.setViewportView(sliderPanel);
@@ -493,50 +254,184 @@ public class InteractivePage extends JPanel implements Screen{
 	}
 	
 	/**
+	 * creates a row of sliders with associated labels
+	 * @param min the beginning index of the row
+	 * @param max the ending index of the row
+	 */
+	public void createSliderRow(int min, int max){
+		
+		//add labels for displaying the slider name
+		for (int i = min - 1; i < max; i++){
+			sliderPanel.add(labelArray[i]);
+			
+			//add any blanks necessary for formatting purposes
+			addBlanks(min);
+		}
+		
+		for (int i = min - 1; i < max; i++){
+			//get the current slider and its associated text display
+			final JSlider currentSlider = sliderArray[i];
+			final JLabel currentText = textTotalArray[i];
+			
+			//add the slider to the slider panel
+			sliderPanel.add(currentSlider);
+			
+			//add change listeners with the appropriate update function depending on the slider
+			final int function = i;
+			currentSlider.addChangeListener(new ChangeListener(){
+
+				@Override
+				public void stateChanged(ChangeEvent e) {
+					// change the number of water bottles in the footprint
+					//then update the various values on the screen
+					try {
+						currentFootPrint.getClass().getDeclaredMethod(setterFunctionArray[function], argTypes).invoke(currentFootPrint, currentSlider.getValue());
+					} catch (IllegalArgumentException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SecurityException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IllegalAccessException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (InvocationTargetException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (NoSuchMethodException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					//update the various displays on the page
+					currentText.setText(String.valueOf(currentSlider.getValue()));
+					textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
+					getConsumptionStatus();
+				}
+				
+			});
+			//set some slider preferences
+			currentSlider.setMajorTickSpacing(10); 
+			currentSlider.setPaintLabels(true); 
+			currentSlider.setPaintTicks(true);
+			
+			//add any blank panels necessary for formatting
+			addBlanks(min);
+		}
+		
+		//add panels for displaying the slider values
+		for (int i = min - 1; i < max; i++){
+			sliderPanel.add(textTotalArray[i]);
+			
+			//add any blanks necessary for formatting
+			addBlanks(min);
+		}
+	}
+	
+	/**
+	 * tests to see if blank panels are necessary to keep formatting consistent
+	 * @param index the current jslider being added
+	 */
+	public void addBlanks(int index){
+		//if there is an extra row with one slider, add two blank panels
+		if (sliderArray.length % 3 == 1 && index == sliderArray.length){
+			sliderPanel.add(new JPanel());
+			sliderPanel.add(new JPanel());
+		}
+		
+		//if there is an extra row with two sliders, add one blank panel
+		if (sliderArray.length % 3 == 2 && index == sliderArray.length){
+			sliderPanel.add(new JPanel());
+		}
+	}
+	
+	/**
 	 * updates the values displayed on the sliders and the labels beneath them
 	 */
 	public void updateSliders(){
+			//updates the sliders whenever a new user profile is passed in 
 		
-				//updates the sliders whenever a new user profile is passed in 
-		
-				slider1.setValue(currentFootPrint.getNumberOfWaterBottles());
-				textTotal1.setText(String.valueOf(currentFootPrint.getNumberOfWaterBottles()));
+		/*for (int i = 0; i <13; i++){	
+			System.out.println("Array Length: " + sliderArray.length);
+			System.out.println("i: " + i);
+			
+			JSlider currentSlider = sliderArray[i];
+			JLabel currentText = textTotalArray[i];
+			
+			try {
+				currentSlider.setValue((Integer) currentFootPrint.getClass().getMethod(getterFunctionArray[i], null).invoke(currentFootPrint));
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				currentText.setText((String) currentFootPrint.getClass().getMethod(getterFunctionArray[i], null).invoke(currentFootPrint));
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}*/
+			slider1.setValue(currentFootPrint.getNumberOfWaterBottles());
+			textTotal1.setText(String.valueOf(currentFootPrint.getNumberOfWaterBottles()));
+			
+			slider2.setValue(currentFootPrint.getNumberOfLoadsOfClothes());
+			textTotal2.setText(String.valueOf(currentFootPrint.getNumberOfLoadsOfClothes()));
+			
+			slider3.setValue(currentFootPrint.getNumberOfTimesDoesDishes());
+			textTotal3.setText(String.valueOf(currentFootPrint.getNumberOfTimesDoesDishes()));
+			
+			slider4.setValue(currentFootPrint.getNumberOfWashes());
+			textTotal4.setText(String.valueOf(currentFootPrint.getNumberOfWashes()));
+			
+			slider5.setValue(currentFootPrint.getNumberOfTimesWaterPlants());
+			textTotal5.setText(String.valueOf(currentFootPrint.getNumberOfTimesWaterPlants()));
+			
+			slider6.setValue(currentFootPrint.getServingOfBeef());
+			textTotal6.setText(String.valueOf(currentFootPrint.getServingOfBeef()));
 				
-				slider2.setValue(currentFootPrint.getNumberOfLoadsOfClothes());
-				textTotal2.setText(String.valueOf(currentFootPrint.getNumberOfLoadsOfClothes()));
-				
-				slider3.setValue(currentFootPrint.getNumberOfTimesDoesDishes());
-				textTotal3.setText(String.valueOf(currentFootPrint.getNumberOfTimesDoesDishes()));
-				
-				slider4.setValue(currentFootPrint.getNumberOfWashes());
-				textTotal4.setText(String.valueOf(currentFootPrint.getNumberOfWashes()));
-				
-				slider5.setValue(currentFootPrint.getNumberOfTimesWaterPlants());
-				textTotal5.setText(String.valueOf(currentFootPrint.getNumberOfTimesWaterPlants()));
-				
-				slider6.setValue(currentFootPrint.getServingOfBeef());
-				textTotal6.setText(String.valueOf(currentFootPrint.getServingOfBeef()));
+			slider7.setValue(currentFootPrint.getServingOfChicken());
+			textTotal7.setText(String.valueOf(currentFootPrint.getServingOfChicken()));
 					
-				slider7.setValue(currentFootPrint.getServingOfChicken());
-				textTotal7.setText(String.valueOf(currentFootPrint.getServingOfChicken()));
-						
-				slider8.setValue(currentFootPrint.getServingOfLamb());
-				textTotal8.setText(String.valueOf(currentFootPrint.getServingOfLamb()));
-		
-				slider9.setValue(currentFootPrint.getServingOfEggs());
-				textTotal9.setText(String.valueOf(currentFootPrint.getServingOfEggs()));
+			slider8.setValue(currentFootPrint.getServingOfLamb());
+			textTotal8.setText(String.valueOf(currentFootPrint.getServingOfLamb()));
+	
+			slider9.setValue(currentFootPrint.getServingOfEggs());
+			textTotal9.setText(String.valueOf(currentFootPrint.getServingOfEggs()));
 
-				slider10.setValue(currentFootPrint.getServingOfLentils());
-				textTotal10.setText(String.valueOf(currentFootPrint.getServingOfLentils()));
+			slider10.setValue(currentFootPrint.getServingOfLentils());
+			textTotal10.setText(String.valueOf(currentFootPrint.getServingOfLentils()));
+			
+			slider11.setValue(currentFootPrint.getServingOfPasta());
+			textTotal11.setText(String.valueOf(currentFootPrint.getServingOfPasta()));
 				
-				slider11.setValue(currentFootPrint.getServingOfPasta());
-				textTotal11.setText(String.valueOf(currentFootPrint.getServingOfPasta()));
+			slider12.setValue(currentFootPrint.getServingOfCorn());
+			textTotal12.setText(String.valueOf(currentFootPrint.getServingOfCorn()));
 					
-				slider12.setValue(currentFootPrint.getServingOfCorn());
-				textTotal12.setText(String.valueOf(currentFootPrint.getServingOfCorn()));
-						
-				slider13.setValue(currentFootPrint.getServingsOfVeggies());
-				textTotal13.setText(String.valueOf(currentFootPrint.getServingsOfVeggies()));
+			slider13.setValue(currentFootPrint.getServingsOfVeggies());
+			textTotal13.setText(String.valueOf(currentFootPrint.getServingsOfVeggies()));
 	}
 	
 	/**
@@ -585,7 +480,7 @@ public class InteractivePage extends JPanel implements Screen{
 		//update the footprint associated with the user and the total amount of water displayed
 		currentFootPrint=currentUser.getFootPrint();
 		textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-		
+
 		//update the sliders based on the new user
 		updateSliders();
 	}

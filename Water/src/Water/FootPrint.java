@@ -11,19 +11,19 @@ package Water;
  */
 public class FootPrint {
 
-	private boolean usesRecyclableWaterBottle=true;
+	private boolean usesRecyclableWaterBottle=false;
 	private boolean usesPlasticWaterBottle=false;
 	private final double literPerPlaticWaterBottle=1.8;
 	private final double literPerRecycableWaterBottle=.6;
 	private int numberOfWaterBottles=0;
 
-	private boolean usesSprinklers=true;
+	private boolean usesSprinklers=false;
 	private final int literPerSprinklerPerTime=90;
 	private boolean handWaters=false;
 	private final int literPerHandWaterTime=50;
 	private int numberOfTimesWaterPlants;
 
-	private boolean usesDishWasher=true;
+	private boolean usesDishWasher=false;
 	private final int literPerDishWater=3;
 	private boolean doesDishedByHand=false;
 	private final int literPerDishesByHand=10;
@@ -46,13 +46,13 @@ public class FootPrint {
 	private int servingOfEggs=0;
 	private final int literPerServingOfEggs=135;
 
-	private boolean takesShowers=true;
+	private boolean takesShowers=false;
 	private final double literPerShowerPerMinute=35;
 	private boolean takesBaths=false;
 	private final double litersPerBath=50;
 	private int numberOfWashes=0;
 
-	private boolean usesWashingMachine=true;
+	private boolean usesWashingMachine=false;
 	private boolean handWashesClothes=false;
 	private int numberOfLoadsOfClothes=0;
 	private final int litersPerLoadsOfClothersWashingMachine=20;
@@ -461,6 +461,7 @@ public class FootPrint {
 	 */
 	public void updateTotalAmountOfWater()
 	{
+		
 		//write an equation that takes
 		//all the information that is 
 		//in private data memebers
@@ -484,8 +485,8 @@ public class FootPrint {
 		
 		System.out.println("totalLitersAmountOfWater"+totalLitersAmountOfWater);
 		System.out.println("literPerPlaticWaterBottle"+literPerPlaticWaterBottle);
-		System.out.println("numberOfWaterBottles"+numberOfWaterBottles);}
-		
+		System.out.println("numberOfWaterBottles"+numberOfWaterBottles);
+		}
 		if(usesDishWasher)
 		{
 			totalLitersAmountOfWater+=literPerDishWater*numberOfTimesDoesDishes;
@@ -528,7 +529,7 @@ public class FootPrint {
 		}
 
 		waterBottle.setWaterBottle(totalLitersAmountOfWater);
-
+		System.out.println("print out the total"+totalLitersAmountOfWater);
 	}
 
 	/**
@@ -742,5 +743,45 @@ public class FootPrint {
 		return tipsToReturn;
 	}
 
+	//boolean getters
+	public boolean getDoesDishesByHand(){
+		return doesDishedByHand;
+	}
+	
+	public boolean getHandWashesClothes(){
+		return handWashesClothes;
+	}
+	
+	public boolean getHandWaters(){
+		return handWaters;
+	}
+	
+	public boolean getUsesDishWasher(){
+		return usesDishWasher;
+	}
+	
+	public boolean getUsesPlasticWaterBottle(){
+		return usesPlasticWaterBottle;
+	}
+	
+	public boolean getUsesRecyclableWaterBottle(){
+		return usesRecyclableWaterBottle;
+	}
+	
+	public boolean getUsesSprinklers(){
+		return usesSprinklers;
+	}
+	
+	public boolean getUsesWashingMachine(){
+		return usesWashingMachine;
+	}
+	
+	public boolean getTakesBaths(){
+		return takesBaths;
+	}
+	
+	public boolean getTakesShowers(){
+		return takesShowers;
+	}
 
 }
