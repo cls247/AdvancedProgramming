@@ -127,7 +127,7 @@ public class ScreenDriver
 		final JFrame frame = new JFrame("Water");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
-		frame.setPreferredSize(new Dimension(1000,800));
+		frame.setPreferredSize(new Dimension(800,660)));
 		frame.setFocusable(true);
 		
 //		JPanel jp = new JPanel();

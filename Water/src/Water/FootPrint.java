@@ -485,8 +485,8 @@ public class FootPrint {
 		
 		System.out.println("totalLitersAmountOfWater"+totalLitersAmountOfWater);
 		System.out.println("literPerPlaticWaterBottle"+literPerPlaticWaterBottle);
-		System.out.println("numberOfWaterBottles"+numberOfWaterBottles);
-		}
+		System.out.println("numberOfWaterBottles"+numberOfWaterBottles);}
+		
 		if(usesDishWasher)
 		{
 			totalLitersAmountOfWater+=literPerDishWater*numberOfTimesDoesDishes;
@@ -743,7 +743,7 @@ public class FootPrint {
 		return tipsToReturn;
 	}
 
-	//boolean getters
+
 	public boolean getDoesDishesByHand(){
 		return doesDishedByHand;
 	}

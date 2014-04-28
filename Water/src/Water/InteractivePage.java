@@ -186,9 +186,6 @@ public class InteractivePage extends JPanel implements Screen{
 		topPanel.add(new JLabel());
 		getConsumptionStatus();
 		
-		//check that all booleans from previous screens have been checked
-		checkBooleans();
-		
 		//add the sliders to the page
 		addSliders();
 	}
@@ -198,6 +195,7 @@ public class InteractivePage extends JPanel implements Screen{
 	 * they use the least wasteful option
 	 */
 	public void checkBooleans(){
+		System.out.println("checking booleans");
 		if (!currentFootPrint.getUsesDishWasher() && !currentFootPrint.getDoesDishesByHand()){
 			currentFootPrint.setUsesDishWasher();
 		}
@@ -285,6 +283,9 @@ public class InteractivePage extends JPanel implements Screen{
 					// change the number of water bottles in the footprint
 					//then update the various values on the screen
 					try {
+						//check that all booleans from previous screens have been checked
+						checkBooleans();
+						
 						currentFootPrint.getClass().getDeclaredMethod(setterFunctionArray[function], argTypes).invoke(currentFootPrint, currentSlider.getValue());
 					} catch (IllegalArgumentException e1) {
 						// TODO Auto-generated catch block
@@ -309,7 +310,7 @@ public class InteractivePage extends JPanel implements Screen{
 				}
 				
 			});
-			//set some slider preferences
+			//set some slider prefferences
 			currentSlider.setMajorTickSpacing(10); 
 			currentSlider.setPaintLabels(true); 
 			currentSlider.setPaintTicks(true);

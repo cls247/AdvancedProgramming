@@ -100,6 +100,10 @@ public class Bottle {
 			currentBottle = 21;
 			
 		}
+		else if(currentBottle<0)
+		{
+			currentBottle=0;
+		}
 		
 	}
 	
