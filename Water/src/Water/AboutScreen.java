@@ -121,6 +121,11 @@ public class AboutScreen extends JPanel implements Screen {
 
 	}
 
+	/**
+	 * drawBackground() 
+	 * 
+	 * This method draws the background image for the screen.
+	 */
 	@Override
 	public void drawBackground() {
 		try {

@@ -29,6 +29,9 @@ public class AllTipScreen extends JPanel implements Screen{
 	 * This is the image that will be the background
 	 */
 	private Image bkgd;
+	/**
+	 * This is the user that will be updated throughout the scereen.
+	 */
 	private User currentUser;
 	
 	/**
@@ -143,6 +146,11 @@ public class AllTipScreen extends JPanel implements Screen{
 		
 	}
 
+	/**
+	 * drawBackground() 
+	 * 
+	 * This method draws the background of the screen.
+	 */
 	@Override
 	public void drawBackground() {
 		try {

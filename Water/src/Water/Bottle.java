@@ -28,10 +28,14 @@ public class Bottle {
 	
 	private int currentBottle=0;
 	
+	//this private data variable holds the 
+	//index of the current overflow water
+	//bottle
 	private int currentOverflow = 0;
 	
 	//this is an arraylist of all the water bottle from 1-21
 	private ArrayList <String> waterBottles=new ArrayList<String>();
+	//this is an arraylist of all the water bottles with overflow from 1-21
 	private ArrayList <String> overflowBottles=new ArrayList<String>();
 	
 	/**
@@ -59,6 +63,11 @@ public class Bottle {
 		}
 	}
 	
+	/**
+	 * addWater()
+	 * 
+	 * This method adds the correct string to every index of the ArrayList
+	 */
 	public void addOverflow(){
 		
 		for(int i=0; i< 22; i++){
@@ -144,6 +153,7 @@ public class Bottle {
 	public boolean isNotFull(){
 		return (currentBottle <= 21);
 	}
+	
 	/**
 	 * getImageBottle()
 	 * 
@@ -152,6 +162,7 @@ public class Bottle {
 	{
 		return waterBottles.get(index);
 	}
+	
 	/**
 	 * getOverFlowImage()
 	 * 

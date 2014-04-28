@@ -68,7 +68,8 @@ public class BottleTest {
 	/**
 	 * testSetWaterBottle(double total)
 	 * 
-	 * 
+	 * This method test the setWaterBottle method of
+	 * the water bottle class.
 	 */
 	public void testSetWaterBottle(double total)
 	{
@@ -93,8 +94,5 @@ public class BottleTest {
 		testBottle.setWaterBottle(210000);
 		assertEquals(false, testBottle.isNotFull());
 	}
-
-
-
 }
 

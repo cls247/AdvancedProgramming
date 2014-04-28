@@ -42,10 +42,11 @@ class CardDriver extends JPanel
 	private static ScreenWithTwoQuestions washClothes;
 	private static FoodServingScreen meatScreen;
 	
-	//button to move backward and forward
+	//buttons to move backward and forward
 	private JButton previousButton;
 	private JButton nextButton;
 	
+	//Jpanel that holds the buttons
 	private JPanel buttonPanel;
 	
 	//arraylist of all the screens 
@@ -78,6 +79,8 @@ class CardDriver extends JPanel
 	/**
 	 * init() 
 	 * 
+	 * This method sets up the button panel and all the 
+	 * screens that go in the Card Layout.
 	 */
 	private void init() 
 	{   		
@@ -86,21 +89,25 @@ class CardDriver extends JPanel
 		buttonPanel = new JPanel(); 
 		buttonPanel.setFocusable(true);
 
-		//add a button to go forward
+		//add a button to go backward
 		makePreviousButton();
 
+		//add a button to go forward
 		makeNextButton();
 
+		//add the buttons to the panel
 		buttonPanel.add(previousButton);
 		buttonPanel.add(nextButton);
     
 		pages = new JPanel(new CardLayout());
 
+		//make all the screens in the Card Layout
 		makeScreens();
 
 		bigPane.add(pages, BorderLayout.CENTER);
 		bigPane.add(buttonPanel, BorderLayout.PAGE_END);
 
+		//add the card layout to the screen
 		add(bigPane);
 
 	}
@@ -109,10 +116,12 @@ class CardDriver extends JPanel
 	 * makeScreens()
 	 * 
 	 * This method makes all the screen to be flipped 
-	 * through throughout the CardDriver.
+	 * through throughout the CardDriver. Each of the screens
+	 * are made and added to the card layout. 
 	 */
 	
 	private void makeScreens() {
+		
 		StartScreen startScreen = new StartScreen();
 		startScreen.receiveUser(currentUser);
 		pages.add(startScreen,"start");
@@ -192,6 +201,8 @@ class CardDriver extends JPanel
 							cardLayout.next(pages);  
 							moveUserForward(indexOfCardLayout);
 						}
+						//set the next and previous buttons only to be shown if 
+						//they are able to be pressed
 						if(indexOfCardLayout==numberOfCards)
 							nextButton.setVisible(false);
 						else
@@ -214,6 +225,7 @@ class CardDriver extends JPanel
 	 */
 
 	private void makePreviousButton() {
+		//make the button to move backward in the card layout
 		previousButton = new JButton("PREVIOUS");
 		previousButton.setBackground(Color.BLACK);
 		previousButton.setForeground(Color.BLACK);
@@ -235,6 +247,8 @@ class CardDriver extends JPanel
 					cardLayout.previous(pages);
 					moveUserBackward(indexOfCardLayout);
 				}
+				//set the buttons so they will only be shown if they can
+				//be pressed
 				if(indexOfCardLayout==numberOfCards)
 					nextButton.setVisible(false);
 				else

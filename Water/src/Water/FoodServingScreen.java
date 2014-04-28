@@ -30,24 +30,31 @@ import javax.swing.JScrollPane;
 
 public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
+	//great a thread for the screen to run on
 	private Thread dragToPlate = new Thread();
+	//set the delay so it runs smoothly
 	private final int DELAY = 20;
 
+	//set the waterbottle to be shown on the screen
 	private ImageIcon waterBottle;
 	private Image bottle;
+	//add an image for the background
 	private Image bkgd;
 
+	//create a panel for the buttons.
 	private final JPanel bottomPanel = new JPanel();
 	private JPanel topPanel = new JPanel();
 	private JPanel foodButtonPanel = new JPanel();
 	private JScrollPane foodScrollPane = new JScrollPane(bottomPanel);
 
+	//set up the rows and collumns for the screen
 	private final int ROWS = 8;
 	private final int COLUMNS = 8;
 	private final int BUTTON_WIDTH = 95;
 	private final int BUTTON_HEIGHT = 95;
 	private ArrayList<JButton> buttonsOnBottomPanel = new ArrayList<JButton>();
 
+	//make the icons to be put on the buttons
 	private final ImageIcon chickenIcon = new ImageIcon("chicken.jpg");
 	private final ImageIcon lambIcon = new ImageIcon("lamb.jpg");
 	private final ImageIcon beefIcon = new ImageIcon("beef.jpg");
@@ -57,6 +64,9 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 	private final ImageIcon pastaIcon = new ImageIcon("pasta.jpg");
 	private final ImageIcon veggiesIcon = new ImageIcon("veggies.jpg");
 
+	//make the buttons to be pressed in order to increase
+	//the amount of each serving of the respective
+	//foods
 	private final JButton chickenButton = new JButton();
 	private final JButton lambButton = new JButton();
 	private final JButton cowButton = new JButton();
@@ -66,6 +76,8 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 	private final JButton pastaButton = new JButton();
 	private final JButton veggiesButton = new JButton();
 
+	// this should hold the total amount of the 
+	// of the servings of their respective foods.
 	private int cowServings = 0;
 	private int chickenServings = 0;
 	private int lambServings = 0;
@@ -75,6 +87,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 	private int pastaServings = 0;
 	private int veggieServings = 0;
 
+	//this is the user to be editted
 	private User currentUser = new User();
 
 	/**
@@ -135,6 +148,14 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 		}
 	}
 
+	/**
+	 * makeTopButton()
+	 * 
+	 * This method creates the top botton
+	 * 
+	 * @param bottomButtonListener
+	 * @return
+	 */
 	private ActionListener makeTopButton(
 			final ActionListener bottomButtonListener) {
 		// action listener for the buttons on the top panel so that when a
@@ -206,6 +227,14 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 		return topButtonListener;
 	}
 
+	
+	/**
+	 * makeBottomButton()
+	 * 
+	 * This method makes the bottom button.
+	 * 
+	 * @return
+	 */
 	private ActionListener makeBottomButton() {
 		// action listener for the buttons on the bottom of the panel so
 		// that they can be deleted and removed from this
