@@ -1,9 +1,8 @@
 package Water;
 
 /**
- * This is a template for all of the screens
- * 
- * @author Sand
+ * This is a template for all of the screens that has
+ * specific methods to be impletmented by each screen.
  * 
  */
 public interface Screen {

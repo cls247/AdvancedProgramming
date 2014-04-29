@@ -12,54 +12,73 @@ package Water;
  */
 public class FootPrint {
 
+	// booleans for type of water bottle used
 	private boolean usesRecyclableWaterBottle = false;
 	private boolean usesPlasticWaterBottle = false;
+
+	// constants for the liters per each type of bottle
 	private final double literPerPlaticWaterBottle = 1.8;
 	private final double literPerRecycableWaterBottle = .6;
 	private int numberOfWaterBottles = 0;
 
+	// booleans for the type of lawn-watering the user does
 	private boolean usesSprinklers = false;
-	private final int literPerSprinklerPerTime = 90;
 	private boolean handWaters = false;
+
+	// constant for the liters of water used per each type
+	private final int literPerSprinklerPerTime = 90;
 	private final int literPerHandWaterTime = 50;
 	private int numberOfTimesWaterPlants = 0;
 
+	// booleans for the type of dish washing the user does
 	private boolean usesDishWasher = false;
-	private final int literPerDishWater = 3;
 	private boolean doesDishedByHand = false;
+
+	// constants for the liters per water used by each kind
+	private final int literPerDishWater = 3;
 	private final int literPerDishesByHand = 10;
 	private int numberOfTimesDoesDishes = 0;
 
-	private int servingOfBeef = 0;
+	// constants for the liters of water used for each type of food
 	private final int literPerServingOfBeef = 2024;
-	private int servingOfChicken = 0;
 	private final int literPerServingOfChicken = 350;
-	private int servingOfLamb = 0;
 	private final int literPerServingOfLamb = 914;
-	private int servingOfVeges = 0;
 	private final int literPerServingOfVeggies = 20;
-	private int servingOfLentils = 0;
 	private final int literPerServingOfLentils = 59;
-	private int servingOfPasta = 0;
 	private final int literPerServingOfPasta = 150;
-	private int servingOfCorn = 0;
 	private final int literPerServingOfCorn = 70;
-	private int servingOfEggs = 0;
 	private final int literPerServingOfEggs = 135;
 
+	// number of servings of each type of food
+	private int servingOfBeef = 0;
+	private int servingOfChicken = 0;
+	private int servingOfLamb = 0;
+	private int servingOfVeges = 0;
+	private int servingOfLentils = 0;
+	private int servingOfPasta = 0;
+	private int servingOfCorn = 0;
+	private int servingOfEggs = 0;
+
+	// booleans for different types of bathing options
 	private boolean takesShowers = false;
-	private final double literPerShowerPerMinute = 35;
 	private boolean takesBaths = false;
+
+	// constants for amount of water used
+	private final double literPerShowerPerMinute = 35;
 	private final double litersPerBath = 50;
 	private int numberOfWashes = 0;
 
+	// booleans for clothing washing
 	private boolean usesWashingMachine = false;
 	private boolean handWashesClothes = false;
 	private int numberOfLoadsOfClothes = 0;
+
+	// constants for the amount of water each type uses
 	private final int litersPerLoadsOfClothersWashingMachine = 20;
 	private final int litersPerLoadsOfClothesHandWashing = 37;
-
 	private double totalLitersAmountOfWater = 0;
+
+	// waterBottle to be drawn on the screen
 	private Bottle waterBottle;
 
 	// string arrays for storing tips
@@ -97,12 +116,16 @@ public class FootPrint {
 			"Lawns can go a lot longer without water than you thing" };
 
 	/**
-	 * This are alot of getters and setters in order to edit the FootPrint
-	 * appropriately
+	 * FootPrint()
+	 * 
+	 * constructor for the FootPrint class
 	 */
 	public FootPrint() {
 		waterBottle = new Bottle();
 	}
+
+	// There are alot of getters and setters in order to edit the FootPrint
+	// appropriately:
 
 	/**
 	 * setUsesRecyclableWaterBottle()
@@ -111,6 +134,9 @@ public class FootPrint {
 	 * usesPlasticWaterBottle to false
 	 */
 	public void setUsesRecyclableWaterBottle() {
+		// if the user uses recyclable water bottles, usesRecyclable should be
+		// true
+		// and usesPlastic should be false
 		usesRecyclableWaterBottle = true;
 		usesPlasticWaterBottle = false;
 		updateTotalAmountOfWater();
@@ -124,6 +150,10 @@ public class FootPrint {
 	 * usesRecycableWaterBottle to false
 	 */
 	public void setUsesPlasticWaterBottle() {
+		// if the user uses plastic water bottles, usesRecyclable should be
+		// false
+		// and usesPlastic should be true
+
 		usesPlasticWaterBottle = true;
 		usesRecyclableWaterBottle = false;
 		updateTotalAmountOfWater();
@@ -140,6 +170,11 @@ public class FootPrint {
 		updateTotalAmountOfWater();
 	}
 
+	/**
+	 * getNumberOfWaterBottles()
+	 * 
+	 * @return numberOfWaterBottles
+	 */
 	public int getNumberOfWaterBottles() {
 		return numberOfWaterBottles;
 	}
@@ -147,9 +182,11 @@ public class FootPrint {
 	/**
 	 * setUsesDishWasher()
 	 * 
-	 * This method sets usesDishWasher to true and doesDishesByHand
+	 * This method sets usesDishWasher to true and doesDishesByHand to false
 	 */
 	public void setUsesDishWasher() {
+		// if the user uses a dishwasher, that boolean should be true and
+		// doesByHand should be false
 		usesDishWasher = true;
 		doesDishedByHand = false;
 		updateTotalAmountOfWater();
@@ -162,6 +199,8 @@ public class FootPrint {
 	 */
 
 	public void setDoesDishedByHand() {
+		// if they user does dishes by hand, usesDishWasher should be false;
+		// and doesDishedByHand should be true
 		usesDishWasher = false;
 		doesDishedByHand = true;
 		updateTotalAmountOfWater();
@@ -179,6 +218,11 @@ public class FootPrint {
 		updateTotalAmountOfWater();
 	}
 
+	/**
+	 * getNumberOfTimesDoesDishes()
+	 * 
+	 * @return numberOfTimesDoesDishes
+	 */
 	public int getNumberOfTimesDoesDishes() {
 		return numberOfTimesDoesDishes;
 	}
@@ -195,6 +239,11 @@ public class FootPrint {
 		updateTotalAmountOfWater();
 	}
 
+	/**
+	 * getServingOfBeef()
+	 * 
+	 * @return servingOfBeef
+	 */
 	public int getServingOfBeef() {
 		return servingOfBeef;
 	}
@@ -212,6 +261,11 @@ public class FootPrint {
 		updateTotalAmountOfWater();
 	}
 
+	/**
+	 * getServingOfChicken
+	 * 
+	 * @return servingOfChicken
+	 */
 	public int getServingOfChicken() {
 		return servingOfChicken;
 	}
@@ -229,6 +283,11 @@ public class FootPrint {
 		updateTotalAmountOfWater();
 	}
 
+	/**
+	 * getServingOfLamb()
+	 * 
+	 * @return servingOfLamb
+	 */
 	public int getServingOfLamb() {
 		return servingOfLamb;
 	}
@@ -246,6 +305,11 @@ public class FootPrint {
 		updateTotalAmountOfWater();
 	}
 
+	/**
+	 * getServingOfEggs()
+	 * 
+	 * @return servingOfEggs
+	 */
 	public int getServingOfEggs() {
 		return servingOfEggs;
 	}
@@ -263,6 +327,11 @@ public class FootPrint {
 		updateTotalAmountOfWater();
 	}
 
+	/**
+	 * getServingsOfVeggies()
+	 * 
+	 * @return servingOfVeges
+	 */
 	public int getServingsOfVeggies() {
 		return servingOfVeges;
 	}
@@ -281,6 +350,11 @@ public class FootPrint {
 		updateTotalAmountOfWater();
 	}
 
+	/**
+	 * getServingOfLentils
+	 * 
+	 * @return servingOfLentils
+	 */
 	public int getServingOfLentils() {
 		return servingOfLentils;
 	}
@@ -299,6 +373,11 @@ public class FootPrint {
 		updateTotalAmountOfWater();
 	}
 
+	/**
+	 * getServingOfPasta()
+	 * 
+	 * @return servingOfPasta
+	 */
 	public int getServingOfPasta() {
 		return servingOfPasta;
 	}
@@ -317,6 +396,11 @@ public class FootPrint {
 		updateTotalAmountOfWater();
 	}
 
+	/**
+	 * getServingOfCorn()
+	 * 
+	 * @return servingOfCorn;
+	 */
 	public int getServingOfCorn() {
 		return servingOfCorn;
 	}
@@ -330,6 +414,8 @@ public class FootPrint {
 	 * @param setServingOfCorn
 	 */
 	public void setTakesShowers() {
+		// if the user takes showers and not baths,
+		// takesShowers is true and takesBaths is false;
 		takesShowers = true;
 		takesBaths = false;
 		updateTotalAmountOfWater();
@@ -344,6 +430,8 @@ public class FootPrint {
 	 * @param setServingOfCorn
 	 */
 	public void setTakesBaths() {
+		// if the user takes baths and not showers,
+		// takesShowers is false and takesBaths is true;
 		takesShowers = false;
 		takesBaths = true;
 		updateTotalAmountOfWater();
@@ -362,6 +450,11 @@ public class FootPrint {
 		updateTotalAmountOfWater();
 	}
 
+	/**
+	 * getNumberOfWashes()
+	 * 
+	 * @return numberOfWashes
+	 */
 	public int getNumberOfWashes() {
 		return numberOfWashes;
 	}
@@ -375,6 +468,9 @@ public class FootPrint {
 	 * @param setNumberOfWashes
 	 */
 	public void setUsesWashingMachine() {
+		// if the user uses a washing machine, set usesWashingMachine to true
+		// and
+		// handWashesClothes to false.
 		usesWashingMachine = true;
 		handWashesClothes = false;
 		updateTotalAmountOfWater();
@@ -389,6 +485,8 @@ public class FootPrint {
 	 * @param setNumberOfWashes
 	 */
 	public void setHandWashesClothes() {
+		// if the user hand washes, set usesWashingMachine to false
+		// and handWashesClothes to true
 		usesWashingMachine = false;
 		handWashesClothes = true;
 		updateTotalAmountOfWater();
@@ -464,20 +562,18 @@ public class FootPrint {
 	 * 
 	 * This method updates the total amount of water in the food print based on
 	 * the private data variables and a calculation. This method is called
-	 * everytime that anything is changed in the Foootprint in order to ensure
+	 * everytime that anything is changed in the Footprint in order to ensure
 	 * that the total is always up to date.
 	 */
 	public void updateTotalAmountOfWater() {
 
-		// write an equation that takes
-		// all the information that is
-		// in private data memebers
-		// and calculates the total
-		// so we can call this after new data
-		// is entered so it would be like we are
-		// keeping a running total
-		// total=(amount of beef)*(how much water in beef) etc etc etc
+		// start with the total at 0 so it is recalculated every time
 		totalLitersAmountOfWater = 0;
+
+		// this is a long equation that, based on the options the user selected
+		// and what has been set by ther setters, will calculate the total
+		// amount of
+		// water used, in liters
 		if (usesRecyclableWaterBottle) {
 
 			totalLitersAmountOfWater += (literPerRecycableWaterBottle * numberOfWaterBottles);
@@ -496,7 +592,9 @@ public class FootPrint {
 			totalLitersAmountOfWater += literPerDishesByHand
 					* numberOfTimesDoesDishes;
 		}
-		calcualteWaterForFood();
+
+		// call the method that will calculate the water used by just the food
+		calculateWaterForFood();
 
 		if (takesShowers) {
 			totalLitersAmountOfWater += literPerShowerPerMinute
@@ -527,16 +625,20 @@ public class FootPrint {
 					* numberOfTimesWaterPlants;
 		}
 
+		// set the waterbottle by passing in the totalLiters of water
+		// that was just calculated
 		waterBottle.setWaterBottle(totalLitersAmountOfWater);
 	}
 
 	/**
-	 * calcualteWaterForFood()
+	 * calculateWaterForFood()
 	 * 
 	 * This method increases the total amount of water used by the amount used
 	 * for water.
 	 */
-	private void calcualteWaterForFood() {
+	private void calculateWaterForFood() {
+		// equation to calculate the total liters of water that just the
+		// different servings of food use
 		totalLitersAmountOfWater += servingOfBeef * literPerServingOfBeef;
 		totalLitersAmountOfWater += servingOfChicken * literPerServingOfChicken;
 		totalLitersAmountOfWater += servingOfLamb * literPerServingOfLamb;
@@ -667,15 +769,6 @@ public class FootPrint {
 	}
 
 	/**
-	 * refreshTotal()
-	 * 
-	 * This method sets usesRecyclableWaterBottle to false.
-	 */
-	public void refreshTotal() {
-		updateTotalAmountOfWater();
-	}
-
-	/**
 	 * Tips()
 	 * 
 	 * This method will be called on the last screen where the user gets their
@@ -746,42 +839,92 @@ public class FootPrint {
 		return tipsToReturn;
 	}
 
+	/**
+	 * getDoesDishesByHand()
+	 * 
+	 * @return doesDishedByHand
+	 */
 	public boolean getDoesDishesByHand() {
 		return doesDishedByHand;
 	}
 
+	/**
+	 * getHandWashesClothes()
+	 * 
+	 * @return handWashesClothes
+	 */
 	public boolean getHandWashesClothes() {
 		return handWashesClothes;
 	}
 
+	/**
+	 * getHandWaters()
+	 * 
+	 * @return handWaters
+	 */
 	public boolean getHandWaters() {
 		return handWaters;
 	}
 
+	/**
+	 * getUsesDishWasher()
+	 * 
+	 * @return usesDishWasher
+	 */
 	public boolean getUsesDishWasher() {
 		return usesDishWasher;
 	}
 
+	/**
+	 * getUsesPlasticWaterBottle()
+	 * 
+	 * @return usesPlasticWaterBottle
+	 */
 	public boolean getUsesPlasticWaterBottle() {
 		return usesPlasticWaterBottle;
 	}
 
+	/**
+	 * getUsesRecyclableWaterBottle() {
+	 * 
+	 * @return usesRecyclableWaterBottle
+	 */
 	public boolean getUsesRecyclableWaterBottle() {
 		return usesRecyclableWaterBottle;
 	}
 
+	/**
+	 * getUsesSprinklers()
+	 * 
+	 * @return usesSprinklers
+	 */
 	public boolean getUsesSprinklers() {
 		return usesSprinklers;
 	}
 
+	/**
+	 * getUsesWashingMachine()
+	 * 
+	 * @return usesWashingMachine
+	 */
 	public boolean getUsesWashingMachine() {
 		return usesWashingMachine;
 	}
 
+	/**
+	 * getTakesBaths()
+	 * 
+	 * @return takesBaths
+	 */
 	public boolean getTakesBaths() {
 		return takesBaths;
 	}
 
+	/**
+	 * getTakesShowers()
+	 * 
+	 * @return takesShowers
+	 */
 	public boolean getTakesShowers() {
 		return takesShowers;
 	}

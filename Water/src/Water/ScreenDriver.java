@@ -25,6 +25,8 @@
 // consumption compares with the recommended consumption amount and they are presented with a personalized
 // list of recommendations and tips to reduce their water footprint. 
 //
+// Received help from TA: Andrew, Nathan
+// Online resources used: oracle.com
 
 package Water;
 
@@ -42,24 +44,32 @@ import javax.swing.JTabbedPane;
  * the project and allows the user to flip through all of the tabs. It creates
  * an instance of a class for every screen that is to be shown.
  * 
- * 
  */
+
 public class ScreenDriver extends JApplet {
 	// create all the screens that are going to be tabs
 	// from the first page
 
 	private CardDriver welcomeScreen;
-	private TeacherPage teacherScreen;
+	private TeacherScreen teacherScreen;
 	private AboutScreen aboutScreen;
 	private AllTipScreen tips;
 
+	/**
+	 * addComponentToPane(Container pane)
+	 * 
+	 * this method will add all of the components to their correct tabs and
+	 * panes
+	 * 
+	 * @param pane
+	 */
 	public void addComponentToPane(Container pane) {
 
 		JTabbedPane tabs = new JTabbedPane();
 
 		// create all of the first couple of screens
 		welcomeScreen = new CardDriver();
-		teacherScreen = new TeacherPage();
+		teacherScreen = new TeacherScreen();
 		aboutScreen = new AboutScreen();
 		tips = new AllTipScreen();
 
@@ -94,7 +104,7 @@ public class ScreenDriver extends JApplet {
 
 		// create all of the first couple of screens
 		welcomeScreen = new CardDriver();
-		teacherScreen = new TeacherPage();
+		teacherScreen = new TeacherScreen();
 		aboutScreen = new AboutScreen();
 		tips = new AllTipScreen();
 
@@ -130,24 +140,44 @@ public class ScreenDriver extends JApplet {
 
 	}
 
+	/**
+	 * getWelcomeScreen()
+	 * 
+	 * @return welcomeScreen
+	 */
 	public CardDriver getWelcomeScreen() {
 
 		return welcomeScreen;
 
 	}
 
-	public TeacherPage getTeacherScreen() {
+	/**
+	 * getTeacherScreen()
+	 * 
+	 * @return teacherScreen
+	 */
+	public TeacherScreen getTeacherScreen() {
 
 		return teacherScreen;
 
 	}
 
+	/**
+	 * getAboutScreen()
+	 * 
+	 * @return aboutScreen
+	 */
 	public AboutScreen getAboutScreen() {
 
 		return aboutScreen;
 
 	}
 
+	/**
+	 * getAllTipScreen()
+	 * 
+	 * @return tips
+	 */
 	public AllTipScreen getAllTipScreen() {
 
 		return tips;

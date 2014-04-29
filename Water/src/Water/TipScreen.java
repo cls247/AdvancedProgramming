@@ -20,9 +20,8 @@ import javax.swing.ScrollPaneConstants;
  * information. It should print out the total amount of water that is input and
  * specific tips for the user based on what they input.
  * 
- * @author Sand
- * 
  */
+
 public class TipScreen extends JPanel implements Screen, Runnable {
 
 	private double waterUsed;
@@ -160,7 +159,7 @@ public class TipScreen extends JPanel implements Screen, Runnable {
 	public void setTipsString() {
 
 		if ((waterUsed >= 0) && (waterUsed <= 10000)) {
-			String waterUsedString = new DecimalFormat("#0.00")
+			String waterUsedString = new DecimalFormat("#0.0000")
 					.format(waterUsed);
 			tip.setText("You used " + waterUsedString
 					+ " liters of water. \nYou used a regular amount of water."

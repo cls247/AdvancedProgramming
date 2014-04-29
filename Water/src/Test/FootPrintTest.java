@@ -6,6 +6,13 @@ import org.junit.Test;
 
 import Water.FootPrint;
 
+
+/**
+ * FootPrintTest
+ * 
+ * JUnit tests for the Footprint Class
+ * 
+ */
 public class FootPrintTest {
 
 	FootPrint testFootPrint = new FootPrint();

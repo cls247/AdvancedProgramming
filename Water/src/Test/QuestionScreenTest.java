@@ -12,11 +12,11 @@ import Water.QuestionScreen;
 import Water.User;
 
 /**
- * This method test the Question Screen's method.
+ * This class tests the methods of the Question Screen's class.
  * 
- * @author Chris
  * 
  */
+
 public class QuestionScreenTest {
 
 	// make data variables to hold the three questions
@@ -45,6 +45,7 @@ public class QuestionScreenTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 
+		// set up the data members
 		testUser = new User();
 		qScreen = new QuestionScreen(firstQuestion, secondQuestion,
 				thirdQuestion, type);
@@ -61,10 +62,13 @@ public class QuestionScreenTest {
 	 * This method checked the constructor for the QuestionScreen.
 	 */
 	@Test
-	public void QuestionScreenTest() {
+	public void testQuestionScreen() {
 
+		// create a test screen
 		QuestionScreen testQScreen = new QuestionScreen(firstQuestion,
 				secondQuestion, thirdQuestion, type);
+
+		// set the expected and actual results
 		String actualFirstQuestion = testQScreen.getFirstQuestion();
 		String expectedFirstQuestion = "1st Question";
 
@@ -80,8 +84,11 @@ public class QuestionScreenTest {
 	@Test
 	public void createSecondLabelAndButtonTest() {
 
+		// simulate a click on the second button
 		testButton2.doClick();
 		User testUser = qScreen.passOnUser();
+
+		// set the actual and expected boolean values
 		boolean actualUsesPlasticWaterBottle = testUser.getFootPrint()
 				.getUsesPlasticWaterBottle();
 		boolean expectedUsesPlasticWaterBottle = true;
@@ -99,8 +106,11 @@ public class QuestionScreenTest {
 	@Test
 	public void createFirstLabelAndButtonTest() {
 
+		// simulate a click on the first button
 		testButton1.doClick();
 		User testUser = qScreen.passOnUser();
+
+		// set the actual and expected boolean values
 		boolean actualUsesRecyclableWaterBottle = testUser.getFootPrint()
 				.getUsesRecyclableWaterBottle();
 		boolean expectedUsesRecyclableWaterBottle = true;
@@ -120,10 +130,13 @@ public class QuestionScreenTest {
 	@Test
 	public void addMoreQuestionsTest() {
 
+		// set the actual and expected boolean values
 		boolean actualSpinnerVisible = false;
+		boolean expectedSpinnerVisible = true;
+
+		// repaint the screen and check if the spinner is visible
 		qScreen.repaint();
 		actualSpinnerVisible = qScreen.getButton1().isVisible();
-		boolean expectedSpinnerVisible = true;
 
 		assertEquals(expectedSpinnerVisible, actualSpinnerVisible);
 
@@ -139,8 +152,11 @@ public class QuestionScreenTest {
 	@Test
 	public void checkForCheckedBoxesTest() {
 
+		// if the button is selected, setSelected should change it to false
 		if (qScreen.getButton1().isSelected())
 			qScreen.getButton1().setSelected(false);
+
+		// repaint the screen and set up the expected and actual values
 		qScreen.repaint();
 		boolean actualUsesRecyclables = testUser.getFootPrint()
 				.getUsesRecyclableWaterBottle();

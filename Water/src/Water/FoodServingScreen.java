@@ -21,12 +21,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 /**
- * This should be the template for the page that has dragging features. This
- * will be used for the grains, meats and fruits and vegetables.
- * 
- * @author Sand
+ * This is the page where the user can click on different buttons of meat and
+ * food to select the number of servings of each they eat a week
  * 
  */
+
 
 public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
@@ -47,7 +46,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 	private JPanel foodButtonPanel = new JPanel();
 	private JScrollPane foodScrollPane = new JScrollPane(bottomPanel);
 
-	// set up the rows and collumns for the screen
+	// set up the rows and columns for the screen
 	private final int ROWS = 8;
 	private final int COLUMNS = 8;
 	private final int BUTTON_WIDTH = 95;
@@ -87,7 +86,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 	private int pastaServings = 0;
 	private int veggieServings = 0;
 
-	// this is the user to be editted
+	// this is the user to be edited
 	private User currentUser = new User();
 
 	/**
@@ -151,10 +150,10 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 	/**
 	 * makeTopButton()
 	 * 
-	 * This method creates the top botton
+	 * This method creates the top button
 	 * 
 	 * @param bottomButtonListener
-	 * @return
+	 * @return topButtonListener
 	 */
 	private ActionListener makeTopButton(
 			final ActionListener bottomButtonListener) {
@@ -688,6 +687,8 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 		}
 
 	}
+
+	// from here on these are just accessor functions for testing
 
 	/**
 	 * getButtonArray()

@@ -7,9 +7,6 @@ import javax.swing.ImageIcon;
 /**
  * This is the water bottle class and it will be helpful when we want to print a
  * water bottle with a certain water level on each of the screens.
- * 
- * @author Sand
- * 
  */
 
 public class Bottle {
@@ -19,20 +16,21 @@ public class Bottle {
 	 */
 	private double waterLevel = 0;
 
-	// this is a private data variable
-	// that holds the index of the current
-	// water bottle that the user is up to
-	// ask Casandra if this is confusing
-
+	/**
+	 * this is a private data variable that holds the index of the current water
+	 * bottle that the user is up to
+	 */
 	private int currentBottle = 0;
 
-	// this private data variable holds the
-	// index of the current overflow water
-	// bottle
+	/**
+	 * this private data variable holds the index of the current overflow water
+	 * bottle
+	 */
 	private int currentOverflow = 0;
 
 	// this is an arraylist of all the water bottle from 1-21
 	private ArrayList<String> waterBottles = new ArrayList<String>();
+
 	// this is an arraylist of all the water bottles with overflow from 1-21
 	private ArrayList<String> overflowBottles = new ArrayList<String>();
 
@@ -65,38 +63,36 @@ public class Bottle {
 	 */
 	public void addOverflow() {
 
+		// this should add images to the overflow array
 		for (int i = 0; i < 22; i++) {
-
 			overflowBottles.add("overflow" + String.valueOf(i + 1) + ".jpg");
-
 		}
-
 	}
 
 	/**
-	 * setWaterBottle(double total) This method takes total and sets the correct
-	 * current index of the water bottle by a formula.
+	 * setWaterBottle(double total)
+	 * 
+	 * This method takes total and sets the correct current index of the water
+	 * bottle by a formula.
 	 * 
 	 * @param total
 	 *            the total that is to be taken in from the user
 	 */
 	public void setWaterBottle(double total) {
 		// sets the water level equal to the total
-
-		// this method takes in the total amount of
-		// water and it sets the water bottle index (currentBottle)
-		// to the correct index according to the amount of water
 		waterLevel = total;
+
+		// determine what numner the current water bottle is
 		currentBottle = (int) Math.floor(((double) waterLevel) / 1000);
 
+		// setting the correct bottle if the waterlevel goes above the max
 		if (currentBottle >= 21) {
-
 			currentBottle = 21;
 
+			// or below the min
 		} else if (currentBottle < 0) {
 			currentBottle = 0;
 		}
-
 	}
 
 	/**
@@ -108,16 +104,20 @@ public class Bottle {
 	public ImageIcon getImage() {
 
 		ImageIcon waterBottle;
-		if (currentBottle < 21) {
-			// this method returns the image of the current water bottle
-			waterBottle = new ImageIcon(waterBottles.get(currentBottle));
-		} else {
 
+		// if there is no overflow, then set the current bottle to the correct
+		// water bottle image
+		if (currentBottle < 21) {
+			waterBottle = new ImageIcon(waterBottles.get(currentBottle));
+
+			// if there is an overflow, set the correct overflow image
+		} else {
 			waterBottle = new ImageIcon(
 					overflowBottles.get(currentOverflow % 22));
 			currentOverflow++;
 
 		}
+
 		return waterBottle;
 	}
 

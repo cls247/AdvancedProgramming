@@ -20,12 +20,10 @@ import javax.swing.event.ChangeListener;
 
 /**
  * This is the template for the majority of the pages. It gets questions in its
- * constuctor to change the each page so it is specific to the information to be
- * input.
- * 
- * @author Sand
- * 
+ * constructor to change the each page so it is specific to the information to
+ * be input.
  */
+
 
 public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 		Screen {
@@ -90,7 +88,6 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 	public void init() {
 		startThread();
 		drawBackground();
-		// setBackground();
 		createFirstLabelAndButton();
 		createSecondLabelAndButton();
 		createThirdLabelAndSpinner();
@@ -113,7 +110,7 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 		SpinnerNumberModel m_numberSpinnerModel;
 		Double current = new Double(0.00);
 		Double min = new Double(0.00);
-		Double max = new Double(100.00);
+		Double max = new Double(20.00);
 		Double step = new Double(1.00);
 
 		// set the max
@@ -142,11 +139,12 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
-				// TODO Auto-generated method stub
 				Double answer = (Double) (m_numberSpinner.getValue());
 
 				int temp = answer.intValue();
-				// *****NICK DELETED A SYSTEM.OUT HERE
+
+				// check the type of the question and set the footprint
+				// accordingly
 				if (type == "bottle")
 					currentUser.getFootPrint().setNumberOfWaterBottles(temp);
 				if (type == "plants")
@@ -184,7 +182,9 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				firstQuestionBox.setSelected(false);
-				// TODO Auto-generated method stub
+
+				// check the type of the question and set the footprint
+				// accordingly
 				if (type == "bottle")
 					currentUser.getFootPrint().setUsesPlasticWaterBottle();
 				if (type == "plants")
@@ -202,10 +202,13 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 	}
 
 	private void createFirstLabelAndButton() {
+		// create and set up the first question
 		JLabel firstQuestionLabel = new JLabel(firstQuestion);
 		firstQuestionLabel.setVisible(true);
-		firstQuestionLabel.setSize(250, 50); // ***NICK MADE CHANGES HERE
-		firstQuestionLabel.setLocation(125, 85); // ***NICK MADE CHANGES HERE
+		firstQuestionLabel.setSize(250, 50);
+		firstQuestionLabel.setLocation(125, 85);
+
+		// add it to the screen
 		add(firstQuestionLabel);
 
 		// answer the first question
@@ -217,10 +220,10 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
 				secondQuestionBox.setSelected(false);
 
+				// check the type of the question and set the footprint
+				// accordingly
 				if (type == "bottle")
 					currentUser.getFootPrint().setUsesRecyclableWaterBottle();
 				if (type == "plants")
@@ -231,19 +234,27 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 					currentUser.getFootPrint().setUsesDishWasher();
 				if (type == "clothes")
 					currentUser.getFootPrint().setUsesWashingMachine();
-
 			}
-
 		});
 	}
 
+	/**
+	 * setBackground()
+	 * 
+	 * sets the background image and dimensions
+	 */
 	private void setBackground() {
 		setPreferredSize(new Dimension(800, 600));
 		try {
 
+			// get the image from the file
 			bkgd = ImageIO.read(new File("background.jpg"));
+
+			// get the dimensions of the image
 			Dimension size = new Dimension(bkgd.getWidth(null),
 					bkgd.getHeight(null));
+
+			// set the frame dimensions based on the image size
 			setPreferredSize(size);
 			setMinimumSize(size);
 			setMaximumSize(size);
@@ -255,6 +266,11 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 		}
 	}
 
+	/**
+	 * startThread()
+	 * 
+	 * funtion that starts theThread
+	 */
 	private void startThread() {
 		bottleThread = new Thread(this);
 		bottleThread.start();
@@ -266,10 +282,19 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 
 	}
 
+	/**
+	 * paintComponent(Graphics g)
+	 * 
+	 * paints the background and other elements onto the screen
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+
+		// draw the background image
 		g.drawImage(bkgd, 0, 0, null);
+
+		// get the waterBottle and draw it on the screen
 		waterBottle = currentUser.getFootPrint().getWaterBottle().getImage();
 		bottle = waterBottle.getImage();
 		g.drawImage(bottle, 600, 20, null);
@@ -278,27 +303,46 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 		checkForCheckedBoxes();
 	}
 
+	/**
+	 * addMoreQuestions()
+	 * 
+	 * If either question box on the screen is checked, this method will display
+	 * a third question with a spinner asking the user to select how much they
+	 * consume per week
+	 */
 	private void addMoreQuestions() {
 
+		// check that either one of the two questions is selected
 		if (firstQuestionBox.isSelected() || secondQuestionBox.isSelected()) {
 
+			// display the third question/spinner
 			m_numberSpinner.setVisible(true);
 			thirdQuestionLabel.setVisible(true);
 
 		}
+
+		// check if neither has been checked
 		if ((!firstQuestionBox.isSelected())
 				&& (!secondQuestionBox.isSelected())) {
 
+			// set the question/spinner to invisible
 			m_numberSpinner.setVisible(false);
 			thirdQuestionLabel.setVisible(false);
-
 		}
-
 	}
 
+	/**
+	 * checkForCheckedBoxes()
+	 * 
+	 * This method will check if the first or second question on each screen was
+	 * selected, and set the opposite to unchecked so that only one can be
+	 * checked at a time
+	 */
 	private void checkForCheckedBoxes() {
 
+		// check if the first question is not selected
 		if ((!firstQuestionBox.isSelected())) {
+			// set everything unclicked
 			if (type == "bottle")
 				currentUser.getFootPrint()
 						.setUsesRecyclableWaterBottleUnclicked();
@@ -312,7 +356,9 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 				currentUser.getFootPrint().setUsesWashingMachineUnclicked();
 		}
 
+		// check if the second question is not selected
 		if ((!secondQuestionBox.isSelected())) {
+			// set everythign to unclicked
 			if (type == "bottle")
 				currentUser.getFootPrint().setUsesPlasticWaterBottleUnclicked();
 			if (type == "plants")
@@ -325,10 +371,17 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 				currentUser.getFootPrint().setHandWashesClothesUnclicked();
 		}
 
-		currentUser.getFootPrint().refreshTotal();
+		// update the total amount of water
+		currentUser.getFootPrint().updateTotalAmountOfWater();
 
 	}
 
+	/**
+	 * run()
+	 * 
+	 * Override the run method to start the thread and make the animation move
+	 * smoothly
+	 */
 	@Override
 	public void run() {
 		long beforeTime, timeDiff, timeSleep;
@@ -354,17 +407,38 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 		}
 	}
 
+	/**
+	 * passOnUser()
+	 * 
+	 * this method passes the user out of the screen so it can be received by
+	 * another one
+	 */
 	@Override
 	public User passOnUser() {
-		// *****NICK DELETED A SYSTEM.OUT HERE
 		return currentUser;
 	}
 
+	/**
+	 * receiveUser()
+	 * 
+	 * receives the user from the previous page and updates values on the page
+	 */
 	@Override
 	public void receiveUser(User setCurrentUser) {
 		currentUser = setCurrentUser;
 	}
 
+	/**
+	 * drawBackground()
+	 * 
+	 * This method created an image from an image file to set the background of
+	 * the frame so that it can be repainted every time. The other size
+	 * dimensions are set based on the size of the image so covered the entire
+	 * frame
+	 * 
+	 * @exception error
+	 *                - if the file is not found, throws an IOException
+	 */
 	@Override
 	public void drawBackground() {
 		try {
@@ -392,18 +466,38 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable,
 
 	}
 
+	/**
+	 * getFirstQuestion()
+	 * 
+	 * @return firstQuestion
+	 */
 	public String getFirstQuestion() {
 		return firstQuestion;
 	}
 
+	/**
+	 * getSpinner()
+	 * 
+	 * @return m_numberSpinner
+	 */
 	public JSpinner getSpinner() {
 		return m_numberSpinner;
 	}
 
+	/**
+	 * getButton2()
+	 * 
+	 * @return secondQuestionBox
+	 */
 	public JCheckBox getButton2() {
 		return secondQuestionBox;
 	}
 
+	/**
+	 * getButton1()
+	 * 
+	 * @return firstQuestionBox
+	 */
 	public JCheckBox getButton1() {
 		return firstQuestionBox;
 	}

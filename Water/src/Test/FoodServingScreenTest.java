@@ -13,9 +13,7 @@ import Water.FoodServingScreen;
 /**
  * FoodServingScreenTest
  * 
- * JUnit tests for the FoodServingScreenTest
- * 
- * @author sophiakleyman
+ * JUnit tests for the FoodServingScreen
  * 
  */
 public class FoodServingScreenTest {
