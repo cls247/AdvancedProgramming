@@ -16,79 +16,75 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
 /**
- * This is the final screen that the user will
- * see after they input all their information.
- * It should print out the total amount of water that is input
- * and specific tips for the user based on what they input.
+ * This is the final screen that the user will see after they input all their
+ * information. It should print out the total amount of water that is input and
+ * specific tips for the user based on what they input.
  * 
  * @author Sand
- *
+ * 
  */
-public class TipScreen extends JPanel implements Screen, Runnable{
-	
+public class TipScreen extends JPanel implements Screen, Runnable {
+
 	private double waterUsed;
-	private JTextArea tip=new JTextArea();
+	private JTextArea tip = new JTextArea();
 	// image for the background
 	private Image bkgd;
-	//the user that is being updated
-	private User currentUser=new User();
-	//set delay for the thread
+	// the user that is being updated
+	private User currentUser = new User();
+	// set delay for the thread
 	private final int DELAY = 20;
 	private Thread thread;
 	private JPanel contentPanel;
 	private JScrollPane sliderScrollPane;
-	
-    /**
+
+	/**
 	 * TipScreen()
-	 *
+	 * 
 	 * This sets the default details of teh screen
 	 */
-	public TipScreen()
-	{
+	public TipScreen() {
 		init();
 		setLayout(null);
 		updateTotal();
-		
+
 		tip.setBounds(0, 150, 800, 200);
 		tip.setWrapStyleWord(true);
-		
+
 	}
-    
-    /**
-	 * updateTotal()
-	 * This method gets the current water total.
+
+	/**
+	 * updateTotal() This method gets the current water total.
 	 */
-	public void updateTotal()
-	{
-		waterUsed=currentUser.getFootPrint().getTotalAmountOfWater();
-		
-        setTipsString();
-        //calculateFootPrint();
-		
+	public void updateTotal() {
+		waterUsed = currentUser.getFootPrint().getTotalAmountOfWater();
+
+		setTipsString();
+		// calculateFootPrint();
+
 	}
-	
+
 	@Override
-	public void init()
-	{
+	public void init() {
 		createContentPanels();
 		startThread();
-        
-        /* setLayout(new FlowLayout());
-         drawBackground();
-         thread = new Thread(this);
-         thread.start();
-         */
+
+		/*
+		 * setLayout(new FlowLayout()); drawBackground(); thread = new
+		 * Thread(this); thread.start();
+		 */
 	}
+
 	private void startThread() {
 		thread = new Thread(this);
 		thread.start();
 	}
-	private void createContentPanels() {
-		try{
 
+	private void createContentPanels() {
+		try {
 
 			bkgd = ImageIO.read(new File("background.jpg"));
-			Dimension backgroundSize = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
+			Dimension backgroundSize = new Dimension(bkgd.getWidth(null),
+					bkgd.getHeight(null));
 			setPreferredSize(backgroundSize);
 			setMinimumSize(backgroundSize);
 			setMaximumSize(backgroundSize);
@@ -97,45 +93,41 @@ public class TipScreen extends JPanel implements Screen, Runnable{
 			contentPanel.setVisible(true);
 			contentPanel.setBounds(0, 150, 800, 200);
 			contentPanel.setBackground(Color.white);
-			
+
 			sliderScrollPane = new JScrollPane(contentPanel);
 			sliderScrollPane.setBackground(Color.white);
 			sliderScrollPane.setVisible(true);
-			sliderScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			sliderScrollPane
+					.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			sliderScrollPane.setBounds(0, 150, 800, 200);
 			contentPanel.add(tip);
 			tip.setEditable(false);
 			add(sliderScrollPane);
-	
-			
-		}catch(IOException error){
 
+		} catch (IOException error) {
 
 		}
-		
+
 		setLayout(new FlowLayout());
 	}
-	
-	
-	public void paintComponent(Graphics g){
-		
-		super.paintComponent(g);
-		g.drawImage(bkgd, 0,0, null);
 
-		}
+	public void paintComponent(Graphics g) {
+
+		super.paintComponent(g);
+		g.drawImage(bkgd, 0, 0, null);
+
+	}
+
 	@Override
 	public void run() {
 		long beforeTime, timeDiff, timeSleep;
 		beforeTime = System.currentTimeMillis();
-
 
 		while (true) {
 			repaint();
 			timeDiff = System.currentTimeMillis() - beforeTime;
 			timeSleep = DELAY - timeDiff;
 
-			
-			
 			if (timeSleep < 0) {
 				timeSleep = 2;
 			}
@@ -148,37 +140,44 @@ public class TipScreen extends JPanel implements Screen, Runnable{
 
 			beforeTime = System.currentTimeMillis();
 		}
-		
+
 	}
+
 	@Override
 	public User passOnUser() {
-		
+		updateTotal();
 		return currentUser;
 	}
+
 	@Override
 	public void receiveUser(User setCurrentUser) {
-		currentUser=setCurrentUser;
-		updateTotal();
+		currentUser = setCurrentUser;
 		setTipsString();
+		updateTotal();
+
 	}
-	
-	public void setTipsString(){
-		
-		if((waterUsed >=0) && (waterUsed <=10000)){
-			String waterUsedString=new DecimalFormat("#0.0000").format(waterUsed);
-			tip.setText("You used "+ waterUsedString +" liters of water. \nYou used a regular amount of water."+
-			"\n\nIn addition: \n"+ currentUser.getFootPrint().Tips());
+
+	public void setTipsString() {
+
+		if ((waterUsed >= 0) && (waterUsed <= 10000)) {
+			String waterUsedString = new DecimalFormat("#0.00")
+					.format(waterUsed);
+			tip.setText("You used " + waterUsedString
+					+ " liters of water. \nYou used a regular amount of water."
+					+ "\n\nIn addition: \n" + currentUser.getFootPrint().Tips());
 			tip.setWrapStyleWord(true);
-			
-		}else{
-			String waterUsedString=new DecimalFormat("#0.0000").format(waterUsed);
-			tip.setText("You used an abnormal amount of water, "+ waterUsedString+"liters!"+
-			"\n\nIn addition: \n" +currentUser.getFootPrint().Tips());
+
+		} else {
+			String waterUsedString = new DecimalFormat("#0.0000")
+					.format(waterUsed);
+			tip.setText("You used an abnormal amount of water, "
+					+ waterUsedString + "liters!" + "\n\nIn addition: \n"
+					+ currentUser.getFootPrint().Tips());
 			tip.setWrapStyleWord(true);
-		
+
+		}
+
 	}
-	
-   }
 
 	@Override
 	public void drawBackground() {
@@ -201,8 +200,9 @@ public class TipScreen extends JPanel implements Screen, Runnable{
 
 			// if there is an error with the file, throw and IOException
 		} catch (IOException error) {
-			System.out.println("Error in drawBackground: image file failed to load!");
+			System.out
+					.println("Error in drawBackground: image file failed to load!");
 		}
-		
+
 	}
 }

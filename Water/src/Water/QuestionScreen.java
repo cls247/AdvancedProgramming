@@ -18,118 +18,116 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-
 /**
- * This is the template for the majority of the pages.
- * It gets questions in its constuctor to change the 
- * each page so it is specific to the information to 
- * be input. 
+ * This is the template for the majority of the pages. It gets questions in its
+ * constuctor to change the each page so it is specific to the information to be
+ * input.
  * 
  * @author Sand
- *
+ * 
  */
 
-public class QuestionScreen extends JPanel implements ActionListener, Runnable, Screen{
+public class QuestionScreen extends JPanel implements ActionListener, Runnable,
+		Screen {
 
-
-	//questions that are to be asked
+	// questions that are to be asked
 	private String firstQuestion;
 	private String secondQuestion;
 	private String thirdQuestion;
-	
-	//type of questions that are asked on this screen
+
+	// type of questions that are asked on this screen
 	private String type;
-	
-	//this image is the background
+
+	// this image is the background
 	private Image bkgd;
 	JLabel imageLabel;
-	
-	//this is the image for the water bottle to print
+
+	// this is the image for the water bottle to print
 	ImageIcon waterBottle;
 	Image bottle;
 	private final int DELAY = 20;
-	
-	//this is the thread for this question to run on
-	private Thread bottleThread;
-	private User currentUser=new User();
 
-	//these are the toggle boxes for the first two questions
+	// this is the thread for this question to run on
+	private Thread bottleThread;
+	private User currentUser = new User();
+
+	// these are the toggle boxes for the first two questions
 	final JCheckBox firstQuestionBox = new JCheckBox();
 	final JCheckBox secondQuestionBox = new JCheckBox();
-	
-	//this is the label and answer box for the third question
+
+	// this is the label and answer box for the third question
 	JSpinner m_numberSpinner = new JSpinner();
 	JLabel thirdQuestionLabel = new JLabel();
 
-	
 	/**
-	 * QuestionScreen(String firstQuestion1, String secondQuestion1, String thirdQuestion1, String type1)
+	 * QuestionScreen(String firstQuestion1, String secondQuestion1, String
+	 * thirdQuestion1, String type1)
 	 * 
-	 * This constructor makes a screen that has the three questions that 
-	 * are passed in and sets a type for the screen.
+	 * This constructor makes a screen that has the three questions that are
+	 * passed in and sets a type for the screen.
 	 * 
 	 * @param firstQuestion1
 	 * @param secondQuestion1
 	 * @param thirdQuestion1
-	 * @param type1 this is the type that the question screen is going to be of
+	 * @param type1
+	 *            this is the type that the question screen is going to be of
 	 */
-	public QuestionScreen(String firstQuestion1, String secondQuestion1, String thirdQuestion1, String type1)
-	{
-		firstQuestion=firstQuestion1;
-		secondQuestion=secondQuestion1;
-		thirdQuestion=thirdQuestion1;
-		type=type1;
+	public QuestionScreen(String firstQuestion1, String secondQuestion1,
+			String thirdQuestion1, String type1) {
+		firstQuestion = firstQuestion1;
+		secondQuestion = secondQuestion1;
+		thirdQuestion = thirdQuestion1;
+		type = type1;
 		init();
 	}
-	
+
 	/**
 	 * init()
 	 * 
 	 * This method sets all the main details for the screen.
 	 */
 	@Override
-	public void init()
-	{
+	public void init() {
 		startThread();
 		drawBackground();
-		//setBackground();
+		// setBackground();
 		createFirstLabelAndButton();
 		createSecondLabelAndButton();
 		createThirdLabelAndSpinner();
 	}
-	
+
 	/**
 	 * createThirdLabelAndSpinner()
 	 * 
-	 * This method sets up the third question and the answer
-	 * for the question.
+	 * This method sets up the third question and the answer for the question.
 	 */
 	private void createThirdLabelAndSpinner() {
-		
-		//ask the third question
+
+		// ask the third question
 		thirdQuestionLabel = new JLabel(thirdQuestion);
-		thirdQuestionLabel.setSize(350,50);
+		thirdQuestionLabel.setSize(350, 50);
 		thirdQuestionLabel.setLocation(125, 300);
 
-		//make a spinner for the third question to 
-		//be answered
+		// make a spinner for the third question to
+		// be answered
 		SpinnerNumberModel m_numberSpinnerModel;
 		Double current = new Double(0.00);
 		Double min = new Double(0.00);
 		Double max = new Double(100.00);
 		Double step = new Double(1.00);
-		
-		//set the max
+
+		// set the max
 		m_numberSpinnerModel = new SpinnerNumberModel(current, min, max, step);
 		m_numberSpinner = new JSpinner(m_numberSpinnerModel);
 
-		//set the default information on the spinner
-		m_numberSpinner.setSize(100,50);
-		m_numberSpinner.setLocation(500,300);
-		((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).setPreferredSize(new Dimension(10,10));
-		((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).getTextField().setEditable(false);
+		// set the default information on the spinner
+		m_numberSpinner.setSize(100, 50);
+		m_numberSpinner.setLocation(500, 300);
+		((JSpinner.DefaultEditor) m_numberSpinner.getEditor())
+				.setPreferredSize(new Dimension(10, 10));
+		((JSpinner.DefaultEditor) m_numberSpinner.getEditor()).getTextField()
+				.setEditable(false);
 
-		
 		spinnerAction();
 
 		add(m_numberSpinner);
@@ -140,81 +138,82 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 	}
 
 	private void spinnerAction() {
-		m_numberSpinner.addChangeListener(new ChangeListener()
-		{
+		m_numberSpinner.addChangeListener(new ChangeListener() {
 
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				// TODO Auto-generated method stub
-				Double answer= (Double) (m_numberSpinner.getValue());
+				Double answer = (Double) (m_numberSpinner.getValue());
 
-				int temp=answer.intValue();
-				//*****NICK DELETED A SYSTEM.OUT HERE
-				if(type=="bottle")
-					currentUser.getFootPrint().setNumberOfWaterBottles(temp);				
-				if(type=="plants")
-					currentUser.getFootPrint().setNumberOfTimesWaterPlants(temp);
-				if(type=="bathing")
+				int temp = answer.intValue();
+				// *****NICK DELETED A SYSTEM.OUT HERE
+				if (type == "bottle")
+					currentUser.getFootPrint().setNumberOfWaterBottles(temp);
+				if (type == "plants")
+					currentUser.getFootPrint()
+							.setNumberOfTimesWaterPlants(temp);
+				if (type == "bathing")
 					currentUser.getFootPrint().setNumberOfWashes(temp);
-				if(type=="dishes")
+				if (type == "dishes")
 					currentUser.getFootPrint().setNumberOfTimesDoesDishes(temp);
-				if(type=="clothes")
+				if (type == "clothes")
 					currentUser.getFootPrint().setNumberOfLoadsOfClothes(temp);
 			}
 		});
 	}
-	
+
 	private void createSecondLabelAndButton() {
-		//ask the second questions
+		// ask the second questions
 		JLabel secondQuestionlabel = new JLabel(secondQuestion);
 		secondQuestionlabel.setVisible(true);
-		secondQuestionlabel.setSize(250,50); 		//***NICK MADE CHANGES HERE
-		secondQuestionlabel.setLocation(125,200);
+		secondQuestionlabel.setSize(250, 50); // ***NICK MADE CHANGES HERE
+		secondQuestionlabel.setLocation(125, 200);
 		add(secondQuestionlabel);
 
-		//answer the second question
-		//		final JCheckBox secondQuestionBox = new JCheckBox();
+		// answer the second question
+		// final JCheckBox secondQuestionBox = new JCheckBox();
 		secondQuestionBox.setVisible(true);
-		secondQuestionBox.setSize(50,50);
+		secondQuestionBox.setSize(50, 50);
 		secondQuestionBox.setLocation(400, 200);
 		add(secondQuestionBox);
 
-		//need error checking to make sure that these two questions are mutually exclusive
-		secondQuestionBox.addActionListener(new ActionListener(){
+		// need error checking to make sure that these two questions are
+		// mutually exclusive
+		secondQuestionBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				firstQuestionBox.setSelected(false);
 				// TODO Auto-generated method stub
-				if(type=="bottle")
-					currentUser.getFootPrint().setUsesPlasticWaterBottle();				
-				if(type=="plants")
+				if (type == "bottle")
+					currentUser.getFootPrint().setUsesPlasticWaterBottle();
+				if (type == "plants")
 					currentUser.getFootPrint().setHandWaters();
-				if(type=="bathing")
+				if (type == "bathing")
 					currentUser.getFootPrint().setTakesBaths();
-				if(type=="dishes")
+				if (type == "dishes")
 					currentUser.getFootPrint().setDoesDishedByHand();
-				if(type=="clothes")
+				if (type == "clothes")
 					currentUser.getFootPrint().setHandWashesClothes();
 
 			}
 
 		});
 	}
+
 	private void createFirstLabelAndButton() {
 		JLabel firstQuestionLabel = new JLabel(firstQuestion);
 		firstQuestionLabel.setVisible(true);
-		firstQuestionLabel.setSize(250,50);		//***NICK MADE CHANGES HERE
-		firstQuestionLabel.setLocation(125, 85);		//***NICK MADE CHANGES HERE
+		firstQuestionLabel.setSize(250, 50); // ***NICK MADE CHANGES HERE
+		firstQuestionLabel.setLocation(125, 85); // ***NICK MADE CHANGES HERE
 		add(firstQuestionLabel);
 
-		//answer the first question
+		// answer the first question
 		firstQuestionBox.setVisible(true);
-		firstQuestionBox.setSize(50,20);
+		firstQuestionBox.setSize(50, 20);
 		firstQuestionBox.setLocation(400, 100);
 		add(firstQuestionBox);
-		firstQuestionBox.addActionListener(new ActionListener()
-		{
+		firstQuestionBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -222,43 +221,45 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 
 				secondQuestionBox.setSelected(false);
 
-				if(type=="bottle")
-					currentUser.getFootPrint().setUsesRecyclableWaterBottle();				
-				if(type=="plants")
+				if (type == "bottle")
+					currentUser.getFootPrint().setUsesRecyclableWaterBottle();
+				if (type == "plants")
 					currentUser.getFootPrint().setUsesSprinklers();
-				if(type=="bathing")
+				if (type == "bathing")
 					currentUser.getFootPrint().setTakesShowers();
-				if(type=="dishes")
+				if (type == "dishes")
 					currentUser.getFootPrint().setUsesDishWasher();
-				if(type=="clothes")
+				if (type == "clothes")
 					currentUser.getFootPrint().setUsesWashingMachine();
 
 			}
 
 		});
 	}
-	
+
 	private void setBackground() {
-		setPreferredSize(new Dimension(800,600));
-		try{
+		setPreferredSize(new Dimension(800, 600));
+		try {
 
 			bkgd = ImageIO.read(new File("background.jpg"));
-			Dimension size = new Dimension(bkgd.getWidth(null), bkgd.getHeight(null));
+			Dimension size = new Dimension(bkgd.getWidth(null),
+					bkgd.getHeight(null));
 			setPreferredSize(size);
 			setMinimumSize(size);
 			setMaximumSize(size);
 			setSize(size);
 			setLayout(null);
 
-		}catch(IOException error){
-
+		} catch (IOException error) {
 
 		}
 	}
+
 	private void startThread() {
-		bottleThread=new Thread(this);
+		bottleThread = new Thread(this);
 		bottleThread.start();
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -266,26 +267,27 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 	}
 
 	@Override
-	public void paintComponent(Graphics g){
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(bkgd, 0,0, null);
-		waterBottle=currentUser.getFootPrint().getWaterBottle().getImage();
-		bottle=waterBottle.getImage();
-		g.drawImage(bottle, 600,20, null);
+		g.drawImage(bkgd, 0, 0, null);
+		waterBottle = currentUser.getFootPrint().getWaterBottle().getImage();
+		bottle = waterBottle.getImage();
+		g.drawImage(bottle, 600, 20, null);
 
 		addMoreQuestions();
 		checkForCheckedBoxes();
 	}
 
-	private void addMoreQuestions(){
+	private void addMoreQuestions() {
 
-		if(firstQuestionBox.isSelected() || secondQuestionBox.isSelected()){
+		if (firstQuestionBox.isSelected() || secondQuestionBox.isSelected()) {
 
 			m_numberSpinner.setVisible(true);
 			thirdQuestionLabel.setVisible(true);
 
 		}
-		if((!firstQuestionBox.isSelected())&&(!secondQuestionBox.isSelected())){
+		if ((!firstQuestionBox.isSelected())
+				&& (!secondQuestionBox.isSelected())) {
 
 			m_numberSpinner.setVisible(false);
 			thirdQuestionLabel.setVisible(false);
@@ -294,43 +296,43 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 
 	}
 
-	private void checkForCheckedBoxes(){
-		
-		if((!firstQuestionBox.isSelected())){
-			if(type=="bottle")
-				currentUser.getFootPrint().setUsesRecyclableWaterBottleUnclicked();
-			if(type=="plants")
+	private void checkForCheckedBoxes() {
+
+		if ((!firstQuestionBox.isSelected())) {
+			if (type == "bottle")
+				currentUser.getFootPrint()
+						.setUsesRecyclableWaterBottleUnclicked();
+			if (type == "plants")
 				currentUser.getFootPrint().setUsesSprinklersUnclicked();
-			if(type=="bathing")
+			if (type == "bathing")
 				currentUser.getFootPrint().setShowersUnclicked();
-			if(type=="dishes")
+			if (type == "dishes")
 				currentUser.getFootPrint().setUsesDishWasherUnclicked();
-			if(type=="clothes")
+			if (type == "clothes")
 				currentUser.getFootPrint().setUsesWashingMachineUnclicked();
 		}
-		
-		if((!secondQuestionBox.isSelected())){
-			if(type=="bottle")
+
+		if ((!secondQuestionBox.isSelected())) {
+			if (type == "bottle")
 				currentUser.getFootPrint().setUsesPlasticWaterBottleUnclicked();
-			if(type=="plants")
+			if (type == "plants")
 				currentUser.getFootPrint().setHandWatersUnclicked();
-			if(type=="bathing")
+			if (type == "bathing")
 				currentUser.getFootPrint().setBathsUnclicked();
-			if(type=="dishes")
+			if (type == "dishes")
 				currentUser.getFootPrint().setDoesDishesByHandUnclicked();
-			if(type=="clothes")
+			if (type == "clothes")
 				currentUser.getFootPrint().setHandWashesClothesUnclicked();
 		}
-		
+
 		currentUser.getFootPrint().refreshTotal();
-		
+
 	}
 
 	@Override
 	public void run() {
 		long beforeTime, timeDiff, timeSleep;
 		beforeTime = System.currentTimeMillis();
-
 
 		while (true) {
 			repaint();
@@ -351,16 +353,18 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 			beforeTime = System.currentTimeMillis();
 		}
 	}
+
 	@Override
 	public User passOnUser() {
-		//*****NICK DELETED A SYSTEM.OUT HERE
+		// *****NICK DELETED A SYSTEM.OUT HERE
 		return currentUser;
 	}
+
 	@Override
 	public void receiveUser(User setCurrentUser) {
-		//*****NICK DELETED A SYSTEM.OUT HERE
-		currentUser=setCurrentUser;		
+		currentUser = setCurrentUser;
 	}
+
 	@Override
 	public void drawBackground() {
 		try {
@@ -382,8 +386,26 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 
 			// if there is an error with the file, throw and IOException
 		} catch (IOException error) {
-			System.out.println("Error in drawBackground: image file failed to load!");
+			System.out
+					.println("Error in drawBackground: image file failed to load!");
 		}
-		
+
 	}
+
+	public String getFirstQuestion() {
+		return firstQuestion;
+	}
+
+	public JSpinner getSpinner() {
+		return m_numberSpinner;
+	}
+
+	public JCheckBox getButton2() {
+		return secondQuestionBox;
+	}
+
+	public JCheckBox getButton1() {
+		return firstQuestionBox;
+	}
+
 }

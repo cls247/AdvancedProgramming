@@ -30,31 +30,31 @@ import javax.swing.JScrollPane;
 
 public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
-	//great a thread for the screen to run on
+	// great a thread for the screen to run on
 	private Thread dragToPlate = new Thread();
-	//set the delay so it runs smoothly
+	// set the delay so it runs smoothly
 	private final int DELAY = 20;
 
-	//set the waterbottle to be shown on the screen
+	// set the waterbottle to be shown on the screen
 	private ImageIcon waterBottle;
 	private Image bottle;
-	//add an image for the background
+	// add an image for the background
 	private Image bkgd;
 
-	//create a panel for the buttons.
+	// create a panel for the buttons.
 	private final JPanel bottomPanel = new JPanel();
 	private JPanel topPanel = new JPanel();
 	private JPanel foodButtonPanel = new JPanel();
 	private JScrollPane foodScrollPane = new JScrollPane(bottomPanel);
 
-	//set up the rows and collumns for the screen
+	// set up the rows and collumns for the screen
 	private final int ROWS = 8;
 	private final int COLUMNS = 8;
 	private final int BUTTON_WIDTH = 95;
 	private final int BUTTON_HEIGHT = 95;
 	private ArrayList<JButton> buttonsOnBottomPanel = new ArrayList<JButton>();
 
-	//make the icons to be put on the buttons
+	// make the icons to be put on the buttons
 	private final ImageIcon chickenIcon = new ImageIcon("chicken.jpg");
 	private final ImageIcon lambIcon = new ImageIcon("lamb.jpg");
 	private final ImageIcon beefIcon = new ImageIcon("beef.jpg");
@@ -64,9 +64,9 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 	private final ImageIcon pastaIcon = new ImageIcon("pasta.jpg");
 	private final ImageIcon veggiesIcon = new ImageIcon("veggies.jpg");
 
-	//make the buttons to be pressed in order to increase
-	//the amount of each serving of the respective
-	//foods
+	// make the buttons to be pressed in order to increase
+	// the amount of each serving of the respective
+	// foods
 	private final JButton chickenButton = new JButton();
 	private final JButton lambButton = new JButton();
 	private final JButton cowButton = new JButton();
@@ -76,7 +76,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 	private final JButton pastaButton = new JButton();
 	private final JButton veggiesButton = new JButton();
 
-	// this should hold the total amount of the 
+	// this should hold the total amount of the
 	// of the servings of their respective foods.
 	private int cowServings = 0;
 	private int chickenServings = 0;
@@ -87,7 +87,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 	private int pastaServings = 0;
 	private int veggieServings = 0;
 
-	//this is the user to be editted
+	// this is the user to be editted
 	private User currentUser = new User();
 
 	/**
@@ -141,7 +141,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
 			final ActionListener bottomButtonListener = makeBottomButton();
 			final ActionListener topButtonListener = makeTopButton(bottomButtonListener);
-			
+
 			// add the listeners to every button
 			addAllListeners(topButtonListener);
 
@@ -178,42 +178,56 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 				// set the icon of the new button so that the same button
 				// appears when added to the bottom screen
 				if (desc == "Cow") {
-					currentUser.getFootPrint().setServingOfBeef(currentUser.getFootPrint().getServingOfBeef() + 1);
+					currentUser.getFootPrint().setServingOfBeef(
+							currentUser.getFootPrint().getServingOfBeef() + 1);
 					newButton.setIcon(beefIcon);
 					cowServings++;
 				}
 				if (desc == "Lamb") {
-					currentUser.getFootPrint().setServingOfLamb(currentUser.getFootPrint().getServingOfLamb() + 1);
+					currentUser.getFootPrint().setServingOfLamb(
+							currentUser.getFootPrint().getServingOfLamb() + 1);
 					newButton.setIcon(lambIcon);
 					lambServings++;
 				}
 				if (desc == "Chicken") {
-					currentUser.getFootPrint().setServingOfChicken(currentUser.getFootPrint().getServingOfChicken() + 1);
+					currentUser.getFootPrint()
+							.setServingOfChicken(
+									currentUser.getFootPrint()
+											.getServingOfChicken() + 1);
 					newButton.setIcon(chickenIcon);
 					chickenServings++;
 				}
 				if (desc == "Egg") {
-					currentUser.getFootPrint().setServingOfEggs(currentUser.getFootPrint().getServingOfEggs() + 1);
+					currentUser.getFootPrint().setServingOfEggs(
+							currentUser.getFootPrint().getServingOfEggs() + 1);
 					newButton.setIcon(eggIcon);
 					eggServings++;
 				}
 				if (desc == "Corn") {
-					currentUser.getFootPrint().setServingOfLamb(currentUser.getFootPrint().getServingOfCorn() + 1);
+					currentUser.getFootPrint().setServingOfLamb(
+							currentUser.getFootPrint().getServingOfCorn() + 1);
 					newButton.setIcon(cornIcon);
 					cornServings++;
 				}
 				if (desc == "Lentils") {
-					currentUser.getFootPrint().setServingOfLentils(currentUser.getFootPrint().getServingOfLentils() + 1);
+					currentUser.getFootPrint()
+							.setServingOfLentils(
+									currentUser.getFootPrint()
+											.getServingOfLentils() + 1);
 					newButton.setIcon(lentilIcon);
 					lentilServings++;
 				}
 				if (desc == "Pasta") {
-					currentUser.getFootPrint().setServingOfPasta(currentUser.getFootPrint().getServingOfPasta() + 1);
+					currentUser.getFootPrint().setServingOfPasta(
+							currentUser.getFootPrint().getServingOfPasta() + 1);
 					newButton.setIcon(pastaIcon);
 					pastaServings++;
 				}
 				if (desc == "Veggies") {
-					currentUser.getFootPrint().setServingOfVeggies(currentUser.getFootPrint().getServingsOfVeggies() + 1);
+					currentUser.getFootPrint()
+							.setServingOfVeggies(
+									currentUser.getFootPrint()
+											.getServingsOfVeggies() + 1);
 					newButton.setIcon(veggiesIcon);
 					veggieServings++;
 				}
@@ -227,7 +241,6 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 		return topButtonListener;
 	}
 
-	
 	/**
 	 * makeBottomButton()
 	 * 
@@ -251,35 +264,49 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 				// description to know which button was clicked and which
 				// serving amount should be changed
 				if (desc == "Cow") {
-					currentUser.getFootPrint().setServingOfBeef(currentUser.getFootPrint().getServingOfBeef()-1);
+					currentUser.getFootPrint().setServingOfBeef(
+							currentUser.getFootPrint().getServingOfBeef() - 1);
 					cowServings--;
 				}
 				if (desc == "Lamb") {
-					currentUser.getFootPrint().setServingOfLamb(currentUser.getFootPrint().getServingOfLamb()-1);
+					currentUser.getFootPrint().setServingOfLamb(
+							currentUser.getFootPrint().getServingOfLamb() - 1);
 					lambServings--;
 				}
 				if (desc == "Chicken") {
-					currentUser.getFootPrint().setServingOfChicken(currentUser.getFootPrint().getServingOfChicken()-1);
+					currentUser.getFootPrint()
+							.setServingOfChicken(
+									currentUser.getFootPrint()
+											.getServingOfChicken() - 1);
 					chickenServings--;
 				}
 				if (desc == "Egg") {
-					currentUser.getFootPrint().setServingOfEggs(currentUser.getFootPrint().getServingOfEggs()-1);
+					currentUser.getFootPrint().setServingOfEggs(
+							currentUser.getFootPrint().getServingOfEggs() - 1);
 					eggServings--;
 				}
 				if (desc == "Corn") {
-					currentUser.getFootPrint().setServingOfLamb(currentUser.getFootPrint().getServingOfCorn()-1);
+					currentUser.getFootPrint().setServingOfLamb(
+							currentUser.getFootPrint().getServingOfCorn() - 1);
 					cornServings--;
 				}
 				if (desc == "Lentils") {
-					currentUser.getFootPrint().setServingOfLentils(currentUser.getFootPrint().getServingOfLentils()-1);
+					currentUser.getFootPrint()
+							.setServingOfLentils(
+									currentUser.getFootPrint()
+											.getServingOfLentils() - 1);
 					lentilServings--;
 				}
 				if (desc == "Pasta") {
-					currentUser.getFootPrint().setServingOfPasta(currentUser.getFootPrint().getServingOfPasta()-1);
+					currentUser.getFootPrint().setServingOfPasta(
+							currentUser.getFootPrint().getServingOfPasta() - 1);
 					pastaServings--;
 				}
 				if (desc == "Veggies") {
-					currentUser.getFootPrint().setServingOfVeggies(currentUser.getFootPrint().getServingsOfVeggies()-1);
+					currentUser.getFootPrint()
+							.setServingOfVeggies(
+									currentUser.getFootPrint()
+											.getServingsOfVeggies() - 1);
 					veggieServings--;
 				}
 
@@ -309,6 +336,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 		};
 		return bottomButtonListener;
 	}
+
 	/**
 	 * addAllListeners()
 	 * 
@@ -372,7 +400,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
 		// create a new JLabel with the screen instructions
 		JLabel prompt = new JLabel();
-		prompt.setText("<html><p><h3>Click the icons to select your serving of each type of food every week</h3></p></html>");
+		prompt.setText("<html><p><b>Click the icons to select your serving of each type of food every week</b></p></html>");
 		prompt.setLocation(200, 0);
 		prompt.setVisible(true);
 
@@ -660,7 +688,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 		}
 
 	}
-	
+
 	/**
 	 * getButtonArray()
 	 * 

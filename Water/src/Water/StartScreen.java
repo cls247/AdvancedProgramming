@@ -10,20 +10,18 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 //this is the first screen that is shown when the calculator is first loaded
-class StartScreen extends JPanel implements Screen
-{
+class StartScreen extends JPanel implements Screen {
 	private User currentUser;
 	private Image bkgd;
 
-	public StartScreen()
-	{
+	public StartScreen() {
 		init();
 	}
 
-	public void paintComponent(Graphics g){
+	public void paintComponent(Graphics g) {
 
-		//draw the image
-		g.drawImage(bkgd, 0,0, null);
+		// draw the image
+		g.drawImage(bkgd, 0, 0, null);
 
 	}
 
@@ -31,14 +29,16 @@ class StartScreen extends JPanel implements Screen
 	public User passOnUser() {
 		return currentUser;
 	}
+
 	@Override
 	public void receiveUser(User setCurrentUser) {
-		currentUser=setCurrentUser;
+		currentUser = setCurrentUser;
 	}
+
 	@Override
 	public void init() {
 		drawBackground();
-		
+
 	}
 
 	@Override
@@ -62,12 +62,10 @@ class StartScreen extends JPanel implements Screen
 
 			// if there is an error with the file, throw and IOException
 		} catch (IOException error) {
-			System.out.println("Error in drawBackground: image file failed to load!");
+			System.out
+					.println("Error in drawBackground: image file failed to load!");
 		}
-		
+
 	}
 
 }
-
-
-
