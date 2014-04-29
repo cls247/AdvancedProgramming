@@ -372,7 +372,7 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 
 		// create a new JLabel with the screen instructions
 		JLabel prompt = new JLabel();
-		prompt.setText("Please select the number of servings of meat you eat per week:");
+		prompt.setText("<html><p><h3>Click the icons to select your serving of each type of food every week</h3></p></html>");
 		prompt.setLocation(200, 0);
 		prompt.setVisible(true);
 
@@ -659,6 +659,43 @@ public class FoodServingScreen extends JPanel implements Runnable, Screen {
 			System.out.println("Error in setBkgd: image file failed to load!");
 		}
 
+	}
+	
+	/**
+	 * getButtonArray()
+	 * 
+	 * @return buttonsOnBottomPanel- the array that contains the buttons that
+	 *         have been clicked for testing
+	 */
+	public ArrayList<JButton> getButtonArray() {
+		return buttonsOnBottomPanel;
+	}
+
+	/**
+	 * getTestButton()
+	 * 
+	 * @return cowButton- return the cowButton for testing
+	 */
+	public JButton getTestButton() {
+		return cowButton;
+	}
+
+	/**
+	 * getCowServing()
+	 * 
+	 * @return cowServings- return the cowServings for testing
+	 */
+	public int getCowServings() {
+		return cowServings;
+	}
+
+	/**
+	 * getCurrentUser()
+	 * 
+	 * @return currentUser- return the currentUser for testing
+	 */
+	public User getCurrentUser() {
+		return currentUser;
 	}
 
 }

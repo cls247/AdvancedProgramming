@@ -175,4 +175,26 @@ public class Bottle {
 	{
 		return overflowBottles.get(index);
 	}
+	
+	/**
+	 * getWaterBottleArray()
+	 */
+	public ArrayList<String> getWaterBottleArray()
+	{
+		return waterBottles;
+	}
+	/**
+	 * getOverFlowArray()
+	 */
+	public ArrayList<String> getOverFlowArray()
+	{
+		return overflowBottles;
+	}
+	
+	/**
+	 * getCurentOverflow()
+	 */
+	public int getCurrentOverflow(){
+		return currentOverflow;
+	}
 }

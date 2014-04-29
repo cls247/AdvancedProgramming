@@ -21,7 +21,7 @@ public class FootPrint {
 	private final int literPerSprinklerPerTime=90;
 	private boolean handWaters=false;
 	private final int literPerHandWaterTime=50;
-	private int numberOfTimesWaterPlants;
+	private int numberOfTimesWaterPlants=0;
 
 	private boolean usesDishWasher=false;
 	private final int literPerDishWater=3;
@@ -60,6 +60,48 @@ public class FootPrint {
 
 	private double totalLitersAmountOfWater=0;
 	private Bottle waterBottle;
+	
+	//string arrays for storing tips
+	String[] usesPlasticWaterBottleTips = {
+			"You should try using Recycleable Water Bottles.",
+			"It takes 3 times as much water to make a disposable plastic bottle as it does to fill it"
+		};
+		
+	String[] doesDishesByHandArray = {
+		"You should consider using a dishwasher to wash you dishes.",
+		"An energy efficient dishwasher will actually use less water.",
+		"Make sure that your sinks do not have leaks.",
+		"Scrap excess food off of your dishes instead of rinsing them before putting them in dish washer.",
+		"If washing dishes by hand, don't let the water run. Fill a basin with water instead."
+	};
+	
+	String[] takesBathsArray = {
+		"You should take showers instead of baths. They use less water.",
+		"Or at least try to make your showers quick", 		
+		"Don't fill bathtubs to the tops with water to reduce splashing"
+	};
+	
+	String[] meatArray = {
+			"You should try decreasing the amount of Meat you eat.",
+			"Vegetables use less water to produce. It is better for the environment and for you."
+	};
+	
+	String[] takesShowersArray = {
+			"You should shower less times per week. It will conserver water"
+	};
+	
+	String[] usesAppliancesArray = {
+			"You should be sure that you are using water efficient appliances", 		
+			"Washing dark colored clothes in cold water helps to save water"
+	};
+	
+	String[] usesSprinklersArray = {
+			"Water dry spots on your lawn by hand instead of using a sprinkler system", 	
+			"Only water your lawn when it is absolutely necessary", 		
+			"Collect rain water and use it to water lawns and garden",
+			"Don't water your lawn on windy days",
+			"Lawns can go a lot longer without water than you thing"
+	};
 
 
 	/**
@@ -475,17 +517,12 @@ public class FootPrint {
 		{
 	
 		totalLitersAmountOfWater+= (literPerRecycableWaterBottle*numberOfWaterBottles);
-		System.out.println("totalLitersAmountOfWater"+totalLitersAmountOfWater);
-		System.out.println("literPerRecycableWaterBottle"+literPerRecycableWaterBottle);
-		System.out.println("numberOfWaterBottles"+numberOfWaterBottles);
+
 		}
 		if(usesPlasticWaterBottle)
 		{
 		totalLitersAmountOfWater+= (literPerPlaticWaterBottle*numberOfWaterBottles);
-		
-		System.out.println("totalLitersAmountOfWater"+totalLitersAmountOfWater);
-		System.out.println("literPerPlaticWaterBottle"+literPerPlaticWaterBottle);
-		System.out.println("numberOfWaterBottles"+numberOfWaterBottles);}
+}
 		
 		if(usesDishWasher)
 		{
@@ -529,7 +566,6 @@ public class FootPrint {
 		}
 
 		waterBottle.setWaterBottle(totalLitersAmountOfWater);
-		System.out.println("print out the total"+totalLitersAmountOfWater);
 	}
 
 	/**
@@ -708,36 +744,45 @@ public class FootPrint {
 	 * @param tipsToReturn 
 	 * @return
 	 */
+	
+	private String getTips(String [] tipsArray){
+		
+		//create a new string
+		String newTips="";
+		
+		//go through the corresponding array of tips
+		for (int i = 0; i < tipsArray.length; i++){
+			//add a bullet point
+			newTips += "\u2022";
+			//add the tip
+			newTips += tipsArray[i];
+			//add a line break
+			newTips += "\n";
+;		}
+		
+		//add another line break
+		newTips += "\n";
+		
+		return newTips;
+	}
+	
 	private String setTips(String tipsToReturn) {
-
+		
+		//add the necessary tips depending on what the user selected
 		if(usesPlasticWaterBottle)
-			tipsToReturn+="You should try using Recycleable Water Bottles. \n" ;
+			tipsToReturn += getTips(usesPlasticWaterBottleTips);
 		if(doesDishedByHand)
-			tipsToReturn+="You should consider using a dishwasher to wash you dishes.\n" +
-					"It actually uses less water" +"Make sure you turn of the water when not using it. \n"
-					+"Make sure no sinks or water sources have leaks. \n" +"Scrap excess food off of dishes instead of rinsing them before putting them in dish washer \n"
-					+ "\nOr at least try to consolidate your dishwashing\n" +"If washing dishes by hand, don't let the water run. Fill a basin with water instead.";
+			tipsToReturn += getTips(doesDishesByHandArray);
 		if(takesBaths)
-			tipsToReturn+="You should take showers instead of baths. They use less water. \n"
-					+ "Or at least try to make your showers quick \n" 		
-					+"Don't fill bathtubs to the tops with water to reduce splashing\n";
+			tipsToReturn+= getTips(takesBathsArray);
 		if (servingOfLamb+servingOfChicken+servingOfBeef>=5)
-			tipsToReturn += "You should try decreasing the amount of Meat you eat. \n"
-					+"Vegetables use less water to produce. They are better for the "
-					+ "environment and for you. \n";
+			tipsToReturn += getTips(meatArray);
 		if(numberOfWashes>7 && takesShowers)
-			tipsToReturn+="You should shower less times per week. It will conserver water\n";
-		else if(numberOfWashes>7)
-			tipsToReturn+="You should shower less times per week. It will conserver water\n";
+			tipsToReturn+=getTips(takesShowersArray);
 		if(usesWashingMachine || usesDishWasher)
-			tipsToReturn+="You should be sure that you are using water efficient appliances.\n" 		
-					+"Washing dark colored clothes in cold water helps to save water \n";
+			tipsToReturn+=getTips(usesAppliancesArray);
 		if(usesSprinklers){
-			tipsToReturn += "Water dry spots on your lawn by hand instead of using a sprinkler system. \n" 	
-					+"Only water your lawn when it is absolutely necessary. \n" 		
-					+"Collect rain water and use it to water lawns and garden\n"
-					+"Don't water your lawn on windy days\n"
-					+"Lawns can go a lot longer without water than you thing.\n";
+			tipsToReturn += getTips(usesSprinklersArray);
 		}
 		tipsToReturn += "Use water calculators like this one to track your water each month!\n";
 		return tipsToReturn;

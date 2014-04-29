@@ -104,6 +104,7 @@ public class TipScreen extends JPanel implements Screen, Runnable{
 			sliderScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			sliderScrollPane.setBounds(0, 150, 800, 200);
 			contentPanel.add(tip);
+			tip.setEditable(false);
 			add(sliderScrollPane);
 	
 			
@@ -120,8 +121,6 @@ public class TipScreen extends JPanel implements Screen, Runnable{
 		
 		super.paintComponent(g);
 		g.drawImage(bkgd, 0,0, null);
-		updateTotal();
-		System.out.println(waterUsed);
 
 		}
 	@Override
@@ -158,9 +157,9 @@ public class TipScreen extends JPanel implements Screen, Runnable{
 	}
 	@Override
 	public void receiveUser(User setCurrentUser) {
-		setTipsString();
 		currentUser=setCurrentUser;
-		
+		updateTotal();
+		setTipsString();
 	}
 	
 	public void setTipsString(){
@@ -168,13 +167,13 @@ public class TipScreen extends JPanel implements Screen, Runnable{
 		if((waterUsed >=0) && (waterUsed <=10000)){
 			String waterUsedString=new DecimalFormat("#0.0000").format(waterUsed);
 			tip.setText("You used "+ waterUsedString +" liters of water. \nYou used a regular amount of water."+
-			"\nIn addition: \n"+ currentUser.getFootPrint().Tips());
+			"\n\nIn addition: \n"+ currentUser.getFootPrint().Tips());
 			tip.setWrapStyleWord(true);
 			
 		}else{
 			String waterUsedString=new DecimalFormat("#0.0000").format(waterUsed);
-			tip.setText("You used an abnormal amount of water."+ waterUsedString+"liters!"+
-			"\nIn addition: \n" +currentUser.getFootPrint().Tips());
+			tip.setText("You used an abnormal amount of water, "+ waterUsedString+"liters!"+
+			"\n\nIn addition: \n" +currentUser.getFootPrint().Tips());
 			tip.setWrapStyleWord(true);
 		
 	}

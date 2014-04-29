@@ -108,7 +108,7 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 		
 		//ask the third question
 		thirdQuestionLabel = new JLabel(thirdQuestion);
-		thirdQuestionLabel.setSize(350,20);
+		thirdQuestionLabel.setSize(350,50);
 		thirdQuestionLabel.setLocation(125, 300);
 
 		//make a spinner for the third question to 
@@ -149,7 +149,7 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 				Double answer= (Double) (m_numberSpinner.getValue());
 
 				int temp=answer.intValue();
-				System.out.println("the value of the spinner is"+temp);
+				//*****NICK DELETED A SYSTEM.OUT HERE
 				if(type=="bottle")
 					currentUser.getFootPrint().setNumberOfWaterBottles(temp);				
 				if(type=="plants")
@@ -168,14 +168,14 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 		//ask the second questions
 		JLabel secondQuestionlabel = new JLabel(secondQuestion);
 		secondQuestionlabel.setVisible(true);
-		secondQuestionlabel.setSize(250,20);
+		secondQuestionlabel.setSize(250,50); 		//***NICK MADE CHANGES HERE
 		secondQuestionlabel.setLocation(125,200);
 		add(secondQuestionlabel);
 
 		//answer the second question
 		//		final JCheckBox secondQuestionBox = new JCheckBox();
 		secondQuestionBox.setVisible(true);
-		secondQuestionBox.setSize(50,20);
+		secondQuestionBox.setSize(50,50);
 		secondQuestionBox.setLocation(400, 200);
 		add(secondQuestionBox);
 
@@ -202,10 +202,10 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 		});
 	}
 	private void createFirstLabelAndButton() {
-		JLabel firstQuestionLabel = new JLabel(firstQuestion+"?");
+		JLabel firstQuestionLabel = new JLabel(firstQuestion);
 		firstQuestionLabel.setVisible(true);
-		firstQuestionLabel.setSize(250,20);
-		firstQuestionLabel.setLocation(125, 100);
+		firstQuestionLabel.setSize(250,50);		//***NICK MADE CHANGES HERE
+		firstQuestionLabel.setLocation(125, 85);		//***NICK MADE CHANGES HERE
 		add(firstQuestionLabel);
 
 		//answer the first question
@@ -353,12 +353,12 @@ public class QuestionScreen extends JPanel implements ActionListener, Runnable, 
 	}
 	@Override
 	public User passOnUser() {
-		System.out.println("pass on user");
+		//*****NICK DELETED A SYSTEM.OUT HERE
 		return currentUser;
 	}
 	@Override
 	public void receiveUser(User setCurrentUser) {
-		System.out.println("pass back user");
+		//*****NICK DELETED A SYSTEM.OUT HERE
 		currentUser=setCurrentUser;		
 	}
 	@Override

@@ -1,3 +1,5 @@
+//********NICK MADE CHANGES TO THE ENTIRE PAGE
+
 package Water;
 
 
@@ -71,8 +73,9 @@ public class InteractivePage extends JPanel implements Screen{
 	};
 	
 	//text areas for tracking total water consumption and its status
-	private JTextField textWater = new JTextField("00");
+	private JLabel textWater = new JLabel("00");
 	private JLabel consumptionStatus = new JLabel("");
+	private JLabel titleLabel = new JLabel("<html><h2>EXPLORE YOUR WATER CONSUMPTION</h2></hmtl>");
 
 	//labels for each slider
 	private JLabel label1 = new JLabel("Water Bottles Used");
@@ -171,23 +174,31 @@ public class InteractivePage extends JPanel implements Screen{
 		topPanel.setBackground(Color.WHITE);
 		
 		//initialize the slider panel
-		Dimension jpSize = new Dimension(500,500);
-		sliderPanel.setPreferredSize(jpSize);
-		sliderPanel.setMinimumSize(jpSize);
-		sliderPanel.setMaximumSize(jpSize);
-		sliderPanel.setSize(jpSize);
-		sliderPanel.setLayout(new GridLayout(15,3));			
+		Dimension sliderPanelSize = new Dimension(500,500);
+		sliderPanel.setPreferredSize(sliderPanelSize);
+		sliderPanel.setMinimumSize(sliderPanelSize);
+		sliderPanel.setMaximumSize(sliderPanelSize);
+		sliderPanel.setSize(sliderPanelSize);
+		sliderPanel.setLayout(new GridLayout(15,3));	
+		sliderPanel.setBackground(Color.WHITE);
 
 		//add the labels for displaying the total amount of water used
-		topPanel.add(new JLabel("<html><p text-align:center>TOTAL WATER CONSUMPTION</p></hmtl>"));
+		topPanel.add(titleLabel);
+		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 		topPanel.add(textWater);
+		textWater.setHorizontalAlignment(JLabel.CENTER);
 		textWater.setSize(50, 50);
 		topPanel.add(consumptionStatus);
+		consumptionStatus.setHorizontalAlignment(JLabel.CENTER);
 		topPanel.add(new JLabel());
-		getConsumptionStatus();
+				
+		updateConsumptionStatus();
 		
 		//add the sliders to the page
+		
+		updateSliders();
 		addSliders();
+		
 	}
 	
 	/**
@@ -195,7 +206,6 @@ public class InteractivePage extends JPanel implements Screen{
 	 * they use the least wasteful option
 	 */
 	public void checkBooleans(){
-		System.out.println("checking booleans");
 		if (!currentFootPrint.getUsesDishWasher() && !currentFootPrint.getDoesDishesByHand()){
 			currentFootPrint.setUsesDishWasher();
 		}
@@ -306,7 +316,7 @@ public class InteractivePage extends JPanel implements Screen{
 					//update the various displays on the page
 					currentText.setText(String.valueOf(currentSlider.getValue()));
 					textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
-					getConsumptionStatus();
+					updateConsumptionStatus();
 				}
 				
 			});
@@ -351,50 +361,6 @@ public class InteractivePage extends JPanel implements Screen{
 	public void updateSliders(){
 			//updates the sliders whenever a new user profile is passed in 
 		
-		/*for (int i = 0; i <13; i++){	
-			System.out.println("Array Length: " + sliderArray.length);
-			System.out.println("i: " + i);
-			
-			JSlider currentSlider = sliderArray[i];
-			JLabel currentText = textTotalArray[i];
-			
-			try {
-				currentSlider.setValue((Integer) currentFootPrint.getClass().getMethod(getterFunctionArray[i], null).invoke(currentFootPrint));
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				currentText.setText((String) currentFootPrint.getClass().getMethod(getterFunctionArray[i], null).invoke(currentFootPrint));
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}*/
 			slider1.setValue(currentFootPrint.getNumberOfWaterBottles());
 			textTotal1.setText(String.valueOf(currentFootPrint.getNumberOfWaterBottles()));
 			
@@ -446,9 +412,9 @@ public class InteractivePage extends JPanel implements Screen{
 	/**
 	 * changes the consumptionStatus label depending on the level of water being used
 	 */
-	public void getConsumptionStatus(){
-		//get the toal amount of water being used
-		double consumptionLevel = Double.parseDouble(textWater.getText());
+	public void updateConsumptionStatus(){
+		//get the total amount of water being used
+		float consumptionLevel = Float.parseFloat(textWater.getText());
 		
 		//if the total amount of water being used is below 1,500 liters/week, 
 		//tell the user that they are using a healthy amount of water
@@ -470,7 +436,7 @@ public class InteractivePage extends JPanel implements Screen{
 	public User passOnUser() {
 		return currentUser;
 	}
-	
+		
 	/**
 	 * receives the user from the previous page and updates values on the page
 	 */
@@ -483,6 +449,9 @@ public class InteractivePage extends JPanel implements Screen{
 		textWater.setText(String.valueOf(currentFootPrint.getTotalAmountOfWater()));
 
 		//update the sliders based on the new user
+
+		checkBooleans();
+
 		updateSliders();
 	}
 
@@ -501,7 +470,7 @@ public class InteractivePage extends JPanel implements Screen{
 			// set all of the dimensions using the size
 			setPreferredSize(size);
 			setMinimumSize(size);
-			setMaximumSize(size);
+			setMaximumSize(size);	
 			setSize(size);
 			setLayout(null);
 
@@ -510,5 +479,25 @@ public class InteractivePage extends JPanel implements Screen{
 			System.out.println("Error in drawBackground: image file failed to load!");
 		}
 		
+	}
+	
+	public JSlider getSlider(int index){
+		return sliderArray[index];
+	}
+	
+	public JLabel getTextTotal(int index){
+		return textTotalArray[index];
+	}
+	
+	public JLabel getTextWater(){
+		return textWater;
+	}
+	
+	public void setTextWater(String newValue){
+		textWater.setText(newValue);
+	}
+	
+	public JLabel getConsumptionStatus(){
+		return consumptionStatus;
 	}
 }

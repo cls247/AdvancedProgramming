@@ -3,24 +3,12 @@ package Water;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 /**
  * This is just the Welcome screen that is the first screen
@@ -29,11 +17,8 @@ import javax.swing.JTextField;
  * @author Sand
  *
  */
-class CardDriver extends JPanel
+public class CardDriver extends JPanel
 {
-	//string that holds the text to welcome the user
-	private String welcomeText = "Welcome to Help2Out, a water footprint calculator!";
-
 	//all the screens that answer questions
 	private static QuestionScreen chooseWaterBottle;
 	private static QuestionScreen waterPlants;
@@ -127,33 +112,33 @@ class CardDriver extends JPanel
 		pages.add(startScreen,"start");
 
 		allTheScreens.add((Screen) startScreen);
-		chooseWaterBottle = new QuestionScreen("Do you use recyclable bottles?", 
-				"Do you use plastic water bottles?", 
-				"How many water bottles do you use a week?", "bottle");
+		chooseWaterBottle = new QuestionScreen("<html><p><h3>Do you use a recyclable water bottles?</h3></p></html>", 
+				"<html><p><h3>Do you use disposable plastic water bottles?</h3></p></html>", 
+				"<html><p><h3>How many water bottles do you use a week?</h3></p></html>", "bottle");
 		pages.add(chooseWaterBottle, "first");
 
 		allTheScreens.add((Screen) chooseWaterBottle);
-		waterPlants = new QuestionScreen("Do you use sprinklers?", 
-				"Do you water your lawn by hand?", 
-				"How many times a week do you water the lawn?", "plants");
+		waterPlants = new QuestionScreen("<html><p><h3>Do you use sprinklers to water your lawn?</h3></p></html>", 
+				"<html><p><h3>Do you water your lawn by hand?</h3></p></html>", 
+				"<html><p><h3>How many times a week do you water your lawn?</h3></p></html>", "plants");
 		pages.add(waterPlants, "second");
 
 		allTheScreens.add((Screen) waterPlants);
-		washDishes = new QuestionScreen("Do you use a dishwasher?", 
-				"Do you wash dishes by hand?", 
-				"How many times a week do you wash dishes", "dishes");
+		washDishes = new QuestionScreen("<html><p><h3>Do you use a dishwasher?</h3></p></html>", 
+				"<html><p><h3>Do you wash your dishes by hand?</h3></p></html>", 
+				"<html><p><h3>How many times a week do you wash your dishes?</h3></p></html>", "dishes");
 		pages.add(washDishes, "third");
 
 		allTheScreens.add((Screen) washDishes);
-		washClothes = new QuestionScreen("Do you use a washing machine?", 
-				"Do you wash clothes by hand", 
-				"How many loads of laundry do you do in a week?", "clothes");
+		washClothes = new QuestionScreen("<html><p><h3>Do you use a washing machine to do your laundry?</h3></p></html>", 
+				"<html><p><h3>Do you wash your clothes by hand?</h3></p></html>", 
+				"<html><p><h3>How many loads of laundry do you wash in a week?</h3></p></html>", "clothes");
 		pages.add(washClothes, "fourth");
 
 		allTheScreens.add((Screen) washClothes);
-		bathingWin = new QuestionScreen("Do you take showers?", 
-				"Do you take baths", 
-				"How many times a week do you wash yourself?", "bathing");
+		bathingWin = new QuestionScreen("<html><p><h3>Do you take showers?</h3></p></html>", 
+				"<html><p><h3>Do you take baths?</h3></p></html>", 
+				"<html><p><h3>How many times a week do you shower or bathe?</h3></p></html>", "bathing");
 		pages.add(bathingWin, "fifth");
 
 		allTheScreens.add((Screen) bathingWin);
@@ -179,40 +164,39 @@ class CardDriver extends JPanel
 	 * the code for what it does when it is clicked.
 	 * 
 	 */
-	private void makeNextButton() {
+	public void makeNextButton() {
 		nextButton = new JButton("NEXT");
 		nextButton.setBackground(Color.RED);
 		nextButton.setForeground(Color.BLACK);
 		nextButton.setFocusable(true);
 		
 		//this flips to the next card
-				nextButton.addActionListener(new ActionListener()
+		nextButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent ae)
+			{
+				if(indexOfCardLayout+1<=numberOfCards)
 				{
-					public void actionPerformed(ActionEvent ae)
-					{
-						if(indexOfCardLayout+1<=numberOfCards)
-						{
 
-							indexOfCardLayout++;
-							System.out.println("is the next button wokring");
-							//frame.setVisible(false);
-							pages.setVisible(true);
-							CardLayout cardLayout = (CardLayout) pages.getLayout();
-							cardLayout.next(pages);  
-							moveUserForward(indexOfCardLayout);
-						}
-						//set the next and previous buttons only to be shown if 
-						//they are able to be pressed
-						if(indexOfCardLayout!=numberOfCards)
-							nextButton.setVisible(true);
-						else
-							nextButton.setVisible(false);
-						if(indexOfCardLayout!=1)
-							previousButton.setVisible(true);
-						else
-							previousButton.setVisible(false);
-					}
-				});
+					indexOfCardLayout++;
+					//frame.setVisible(false);
+					pages.setVisible(true);
+					CardLayout cardLayout = (CardLayout) pages.getLayout();
+					cardLayout.next(pages);  
+					moveUserForward(indexOfCardLayout);
+				}
+				//set the next and previous buttons only to be shown if 
+				//they are able to be pressed
+				if(indexOfCardLayout!=numberOfCards)
+					nextButton.setVisible(true);
+				else
+					nextButton.setVisible(false);
+				if(indexOfCardLayout!=1)
+					previousButton.setVisible(true);
+				else
+					previousButton.setVisible(false);
+			}
+		});
 	}
 	
 	/**
@@ -224,7 +208,7 @@ class CardDriver extends JPanel
 	 * 
 	 */
 
-	private void makePreviousButton() {
+	public void makePreviousButton() {
 		//make the button to move backward in the card layout
 		previousButton = new JButton("PREVIOUS");
 		previousButton.setBackground(Color.BLACK);
@@ -237,11 +221,11 @@ class CardDriver extends JPanel
 		{
 			public void actionPerformed(ActionEvent ae)
 			{
-				System.out.println("index of card"+indexOfCardLayout);
+				//*****NICK DELETED A SYSTEM.OUT HERE
 				if(indexOfCardLayout-1>0)
 				{
 					indexOfCardLayout--;
-					System.out.println("is this working");
+					//*****NICK DELETED A SYSTEM.OUT HERE
 					CardLayout cardLayout = (CardLayout) pages.getLayout();
 
 					cardLayout.previous(pages);
@@ -275,14 +259,15 @@ class CardDriver extends JPanel
 		
 		if(index <8)
 		{
-		int currentScreenIndex = index;
-		int nextScreenIndex = index+1;
-		//get the current screen and the next screen and update
-		//the user of the next screen
-		Screen currentScreen = (Screen) allTheScreens.get(currentScreenIndex);
-		Screen nextScreen = (Screen) allTheScreens.get(nextScreenIndex);
-		User userToPass = currentScreen.passOnUser();
-		nextScreen.receiveUser(userToPass);
+			int currentScreenIndex = index;
+			int nextScreenIndex = index+1;
+			
+			//get the current screen and the next screen and update
+			//the user of the next screen
+			Screen currentScreen = (Screen) allTheScreens.get(currentScreenIndex);
+			Screen nextScreen = (Screen) allTheScreens.get(nextScreenIndex);
+			User userToPass = currentScreen.passOnUser();
+			nextScreen.receiveUser(userToPass);
 		}
 	}
 
@@ -296,14 +281,46 @@ class CardDriver extends JPanel
 	 * @param index is the index of the screen that is being updated
 	 */
 	public void moveUserBackward(int index){
+		
 		int currentScreenIndex = index;
 		int previousScreenIndex = index-1;
 		Screen currentScreen = (Screen) allTheScreens.get(currentScreenIndex);
 		Screen previousScreen = (Screen) allTheScreens.get(previousScreenIndex);
 		User userToPass = currentScreen.passOnUser();
 		previousScreen.receiveUser(userToPass);
+		
+	}
+	
+	//from here onward, these accessor functions are for JUnit testing
+	public JButton getNext(){
+		
+		return nextButton;
+		
+	}
+	
+	public JButton getPrevious(){
+		
+		return previousButton;
+		
 	}
 
+	public int getIndex(){
+		
+		return indexOfCardLayout;
+		
+	}
+	
+	public void setIndex(int thisIndexOfCardLayout){
+		
+		indexOfCardLayout = thisIndexOfCardLayout;
+		
+	}
+	
+	public int getTotalOfScreens(){
+		
+		return allTheScreens.size();
+		
+	}
 
 }
 
